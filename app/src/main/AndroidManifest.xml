@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Unilocal"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".activities.LugaresFavoritosActivity"
             android:exported="false" />
         <activity
@@ -23,6 +24,9 @@
             android:exported="false" />
         <activity
             android:name=".activities.CrearLugarActivity"
+=======
+            android:name=".activities.DetalleLugarActivity"
+>>>>>>> edf6933e37be572568bda3bf9d3d3debf6b77bd1
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"
