@@ -16,11 +16,16 @@
     <string name="txt_nickname">Escriba su nickname</string>
 
     <!-- TEXTOS DE CREAR LUGAR-->
-    <string name="txt_nombre_lugar">Escriba el nombre</string>
-    <string name="txt_telefono">Escriba el telefono</string>
-    <string name="txt_descripcion">Escriba una descripcion</string>
-    <string name="txt_novedades">Escriba novedades</string>
+    <string name="txt_nombre_lugar">Nombre</string>
+    <string name="txt_telefono">Telefono</string>
+    <string name="txt_direccion">Dirección</string>
+    <string name="txt_descripcion">Descripcion</string>
+    <string name="txt_novedades">Novedades</string>
     <string name="btn_crear_lugar">Crear lugar</string>
     <string name="txt_nuevo_lugar">Nuevo lugar</string>
+
+    <!-- TEXTOS DE VALIDACIONES-->
+    <string name="es_obligatorio">Este campo es obligatario</string>
+
 
 </resources>

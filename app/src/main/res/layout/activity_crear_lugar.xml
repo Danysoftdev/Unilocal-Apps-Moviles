@@ -22,43 +22,64 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:gravity="center"
-                android:text="<-"/>
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:fontFamily="@font/font_awesome_6_free_solid_900"
+                android:text="\uf053"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textSize="20sp"
                 android:text="@string/txt_nuevo_lugar"/>
 
             <Button
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"/>
+                android:id="@+id/btn_lugares"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:fontFamily="@font/font_awesome_6_free_solid_900"
+                android:text="\uf007"
+
+                />
         </LinearLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="370dp"
-
-            android:layout_height="70dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:id="@+id/nombreLayout"
+            style="@style/lugar_form">
 
             <EditText
                 android:id="@+id/nombre_lugar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/txt_nombre_lugar"
-                android:inputType="textEmailAddress"/>
+                android:inputType="text"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/direccionLayout"
+            style="@style/lugar_form">
+
+            <EditText
+                android:id="@+id/direccion_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/txt_direccion"
+                android:inputType="text"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="370dp"
+            android:id="@+id/descripcionLayout"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp">
@@ -70,26 +91,23 @@
                 android:hint="@string/txt_descripcion"
                 android:gravity="left"
                 android:minLines="9"
+
                 />
         </com.google.android.material.textfield.TextInputLayout>
         <Spinner
             android:id="@+id/categoria_lugar"
-            android:layout_width="370dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"></Spinner>
+            style="@style/lugar_form"
+            android:background="@drawable/spinner_border"></Spinner>
+
         <Spinner
             android:id="@+id/ciudad_lugar"
-            android:layout_width="370dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"></Spinner>
+            style="@style/lugar_form"
+            android:background="@drawable/spinner_border"
+            ></Spinner>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="370dp"
-            android:layout_height="70dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:id="@+id/telefonoLayout"
+            style="@style/lugar_form">
 
             <EditText
                 android:id="@+id/telefono_lugar"
@@ -100,10 +118,8 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="370dp"
-            android:layout_height="70dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:id="@+id/novedadesLayout"
+            style="@style/lugar_form">
 
             <EditText
                 android:id="@+id/novedades_lugar"
