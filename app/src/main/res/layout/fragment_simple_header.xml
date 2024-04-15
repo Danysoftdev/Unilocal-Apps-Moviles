@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/simple_header"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:orientation="horizontal"
+    android:background="@drawable/background_simple_header"
+    tools:context=".fragments.SimpleHeaderFragment">
+    
+    <ImageView
+        android:id="@+id/app_img"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="@mipmap/ic_launcher_round"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="245dp"/>
+
+    <Button
+        android:id="@+id/btn_user"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
