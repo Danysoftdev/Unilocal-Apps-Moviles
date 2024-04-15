@@ -22,4 +22,21 @@ object Comentarios {
     fun crear(comentario: Comentario){
         comentarios.add(comentario)
     }
+    fun calcularPromedioCalificacion(idLugar: Int): Double {
+
+        val comentariosLugar = comentarios.filter { c -> c.idLugar == idLugar }
+
+
+        if (comentariosLugar.isEmpty()) {
+            return 0.0
+        }
+
+        val totalCalificaciones = comentariosLugar.sumBy { it.calificaicon }
+
+        // Calcular el promedio
+        val promedio = totalCalificaciones.toDouble() / comentariosLugar.size
+
+        return promedio
+    }
+
 }

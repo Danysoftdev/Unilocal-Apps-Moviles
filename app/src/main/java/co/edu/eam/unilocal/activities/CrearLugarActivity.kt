@@ -28,6 +28,7 @@ class CrearLugarActivity : AppCompatActivity() {
     lateinit var binding: ActivityCrearLugarBinding
     var posCiudad:Int = 0
     var posCategoria:Int =0
+
     lateinit var ciudades :ArrayList<Ciudad>
     lateinit var categorias :ArrayList<Categoria>
 
@@ -36,6 +37,7 @@ class CrearLugarActivity : AppCompatActivity() {
 
         binding = ActivityCrearLugarBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         ciudades = Ciudades.listar()
         categorias = Categorias.listar()
 
@@ -43,10 +45,8 @@ class CrearLugarActivity : AppCompatActivity() {
         cargarCategorias()
 
         binding.btnLugares.setOnClickListener {
-
                 val intent = Intent(baseContext,MisLugaresActivity::class.java)
                 startActivity(intent)
-
         }
 
         binding.btnCrearLugar.setOnClickListener { crearNuevoLugar() }
@@ -64,13 +64,9 @@ class CrearLugarActivity : AppCompatActivity() {
                     /*Toast.makeText(baseContext,"EL elemento seleccionado fue ${parent!!.getItemAtPosition(position).toString()}",Toast.LENGTH_LONG).show()*/
                     posCiudad = position
                 }
-
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-
                 }
-
             }
-
         }
     fun cargarCategorias(){
         var lista = categorias.map { c -> c.nombre }
@@ -78,7 +74,7 @@ class CrearLugarActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.categoriaLugar.adapter = adapter
 
-        binding.ciudadLugar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding.categoriaLugar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 /*Toast.makeText(baseContext,"EL elemento seleccionado fue ${parent!!.getItemAtPosition(position).toString()}",Toast.LENGTH_LONG).show()*/
                 posCategoria = position

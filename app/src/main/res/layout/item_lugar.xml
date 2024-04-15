@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginStart="40dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/spinner_border"
+   >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+          >
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+
+                android:src="@mipmap/ic_launcher_round" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="left"
+         >
+
+            <TextView
+                android:id="@+id/nombre_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre del lugar"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/categoria_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categoria"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/calificacion_lugar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Calificación"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:fontFamily="@font/font_awesome_6_free_solid_900"
+                android:textIsSelectable="true"/>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="left"
+           >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="left"
+                android:layout_weight="1">
+
+
+                <TextView
+                    android:id="@+id/comentarios_lugar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comentarios"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/ir_comentarios_lugar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ver comentarios"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:background="@null"
+                    android:padding="8dp"
+                    android:gravity="center"
+                    android:textAllCaps="false" />
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_lugares"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textSize="22sp"
+
+                android:textColor="@color/black"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:fontFamily="@font/font_awesome_6_free_solid_900"
+                android:text="\uf1f8"
+
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
