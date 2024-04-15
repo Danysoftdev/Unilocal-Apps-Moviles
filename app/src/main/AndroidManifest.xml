@@ -13,6 +13,19 @@
         android:theme="@style/Theme.Unilocal"
         tools:targetApi="31">
         <activity
+            android:name=".activities.IngresarCodigoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.RecuperarContraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.LogiinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ui.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
+        <activity
             android:name=".activities.DetalleLugarActivity"
             android:exported="false" />
         <activity
