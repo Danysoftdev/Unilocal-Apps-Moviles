@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/main"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MisLugaresActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lista_lugares"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activities.MisLugaresActivity">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lista_lugares"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </RelativeLayout>
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/btn_lugares"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:fontFamily="@font/font_awesome_6_free_solid_900"
+        android:text="\uf007"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp" />
+</RelativeLayout>
+
+

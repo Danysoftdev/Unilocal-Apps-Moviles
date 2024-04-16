@@ -54,22 +54,28 @@ class CrearLugarActivity : AppCompatActivity() {
         }
 
         fun cargarCiudades(){
-            var lista = ciudades.map { c -> c.nombre }
+            val lista = mutableListOf("Elige una ciudad")
+            lista.addAll(ciudades.map { c -> c.nombre })
             val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,lista)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.ciudadLugar.adapter = adapter
 
             binding.ciudadLugar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    /*Toast.makeText(baseContext,"EL elemento seleccionado fue ${parent!!.getItemAtPosition(position).toString()}",Toast.LENGTH_LONG).show()*/
-                    posCiudad = position
+                    if (position == 0) {
+                        Toast.makeText(baseContext, "Por favor, elige una ciudad válida", Toast.LENGTH_LONG).show()
+                    } else {
+
+                        posCiudad = position-1
+                    }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
             }
         }
     fun cargarCategorias(){
-        var lista = categorias.map { c -> c.nombre }
+        val lista = mutableListOf("Elige una categoría")
+        lista.addAll(categorias.map { c -> c.nombre })
         val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,lista)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.categoriaLugar.adapter = adapter
@@ -77,7 +83,11 @@ class CrearLugarActivity : AppCompatActivity() {
         binding.categoriaLugar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 /*Toast.makeText(baseContext,"EL elemento seleccionado fue ${parent!!.getItemAtPosition(position).toString()}",Toast.LENGTH_LONG).show()*/
-                posCategoria = position
+                if (position == 0) {
+                    Toast.makeText(baseContext, "Por favor, elige una categoría válida", Toast.LENGTH_LONG).show()
+                } else {
+                    posCategoria = position-1
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -88,11 +98,17 @@ class CrearLugarActivity : AppCompatActivity() {
 
     }
         fun crearNuevoLugar(){
+
+            //CAPTURAMOS LOS VALORES DE TODOS LOS CAMPOS
             val nombre = binding.nombreLugar.text.toString()
             val descripcion = binding.descripcionLugar.text.toString()
             val direccion = binding.direccionLugar.text.toString()
             val telefono = binding.telefonoLugar.text.toString()
             val novedades = binding.novedadesLugar.text.toString()
+            val latitudS = binding.latitudLugar.text.toString()
+            val longitudS = binding.latitudLugar.text.toString()
+            val latitud = latitudS.toFloat()
+            val longitud = latitudS.toFloat()
             val idCiudad = ciudades[posCiudad].id
             val idCategoria = categorias[posCategoria].id
 
@@ -122,10 +138,20 @@ class CrearLugarActivity : AppCompatActivity() {
             }else{
                 binding.novedadesLayout.error = null
             }
+            if(latitudS.isEmpty()){
+                binding.latitudLayout.error = getString(R.string.es_obligatorio)
+            }else{
+                binding.latitudLayout.error = null
+            }
+            if(longitudS.isEmpty()){
+                binding.longitudLayout.error = getString(R.string.es_obligatorio)
+            }else{
+                binding.novedadesLayout.error = null
+            }
 
 
-            if(nombre.isNotEmpty() && descripcion.isNotEmpty()&& telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != -1 && idCategoria != -1){
-                val nuevoLugar = Lugar(9,nombre,descripcion,1,false,idCategoria,direccion, 0f, 0f,idCiudad, novedades)
+            if(nombre.isNotEmpty() && descripcion.isNotEmpty()&& telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != 0 && idCategoria != 0 && latitudS.isNotEmpty() && longitudS.isNotEmpty()){
+                val nuevoLugar = Lugar(9,nombre,descripcion,1,false,idCategoria,direccion, latitud, longitud,idCiudad, novedades)
 
                 val telefonos:ArrayList<String> = ArrayList()
                 telefonos.add(telefono)

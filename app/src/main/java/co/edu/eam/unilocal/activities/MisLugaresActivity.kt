@@ -1,5 +1,6 @@
 package co.edu.eam.unilocal.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,12 @@ class MisLugaresActivity : AppCompatActivity() {
 
         binding.listaLugares.adapter = adapter
         binding.listaLugares.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+
+        binding.btnLugares.setOnClickListener {
+
+            val intent = Intent(this, TopSemanalActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }

@@ -94,11 +94,25 @@
 
                 />
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecciona una categoría:"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+           />
         <Spinner
             android:id="@+id/categoria_lugar"
             style="@style/lugar_form"
             android:background="@drawable/spinner_border"></Spinner>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecciona la ciduad:"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            />
         <Spinner
             android:id="@+id/ciudad_lugar"
             style="@style/lugar_form"
@@ -127,6 +141,28 @@
                 android:layout_height="match_parent"
                 android:hint="@string/txt_novedades"
                 android:inputType="textEmailAddress"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/latitudLayout"
+            style="@style/lugar_form">
+
+            <EditText
+                android:id="@+id/latitud_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/txt_Latitud"
+                android:inputType="phone"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/longitudLayout"
+            style="@style/lugar_form">
+
+            <EditText
+                android:id="@+id/longitud_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/txt_longitud"
+                android:inputType="phone"/>
         </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/btn_crear_lugar"

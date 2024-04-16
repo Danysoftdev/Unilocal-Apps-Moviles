@@ -69,4 +69,8 @@ object Lugares {
     fun buscarXUsuario(idCreador:Int): ArrayList<Lugar>{
         return lugares.filter { l -> l.idCreador ==idCreador }.toCollection(ArrayList())
     }
+    fun ordenarPorCorazones(): ArrayList<Lugar> {
+        return lugares.sortedByDescending { it.corazones }.toCollection(ArrayList())
+    }
+
 }

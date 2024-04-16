@@ -21,6 +21,9 @@
     <string name="txt_direccion">Dirección</string>
     <string name="txt_descripcion">Descripcion</string>
     <string name="txt_novedades">Novedades</string>
+    <string name="txt_longitud">Longitud</string>
+    <string name="txt_Latitud">Latitud</string>
+
     <string name="btn_crear_lugar">Crear lugar</string>
     <string name="txt_nuevo_lugar">Nuevo lugar</string>
 

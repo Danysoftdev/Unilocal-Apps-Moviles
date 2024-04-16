@@ -27,4 +27,7 @@ object Usuarios {
         val usuario = usuarios.first { u -> u.correo == correo && u.password == password }
         return usuario
     }
+    fun buscar(id: Int): Usuario {
+        return usuarios.first { u -> u.id == id }
+    }
 }

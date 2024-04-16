@@ -14,7 +14,8 @@ class Lugar(var id: Int,
             var latitud: Float,
             var longitud: Float,
             var idCiudad: Int,
-            var novedades:String
+            var novedades:String,
+
 ) {
 
     var imagenes: ArrayList<String> = ArrayList()
