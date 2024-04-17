@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">Unilocal</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TEXTOS DE CREAR LUGAR-->
+    <string name="txt_nombre_lugar">Nombre</string>
+    <string name="txt_telefono">Telefono</string>
+    <string name="txt_direccion">Dirección</string>
+    <string name="txt_descripcion">Descripcion</string>
+    <string name="txt_novedades">Novedades</string>
+    <string name="btn_crear_lugar">Crear lugar</string>
+    <string name="txt_nuevo_lugar">Nuevo lugar</string>
+
+    <!-- TEXTOS DEL DETALLE LUGAR -->
+    <string name="txt_calificacion_promedio_lugar">Calificación promedio</string>
+    <string name="txt_categoriga_lugar">Categoria</string>
+    <string name="txt_estado_horario_lugar">Estado horario</string>
+    <string name="txt_horario_lugar">Horario</string>
+    <string name="txt_guardar_lugar">Guardar</string>
 </resources>
