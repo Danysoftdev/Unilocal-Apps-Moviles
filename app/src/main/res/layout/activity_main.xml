@@ -7,13 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <SearchView
+            android:layout_width="282dp"
+            android:layout_height="52dp"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="66dp"
+            android:layout_height="67dp"
+            tools:layout_editor_absoluteX="329dp"
+            tools:layout_editor_absoluteY="16dp"
+            tools:srcCompat="@tools:sample/avatars" />
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
