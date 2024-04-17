@@ -17,4 +17,15 @@
     <string name="txt_estado_horario_lugar">Estado horario</string>
     <string name="txt_horario_lugar">Horario</string>
     <string name="txt_guardar_lugar">Guardar</string>
+
+    <!-- TEXTOS DEL INFO LUGAR FRAGMENT -->
+    <string name="ic_info">\uf05a</string>
+    <string name="ic_horario">\uf017</string>
+    <string name="txt_descripcion_lugar">Descripciòn del lugar</string>
+    <string name="txt_horarios_lugar">Horarios del lugar</string>
+    <string name="txt_ubicacion_lugar">Ubicaciòn del lugar</string>
+    <string name="txt_telefono_lugar">Telefono del lugar</string>
+    <string name="ic_ubicacion">\uf124</string>
+    <string name="ic_telefono">\uf095</string>
+
 </resources>

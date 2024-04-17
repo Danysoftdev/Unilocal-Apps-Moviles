@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="@string/txt_nombre_lugar"
-                style="@style/title_place"/>
+                style="@style/titulo_lugar"/>
 
             <TextView
                 android:id="@+id/calificacionLugar"
@@ -123,6 +123,13 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabsLugar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
