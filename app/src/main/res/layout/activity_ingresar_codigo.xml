@@ -7,75 +7,95 @@
     android:layout_height="match_parent"
     tools:context=".activities.IngresarCodigoActivity">
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingrese el codigo"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="491dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editTextTextPassword2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text= "Contraseña"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="385dp" />
 
-    <EditText
-        android:id="@+id/editTextTextPassword3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text= "Confirmar contraseña"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="300dp" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cambiar contraseña"
+            tools:layout_editor_absoluteX="151dp"
+            tools:layout_editor_absoluteY="103dp" />
 
-    <EditText
-        android:id="@+id/editTextNumberDecimal"
-        android:layout_width="51dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        tools:layout_editor_absoluteX="76dp"
-        tools:layout_editor_absoluteY="199dp" />
 
-    <EditText
-        android:id="@+id/editTextNumberDecimal"
-        android:layout_width="51dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="199dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/editTextNumberDecimal"
-        android:layout_width="51dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="199dp" />
+            <EditText
+                android:id="@+id/numero1"
+                android:layout_width="51dp"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="76dp"
+                tools:layout_editor_absoluteY="199dp" />
 
-    <EditText
-        android:id="@+id/editTextNumberDecimal"
-        android:layout_width="51dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        tools:layout_editor_absoluteX="286dp"
-        tools:layout_editor_absoluteY="199dp" />
+            <EditText
+                android:id="@+id/numero2"
+                android:layout_width="51dp"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="151dp"
+                tools:layout_editor_absoluteY="199dp" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cambiar contraseña"
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="103dp" />
+            <EditText
+                android:id="@+id/numero3"
+                android:layout_width="51dp"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="219dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+            <EditText
+                android:id="@+id/numero4"
+                android:layout_width="51dp"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                tools:layout_editor_absoluteX="286dp"
+                tools:layout_editor_absoluteY="199dp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingrese el codigo"
+            tools:layout_editor_absoluteX="112dp"
+            tools:layout_editor_absoluteY="491dp" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:text= "Contraseña"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="385dp" />
+
+        <EditText
+            android:id="@+id/confirmarPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:text= "Confirmar contraseña"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="300dp" />
+
+
+    </LinearLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

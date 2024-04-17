@@ -7,29 +7,40 @@
     android:layout_height="match_parent"
     tools:context=".activities.RecuperarContraActivity">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enviar codigo"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="393dp" />
 
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text="Email"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="294dp" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="150dp"
-        android:layout_height="34dp"
-        android:text="Recuperar contraseña"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="208dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="150dp"
+            android:layout_height="34dp"
+            android:text="Recuperar contraseña"
+            tools:layout_editor_absoluteX="130dp"
+            tools:layout_editor_absoluteY="208dp" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:text="Email"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="294dp" />
+
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enviar codigo"
+            tools:layout_editor_absoluteX="138dp"
+            tools:layout_editor_absoluteY="393dp" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
