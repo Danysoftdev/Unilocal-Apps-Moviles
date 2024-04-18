@@ -1,10 +1,12 @@
 package co.edu.eam.unilocal.fragmentos
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.databinding.FragmentMenuPrincipalBinding
 
@@ -29,6 +31,21 @@ class MenuPrincipalFragment : Fragment() {
     ): View? {
 
         binding = FragmentMenuPrincipalBinding.inflate(inflater, container, false)
+
+        binding.txtBusqueda.setOnEditorActionListener { v, actionId, event ->
+            if(actionId == EditorInfo.IME_ACTION_SEARCH){
+
+                val busqueda = binding.txtBusqueda.text.toString()
+
+                if (busqueda.isNotEmpty()){
+                    val intent = Intent(activity, null /*ResultadoBusquedaActivity::class.java*/)
+                    intent.putExtra("textoBusqueda", busqueda)
+                    startActivity(intent)
+                }
+            }
+            true
+        }
+
         return binding.root
     }
 }

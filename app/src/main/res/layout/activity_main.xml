@@ -12,16 +12,17 @@
         android:layout_height="match_parent"
         android:background="#a6eca8"/>
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/barraSuperior"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        class="co.edu.eam.unilocal.fragmentos.MenuPrincipalFragment" />
+        android:layout_marginTop="40dp"
+        class="co.edu.eam.unilocal.fragmentos.MenuPrincipalFragment"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/barraInferior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/menu"/>
 
