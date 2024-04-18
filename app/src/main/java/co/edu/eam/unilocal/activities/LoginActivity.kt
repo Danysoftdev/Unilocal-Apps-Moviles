@@ -1,6 +1,7 @@
 package co.edu.eam.unilocal.activities
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,11 @@ class LoginActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val boton: Button = findViewById(R.id.btnIniciar)
+        boton.setOnClickListener {
+            login()
         }
     }
 
