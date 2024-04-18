@@ -20,12 +20,9 @@ object Comentarios {
     }
 
     fun crear(comentario: Comentario): Comentario{
+        comentario.id = comentarios.size + 1
         comentarios.add(comentario)
         return comentario
-    }
-
-    fun generarId(): Int{
-        return comentarios.size + 1
     }
 
     fun obtenerCantidadComentarios(idLugar: Int): Int{

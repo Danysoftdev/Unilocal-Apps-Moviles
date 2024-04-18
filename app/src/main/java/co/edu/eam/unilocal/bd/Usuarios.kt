@@ -27,4 +27,14 @@ object Usuarios {
         val usuario = usuarios.first { u -> u.correo == correo && u.password == password }
         return usuario
     }
+
+    fun getNameById(id: Int): String{
+        var nombre = ""
+        for (usuario: Usuario in usuarios){
+            if (usuario.id == id){
+                nombre = usuario.nombre
+            }
+        }
+        return nombre
+    }
 }

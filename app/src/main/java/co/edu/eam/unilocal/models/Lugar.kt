@@ -48,46 +48,46 @@ class Lugar(var id: Int,
 
     }
 
-    fun obtenerHoraCierre(): Int{
+    fun obtenerHoraCierre(): String{
 
         val fecha = Calendar.getInstance()
         val dia = fecha.get(Calendar.DAY_OF_WEEK)
-        val hora = fecha.get(Calendar.HOUR_OF_DAY)
 
-        var horaCierre = 0
+        var mensaje = ""
 
         for (horario in horarios){
-            if (horario.diasSemana.contains(DiaSemana.entries[dia-1]) && hora < horario.horaCierre &&
-                hora >= horario.horaInicio){
+            if (horario.diasSemana.contains(DiaSemana.entries[dia-1])){
 
-                horaCierre = horario.horaCierre
+                mensaje = "Cierra a las ${horario.horaCierre}:00"
                 break
 
             }
         }
 
-        return horaCierre
+        return mensaje
 
     }
 
-    fun obtenerHoraApertura(): Int{
+    fun obtenerHoraApertura(): String{
 
         val fecha = Calendar.getInstance()
         val dia = fecha.get(Calendar.DAY_OF_WEEK)
-        val hora = fecha.get(Calendar.HOUR_OF_DAY)
 
-        var horaApertura = 0
+        var mensaje = ""
+        var pos = 0
 
         for (horario in horarios){
-            if (horario.diasSemana.contains(DiaSemana.entries[dia-1]) && hora >= horario.horaCierre){
+            pos = horario.diasSemana.indexOf(DiaSemana.entries[dia-1])
 
-                horaApertura = horario.horaInicio
-                break
-
+            mensaje = if (pos != -1){
+                "${horario.diasSemana[pos+1].toString().lowercase()} a las ${horario.horaInicio}:00"
+            }else{
+                "${horario.diasSemana[0].toString().lowercase()} a las ${horario.horaInicio}:00"
             }
+            break
         }
 
-        return horaApertura
+        return mensaje
 
     }
 

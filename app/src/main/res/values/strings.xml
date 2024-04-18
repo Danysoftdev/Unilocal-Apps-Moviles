@@ -30,7 +30,12 @@
     <string name="ic_calificacion">\uf005</string>
 
     <!-- TEXTOS DEL COMENTARIOS LUGAR FRAGMENT -->
-    <string name="txt_descripcion_comentario">Escriba comentario</string>
+    <string name="txt_descripcion_comentario">Escriba su comentario</string>
     <string name="txt_btn_comentar">Comentar</string>
+
+    <!-- TEXTOS DEL COMENTARIO ADAPTER -->
+    <string name="txt_nombre_persona_comentario">Nombre de la persona</string>
+    <string name="txt_fecha_comentario">Fecha del comentario</string>
+    <string name="txt_comentario">Comentario</string>
 
 </resources>

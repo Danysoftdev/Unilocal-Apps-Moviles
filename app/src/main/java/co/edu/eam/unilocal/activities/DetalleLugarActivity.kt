@@ -57,10 +57,10 @@ class DetalleLugarActivity : AppCompatActivity() {
             estadoHorario.text = lugar.verificarEstadoHorario()
             if (lugar.verificarEstadoHorario() == "Abierto"){
                 estadoHorario.setTextColor(Color.GREEN)
-                horario.text = "Cierra a las ${lugar.obtenerHoraCierre()}:00"
+                horario.text = lugar.obtenerHoraCierre()
             }else{
                 estadoHorario.setTextColor(Color.RED)
-                horario.text = "Abre a las ${lugar.obtenerHoraApertura()}:00"
+                horario.text = lugar.obtenerHoraApertura()
             }
         }
 
