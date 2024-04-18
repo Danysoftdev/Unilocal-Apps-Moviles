@@ -21,6 +21,7 @@ class Lugar(var id: Int,
     var telefonos: List<String> = ArrayList()
     var horarios: ArrayList<Horario> = ArrayList()
     var fecha: Date = Date()
+
     override fun toString(): String {
         return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, direccion='$direccion', latitud=$latitud, longitud=$longitud, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, horarios=$horarios, fecha=$fecha)"
     }
@@ -87,6 +88,19 @@ class Lugar(var id: Int,
         }
 
         return horaApertura
+
+    }
+
+    fun obtenerCalificacionPromedio(comentarios: ArrayList<Comentario>): Int{
+
+        var promedio = 0
+
+        if (comentarios.size > 0){
+            val suma = comentarios.stream().map { c -> c.calificaicon }.reduce{suma, valor -> suma + valor}.get()
+            promedio = suma/comentarios.size
+        }
+
+        return promedio
 
     }
 

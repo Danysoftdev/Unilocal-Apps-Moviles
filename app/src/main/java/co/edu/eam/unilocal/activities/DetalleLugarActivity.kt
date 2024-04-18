@@ -2,10 +2,13 @@ package co.edu.eam.unilocal.activities
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import co.edu.eam.unilocal.adapters.ViewPagerAdapter
 import co.edu.eam.unilocal.bd.Categorias
+import co.edu.eam.unilocal.bd.Comentarios
 import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityDetalleLugarBinding
 import co.edu.eam.unilocal.models.Lugar
@@ -35,13 +38,20 @@ class DetalleLugarActivity : AppCompatActivity() {
         if (lugar != null){
 
             val nombre: TextView = binding.nombreLugar
-            val calificacion: TextView = binding.calificacionLugar
             val categoria: TextView = binding.categoriaLugar
             val estadoHorario: TextView = binding.estadoHorarioLugar
             val horario: TextView = binding.horarioLugar
 
             nombre.text = lugar.nombre
-            calificacion.text = "5"
+
+            val calificacion = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
+            for (i in 0..calificacion){
+                (binding.listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
+            }
+
+            val cantidadComentatios: TextView = binding.cantidadComentarios
+            cantidadComentatios.text = "(${Comentarios.obtenerCantidadComentarios(lugar.id).toString()})"
+
             val categoryPlace = Categorias.obtener(lugar.idCategoria)
             categoria.text = categoryPlace?.nombre
             estadoHorario.text = lugar.verificarEstadoHorario()

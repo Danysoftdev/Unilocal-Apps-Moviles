@@ -23,4 +23,19 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <style name="txt_info_fragment">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="estilo_estrellas">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/font_awesome_6_free_solid_900</item>
+        <item name="android:text">@string/ic_calificacion</item>
+    </style>
+
 </resources>

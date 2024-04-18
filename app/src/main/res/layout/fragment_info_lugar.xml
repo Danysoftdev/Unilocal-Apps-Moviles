@@ -21,9 +21,7 @@
 
             <TextView
                 android:id="@+id/ubicacionLugar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
+                style="@style/txt_info_fragment"
                 android:text="@string/txt_ubicacion_lugar"/>
 
         </LinearLayout>
@@ -50,11 +48,9 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/txt_info_fragment"
                     android:layout_marginBottom="15dp"
-                    android:text="@string/txt_horarios_lugar"
-                    android:textSize="15sp"/>
+                    android:text="@string/txt_horarios_lugar"/>
 
                 <TextView
                     android:id="@+id/horariosLugar"
@@ -82,9 +78,7 @@
 
             <TextView
                 android:id="@+id/telefonoLugar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
+                style="@style/txt_info_fragment"
                 android:text="@string/txt_telefono_lugar"/>
 
         </LinearLayout>
@@ -105,10 +99,8 @@
 
             <TextView
                 android:id="@+id/descripcionLugar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_descripcion_lugar"
-                android:textSize="15sp"/>
+                style="@style/txt_info_fragment"
+                android:text="@string/txt_descripcion_lugar"/>
 
         </LinearLayout>
 

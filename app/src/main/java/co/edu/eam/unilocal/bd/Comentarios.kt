@@ -19,7 +19,22 @@ object Comentarios {
         return comentarios.filter { c -> c.idLugar == idLugar }.toCollection(ArrayList())
     }
 
-    fun crear(comentario: Comentario){
+    fun crear(comentario: Comentario): Comentario{
         comentarios.add(comentario)
+        return comentario
     }
+
+    fun generarId(): Int{
+        return comentarios.size + 1
+    }
+
+    fun obtenerCantidadComentarios(idLugar: Int): Int{
+        var cantidad: Int = 0
+        for (comentario: Comentario in comentarios){
+            if (comentario.idLugar == idLugar) cantidad++
+        }
+        return cantidad
+    }
+
+
 }

@@ -1,15 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ComentariosLugarFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/listaComentarios"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/txtComentario"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/fondo_forms"
+            android:hint="@string/txt_descripcion_comentario"
+            android:gravity="start"
+            android:textAlignment="gravity"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/listaEstrellas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/estrella_1"
+                    style="@style/estilo_estrellas"/>
+
+                <TextView
+                    android:id="@+id/estrella_2"
+                    style="@style/estilo_estrellas"/>
+
+                <TextView
+                    android:id="@+id/estrella_3"
+                    style="@style/estilo_estrellas"/>
+
+                <TextView
+                    android:id="@+id/estrella_4"
+                    style="@style/estilo_estrellas"/>
+
+                <TextView
+                    android:id="@+id/estrella_5"
+                    style="@style/estilo_estrellas"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btComentar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_btn_comentar"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/gray"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listaComentarios"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</ScrollView>
