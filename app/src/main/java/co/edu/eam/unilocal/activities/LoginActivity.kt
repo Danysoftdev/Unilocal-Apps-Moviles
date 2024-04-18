@@ -38,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
             try{
                 val user = Usuarios.login(correo.toString(), password.toString())
                 Toast.makeText(this, "Usuario correcto", Toast.LENGTH_LONG).show()
+                startActivity( Intent(this, MainActivity::class.java) )
 
             }catch(e:Exception){
                 Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_LONG).show()

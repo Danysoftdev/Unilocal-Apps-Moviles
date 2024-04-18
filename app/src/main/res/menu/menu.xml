@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuInicio"
+        android:enabled="true"
+        android:icon="@drawable/ic_inicio"
+        android:title="Inicio"/>
+    <item
+        android:id="@+id/menuLugares"
+        android:enabled="true"
+        android:icon="@drawable/ic_mis_lugares"
+        android:title="Mis lugares"/>
+
+    <item
+        android:id="@+id/menuFavoritos"
+        android:enabled="true"
+        android:icon="@drawable/ic_favoritos"
+        android:title="Favoritos"/>
+
+    <item
+        android:id="@+id/menuTopSemanal"
+        android:enabled="true"
+        android:icon="@drawable/ic_top_semanal"
+        android:title="Top semanal"/>
+</menu>
