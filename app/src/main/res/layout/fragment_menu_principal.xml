@@ -1,32 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragmentos.MenuPrincipalFragment">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        tools:context=".fragmentos.MenuPrincipalFragment">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnMenu"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/font_awesome_6_free_solid_900"
-        android:textSize="22sp"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:text="\uf8c9"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/fondo_busqueda">
 
-    <EditText
-        android:id="@+id/txtBusqueda"
-        android:layout_width="290dp"
-        android:layout_height="50dp"
-        android:hint="Nombre del lugar"
-        android:imeOptions="actionSearch"
-        android:singleLine="true"
-        android:paddingStart="10dp"
-        android:paddingEnd="15dp"
-        android:background="@null" />
-</LinearLayout>
+            <EditText
+                android:id="@+id/txt_busqueda"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:hint="@string/txt_busqueda"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:paddingStart="20dp"
+                android:paddingEnd="15dp"
+                android:layout_marginEnd="10dp"
+                android:background="@null"
+                android:drawableEnd="@drawable/ic_search"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_menu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/font_awesome_6_free_solid_900"
+            android:textSize="22sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:text="\uf0c9"/>
+
+
+    </LinearLayout>
+
+
+</FrameLayout>
+
+
