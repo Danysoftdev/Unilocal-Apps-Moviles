@@ -1,5 +1,6 @@
 package co.edu.eam.unilocal.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -43,8 +44,15 @@ class LoginActivity : AppCompatActivity() {
         if ( correo.isNotEmpty() && password.isNotEmpty() ){
             try{
                 val user = Usuarios.login(correo.toString(), password.toString())
-                Toast.makeText(this, "Usuario correcto", Toast.LENGTH_LONG).show()
-                startActivity( Intent(this, MainActivity::class.java) )
+
+                if( user != null ){
+                    val sharedPreferences = getSharedPreferences("sesion", Context.MODE_PRIVATE ).edit()
+                    sharedPreferences.putString("correo_usuario", user.correo)
+                    sharedPreferences.commit()
+                    startActivity( Intent(this, MainActivity::class.java) )
+                }else{
+                    Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_LONG).show()
+                }
 
             }catch(e:Exception){
                 Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_LONG).show()

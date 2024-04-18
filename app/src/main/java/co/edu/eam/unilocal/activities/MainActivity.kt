@@ -1,7 +1,10 @@
 package co.edu.eam.unilocal.activities
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +21,18 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        val btnSesion: Button = findViewById(R.id.btnSesion)
+        val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        val correo = sp.getString("correo", "")
+
+        if( correo!!.isNotEmpty() ){
+            btnSesion.setText("Iniciar sesion")
+            btnSesion.setOnClickListener { startActivity( Intent(this, LoginActivity::class.java) ) }
+        }else{
+            btnSesion.setText("Cerrar sesion")
+            val sharedPreferences = getSharedPreferences("sesion", Context.MODE_PRIVATE ).edit()
+            sharedPreferences.clear()
         }
     }
 
