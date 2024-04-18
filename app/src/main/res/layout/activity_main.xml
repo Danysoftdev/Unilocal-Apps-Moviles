@@ -19,5 +19,11 @@
         android:layout_marginTop="40dp"
         class="co.edu.eam.unilocal.fragmentos.MenuPrincipalFragment"/>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/barraInferior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/menu"/>
 
 </RelativeLayout>

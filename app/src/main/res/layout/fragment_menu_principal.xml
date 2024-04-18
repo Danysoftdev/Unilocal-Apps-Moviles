@@ -15,13 +15,13 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginStart="15dp"
             android:background="@drawable/fondo_busqueda">
 
             <EditText
                 android:id="@+id/txt_busqueda"
-                android:layout_width="260dp"
+                android:layout_width="240dp"
                 android:layout_height="50dp"
                 android:hint="@string/txt_busqueda"
                 android:imeOptions="actionSearch"
@@ -34,20 +34,15 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_menu"
-            android:layout_width="50dp"
+        <ImageButton
+            android:id="@+id/btnMenu"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/font_awesome_6_free_solid_900"
-            android:textSize="22sp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:text="\uf0c9"/>
+            android:layout_weight="1"
+            tools:src="@tools:sample/avatars" />
 
 
     </LinearLayout>
 
 
 </FrameLayout>
-
-
