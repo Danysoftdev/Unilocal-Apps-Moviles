@@ -4,15 +4,19 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import co.edu.eam.unilocal.adapters.ViewPagerAdapter
 import co.edu.eam.unilocal.bd.Categorias
 import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityDetalleLugarBinding
 import co.edu.eam.unilocal.models.Lugar
+import com.google.android.material.tabs.TabLayoutMediator
 
 class DetalleLugarActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityDetalleLugarBinding
-    var codigoLugar: Int = 1
+    private var lugar: Lugar? = null
+    //Recordar cambiar a = 0, cuando ya se tenga la parte de los resultados de búsqueda
+    var codigoLugar: Int = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +24,13 @@ class DetalleLugarActivity : AppCompatActivity() {
         binding = ActivityDetalleLugarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val lugar: Lugar? = Lugares.obtener(codigoLugar)
-        cargarInformacion(lugar)
+        //codigoLugar = intent.extras!!.getInt("codigoLugar")
+        lugar = Lugares.obtener(codigoLugar)
+        cargarInformacionSuperior(lugar)
+        cargarTabs()
     }
 
-    private fun cargarInformacion(lugar: Lugar?){
+    private fun cargarInformacionSuperior(lugar: Lugar?){
 
         if (lugar != null){
 
@@ -48,6 +54,22 @@ class DetalleLugarActivity : AppCompatActivity() {
             }
         }
 
+
+    }
+
+    private fun cargarTabs(){
+
+        if (codigoLugar != 0){
+
+            binding.viewPager.adapter = ViewPagerAdapter(this, codigoLugar)
+            TabLayoutMediator(binding.tabsLugar, binding.viewPager){tab, pos ->
+                when(pos){
+                    0 -> tab.text = "Información"
+                    1 -> tab.text = "Comentario"
+                    2 -> tab.text = "Novedades"
+                }
+            }.attach()
+        }
 
     }
 }
