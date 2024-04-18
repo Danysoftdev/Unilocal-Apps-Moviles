@@ -1,5 +1,6 @@
 package co.edu.eam.unilocal.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -28,6 +29,11 @@ class LoginActivity : AppCompatActivity() {
         boton.setOnClickListener {
             login()
         }
+    }
+
+    fun irARecuperacion(){
+        val intent = Intent(this, RecuperarContraActivity::class.java)
+        startActivity(intent)
     }
 
     fun login(){
