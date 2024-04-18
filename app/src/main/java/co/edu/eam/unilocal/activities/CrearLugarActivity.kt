@@ -44,13 +44,9 @@ class CrearLugarActivity : AppCompatActivity() {
         cargarCiudades()
         cargarCategorias()
 
-        binding.btnLugares.setOnClickListener {
-                val intent = Intent(baseContext,MisLugaresActivity::class.java)
-                startActivity(intent)
-        }
+
 
         binding.btnCrearLugar.setOnClickListener { crearNuevoLugar() }
-
         }
 
         fun cargarCiudades(){
@@ -152,13 +148,13 @@ class CrearLugarActivity : AppCompatActivity() {
 
             if(nombre.isNotEmpty() && descripcion.isNotEmpty()&& telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != 0 && idCategoria != 0 && latitudS.isNotEmpty() && longitudS.isNotEmpty()){
                 val nuevoLugar = Lugar(9,nombre,descripcion,1,false,idCategoria,direccion, latitud, longitud,idCiudad, novedades)
-
                 val telefonos:ArrayList<String> = ArrayList()
                 telefonos.add(telefono)
-
                 nuevoLugar.telefonos = telefonos
-
                 Lugares.crear(nuevoLugar)
+                val intent = Intent(baseContext,MisLugaresActivity::class.java)
+                startActivity(intent)
+                Toast.makeText(this,"SE CREÓ CORRECTAMENTE",Toast.LENGTH_LONG).show()
 
                 Log.e("CrearLugarActivity", Lugares.listarRechazados().toString())
             }

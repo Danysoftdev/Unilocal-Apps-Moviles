@@ -1,34 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
+    android:layout_width="370dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginStart="20dp"
     android:layout_marginTop="10dp"
+    android:gravity="center_horizontal"
+
     android:background="@drawable/spinner_border"
-   >
+
+    >
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-      >
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-
             android:gravity="center"
-          >
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-
-                android:src="@mipmap/ic_launcher_round" />
+            android:paddingTop="10dp"
+            >
 
             <ImageView
                 android:layout_width="150dp"
@@ -39,26 +35,27 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp"
             android:layout_gravity="left"
-         >
+            android:orientation="horizontal"
+            >
+
             <LinearLayout
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-
+                android:layout_weight="1"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/nombre_lugar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
                     android:text="Nombre del lugar"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:paddingTop="10dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -68,62 +65,91 @@
                     android:text="Categoria"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/calificacion_lugar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
+                    android:fontFamily="@font/font_awesome_6_free_solid_900"
                     android:text="Calificación"
                     android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/font_awesome_6_free_solid_900"
-                    android:textIsSelectable="true"/>
+                    android:textIsSelectable="true"
+                    android:textSize="12sp" />
+
                 <TextView
-                    android:id="@+id/comentarios_lugar"
+                    android:id="@+id/direccion_lugar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Comentarios"
+                    android:text="Direccion"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <Button
-                    android:id="@+id/ir_comentarios_lugar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ver comentarios"
-                    android:textColor="#DFDFDF"
-                    android:textSize="15sp"
-
-                    android:background="@null"
-                    android:padding="8dp"
-                    android:gravity="center"
-                    android:textAllCaps="false" />
-
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
 
                 >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
 
-                <Button
-                    android:id="@+id/btn_eliminar_lugar"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/comentarios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:text="50" />
+                    <TextView
+                        android:id="@+id/corazones"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:text="350"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    ><Button
+                    android:id="@+id/btn_corazon"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-
                     android:fontFamily="@font/font_awesome_6_free_solid_900"
-                    android:text="\uf1f8"
+                    android:text="\uf086"
                     android:textColor="@color/black"
-                    android:textSize="22sp"
-
+                    android:textSize="18sp"
                     />
+                    <Button
+                        android:id="@+id/btn_comentarios"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:fontFamily="@font/font_awesome_6_free_solid_900"
+                        android:text="\uf004"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+
+                        />
+                </LinearLayout>
+
+
 
             </LinearLayout>
-        </LinearLayout>
 
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

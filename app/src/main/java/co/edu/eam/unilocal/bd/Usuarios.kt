@@ -30,4 +30,7 @@ object Usuarios {
     fun buscar(id: Int): Usuario {
         return usuarios.first { u -> u.id == id }
     }
+
+
+
 }

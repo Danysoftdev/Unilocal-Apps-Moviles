@@ -12,7 +12,7 @@ object Comentarios {
         comentarios.add(Comentario(3, "Buena comida mexicana, precios razonables", 3, 3, 4))
         comentarios.add(Comentario(4, "El lugar es bonito, pero muy lentos", 2, 2, 3))
         comentarios.add(Comentario(5, "No volvería, los precios son muy altos", 5, 2, 2))
-        comentarios.add(Comentario(6, "Un hotel bien ubicado y con desayuno incluido. Recomendado", 1, 5, 4))
+        comentarios.add(Comentario(6, "Un hotel bien ubicado y con desayuno incluido. Recomendado", 1, 1, 4))
     }
 
     fun listar(idLugar: Int): ArrayList<Comentario> {

@@ -39,7 +39,7 @@
                 android:text="@string/txt_nuevo_lugar"/>
 
             <Button
-                android:id="@+id/btn_lugares"
+
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:textSize="22sp"
@@ -167,6 +167,7 @@
         <Button
             android:id="@+id/btn_crear_lugar"
             android:layout_width="150dp"
+
             android:layout_height="50dp"
             android:text="@string/btn_crear_lugar"/>
     </LinearLayout>

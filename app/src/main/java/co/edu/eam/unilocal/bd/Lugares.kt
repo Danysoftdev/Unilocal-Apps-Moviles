@@ -72,5 +72,9 @@ object Lugares {
     fun ordenarPorCorazones(): ArrayList<Lugar> {
         return lugares.sortedByDescending { it.corazones }.toCollection(ArrayList())
     }
+    fun eliminar(idLugar: Int) {
+        lugares.removeIf { lugar -> lugar.id == idLugar }
+    }
+
 
 }

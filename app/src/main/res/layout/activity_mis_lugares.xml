@@ -13,8 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
-        android:id="@+id/btn_lugares"
+    <!--Button
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:textSize="22sp"
@@ -22,6 +21,14 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:fontFamily="@font/font_awesome_6_free_solid_900"
         android:text="\uf007"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp" /-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_lugares"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/icons_anadir"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp" />
