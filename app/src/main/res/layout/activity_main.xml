@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,29 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <LinearLayout
-        android:layout_width="409dp"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#a6eca8"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/barraSuperior"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
-
-        <SearchView
-            android:layout_width="282dp"
-            android:layout_height="52dp"
-            tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="16dp" />
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="66dp"
-            android:layout_height="67dp"
-            tools:layout_editor_absoluteX="329dp"
-            tools:layout_editor_absoluteY="16dp"
-            tools:srcCompat="@tools:sample/avatars" />
-    </LinearLayout>
+        class="co.edu.eam.unilocal.fragmentos.MenuPrincipalFragment" />
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
