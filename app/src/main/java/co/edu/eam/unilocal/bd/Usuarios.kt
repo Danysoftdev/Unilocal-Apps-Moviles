@@ -45,5 +45,20 @@ object Usuarios {
         }else{
             return true
         }
+
+    fun getNameById(id: Int): String{
+        var nombre = ""
+        for (usuario: Usuario in usuarios){
+            if (usuario.id == id){
+                nombre = usuario.nombre
+            }
+        }
+        return nombre
+    }
+
+    fun getById(id: Int): Usuario? {
+
+        return usuarios.firstOrNull { u -> u.id == id }
+
     }
 }

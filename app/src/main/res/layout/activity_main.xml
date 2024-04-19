@@ -35,6 +35,7 @@
     </LinearLayout>
 
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/barraInferior"
         android:layout_width="match_parent"
