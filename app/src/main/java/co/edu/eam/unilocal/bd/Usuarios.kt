@@ -18,9 +18,16 @@ object Usuarios {
         return usuarios
     }
 
-    fun agregar(usuario: Usuario){
+    fun agregar(usuario: Usuario): Boolean{
         //Hay que validar que no se repita el correo y la contraseña
-        usuarios.add(usuario)
+        val user = usuarios.find { u -> u.correo == usuario.correo || u.password == usuario.password }
+
+        if( user == null ){
+            usuarios.add(usuario)
+            return true
+        }else{
+            return false
+        }
     }
 
     fun login(correo: String, password: String): Usuario {
