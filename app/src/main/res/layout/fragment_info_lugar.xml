@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.InfoLugarFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+        <LinearLayout
+            style="@style/linear_layout_info_fragment">
+
+            <TextView
+                android:id="@+id/iconoUbicacion"
+                style="@style/icono_lugar"
+                android:text="@string/ic_ubicacion"/>
+
+            <TextView
+                android:id="@+id/ubicacionLugar"
+                style="@style/txt_info_fragment"
+                android:text="@string/txt_ubicacion_lugar"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <TextView
+                android:id="@+id/iconoHorario"
+                style="@style/icono_lugar"
+                android:text="@string/ic_horario"/>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/txt_info_fragment"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/txt_horarios_lugar"/>
+
+                <TextView
+                    android:id="@+id/horariosLugar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/gray"/>
+
+        <LinearLayout
+            style="@style/linear_layout_info_fragment">
+
+            <TextView
+                android:id="@+id/iconoTelefono"
+                style="@style/icono_lugar"
+                android:text="@string/ic_telefono"/>
+
+            <TextView
+                android:id="@+id/telefonoLugar"
+                style="@style/txt_info_fragment"
+                android:text="@string/txt_telefono_lugar"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/gray"/>
+
+        <LinearLayout
+            style="@style/linear_layout_info_fragment">
+
+            <TextView
+                android:id="@+id/iconoInfo"
+                style="@style/icono_lugar"
+                android:text="@string/ic_info"/>
+
+            <TextView
+                android:id="@+id/descripcionLugar"
+                style="@style/txt_info_fragment"
+                android:text="@string/txt_descripcion_lugar"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/gray"/>
+
+        <View
+            android:id="@+id/mapa_lugar"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginBottom="15dp"
+            android:background="#a6eca8"/>
+
+    </LinearLayout>
+
+</FrameLayout>

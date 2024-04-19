@@ -1,3 +1,55 @@
 <resources>
     <string name="app_name">Unilocal</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TEXTOS DE CREAR LUGAR-->
+    <string name="txt_nombre_lugar">Nombre</string>
+    <string name="txt_telefono">Telefono</string>
+    <string name="txt_direccion">Dirección</string>
+    <string name="txt_descripcion">Descripcion</string>
+    <string name="txt_novedades">Novedades</string>
+    <string name="btn_crear_lugar">Crear lugar</string>
+    <string name="txt_nuevo_lugar">Nuevo lugar</string>
+
+    <!-- TEXTOS DEL DETALLE LUGAR -->
+    <string name="txt_calificacion_promedio_lugar">Calificación promedio</string>
+    <string name="txt_categoriga_lugar">Categoria</string>
+    <string name="txt_estado_horario_lugar">Estado horario</string>
+    <string name="txt_horario_lugar">Horario</string>
+    <string name="txt_guardar_lugar">Guardar</string>
+
+    <!-- TEXTOS DEL INFO LUGAR FRAGMENT -->
+    <string name="ic_ubicacion">\uf124</string>
+    <string name="txt_ubicacion_lugar">Ubicaciòn del lugar</string>
+    <string name="ic_horario">\uf017</string>
+    <string name="txt_horarios_lugar">Horarios del lugar</string>
+    <string name="ic_telefono">\uf095</string>
+    <string name="txt_telefono_lugar">Telefono del lugar</string>
+    <string name="ic_info">\uf05a</string>
+    <string name="txt_descripcion_lugar">Descripciòn del lugar</string>
+    <string name="ic_calificacion">\uf005</string>
+
+    <!-- TEXTOS DEL COMENTARIOS LUGAR FRAGMENT -->
+    <string name="txt_descripcion_comentario">Escriba su comentario</string>
+    <string name="txt_btn_comentar">Comentar</string>
+
+    <!-- TEXTOS DEL COMENTARIO ADAPTER -->
+    <string name="txt_nombre_persona_comentario">Nombre de la persona</string>
+    <string name="txt_fecha_comentario">Fecha del comentario</string>
+    <string name="txt_comentario">Comentario</string>
+
+
+    <!-- TEXTOS DE INICIO -->
+    <string name="txt_busqueda">Escriba el lugar</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
 </resources>

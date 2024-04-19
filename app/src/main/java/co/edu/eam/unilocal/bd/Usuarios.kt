@@ -18,13 +18,47 @@ object Usuarios {
         return usuarios
     }
 
-    fun agregar(usuario: Usuario){
-        //Hay que validar que no se repita el correo y la contraseña
-        usuarios.add(usuario)
+    fun agregar(usuario: Usuario): Boolean{
+
+        val user = usuarios.firstOrNull { u -> u.correo == usuario.correo }
+
+        if( user == null ){
+            usuario.id = usuarios.size + 1
+            usuarios.add(usuario)
+            return true
+        }else{
+            return false
+        }
     }
 
     fun login(correo: String, password: String): Usuario {
         val usuario = usuarios.first { u -> u.correo == correo && u.password == password }
         return usuario
+    }
+
+    fun verificarCorreo(correo: String): Boolean{
+
+        val user = usuarios.firstOrNull { u -> u.correo == correo }
+
+        if( user == null ){
+            return false
+        }else{
+            return true
+        }
+
+    fun getNameById(id: Int): String{
+        var nombre = ""
+        for (usuario: Usuario in usuarios){
+            if (usuario.id == id){
+                nombre = usuario.nombre
+            }
+        }
+        return nombre
+    }
+
+    fun getById(id: Int): Usuario? {
+
+        return usuarios.firstOrNull { u -> u.id == id }
+
     }
 }
