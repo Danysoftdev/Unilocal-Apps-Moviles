@@ -39,12 +39,7 @@ object Usuarios {
     }
 
     fun getById(id: Int): Usuario? {
-        var user: Usuario? = null
-        for (usuario: Usuario in usuarios){
-            if (usuario.id == id){
-                user = usuario
-            }
-        }
-        return user
+
+        return usuarios.firstOrNull { u -> u.id == id }
     }
 }
