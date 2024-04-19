@@ -39,6 +39,7 @@
             tools:layout_editor_absoluteX="100dp"
             tools:layout_editor_absoluteY="314dp" />
 
+
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -49,8 +50,11 @@
             android:ems="10"
             android:inputType="text"
             android:gravity="center"
+            android:id="@+id/btnRecuperarContra"
+            android:layout_width="254dp"
+            android:layout_height="45dp"
+            android:ems="10"
             android:text="¿Has olvidado tu contraseña?"
-            android:onClick="irARecuperacion"
             tools:layout_editor_absoluteX="87dp"
             tools:layout_editor_absoluteY="359dp" />
 
