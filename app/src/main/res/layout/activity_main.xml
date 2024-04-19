@@ -12,12 +12,29 @@
         android:layout_height="match_parent"
         android:background="#a6eca8"/>
 
-    <fragment
-        android:id="@+id/barraSuperior"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginTop="40dp"
-        class="co.edu.eam.unilocal.fragments.MenuPrincipalFragment"/>
+        android:gravity="center_vertical">
+
+        <fragment
+            android:id="@+id/barraSuperior"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            class="co.edu.eam.unilocal.fragmentos.MenuPrincipalFragment"/>
+
+        <Button
+            android:id="@+id/btnSesion"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+
+    </LinearLayout>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/barraInferior"

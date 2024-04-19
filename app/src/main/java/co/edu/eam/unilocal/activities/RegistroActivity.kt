@@ -1,5 +1,6 @@
 package co.edu.eam.unilocal.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -14,29 +15,18 @@ import co.edu.eam.unilocal.models.Usuario
 
 class RegistroActivity : AppCompatActivity() {
 
-    lateinit var binding:ActivityRegistroBinding
-    private var id: Int = 0
+    lateinit var binding: ActivityRegistroBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_registro)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
-        val boton:Button = findViewById(R.id.btnRegistro)
-        boton.setOnClickListener {
-            registrar()
-        }
+        binding = ActivityRegistroBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btnRegistro.setOnClickListener { registrar() }
     }
 
-
-
-
-    fun registrar(): Boolean{
+    fun registrar() {
         val nombre = binding.txtNombre.text
         val nickname = binding.txtNickname.text
         val email = binding.txtEmail.text
@@ -52,7 +42,15 @@ class RegistroActivity : AppCompatActivity() {
             Toast.makeText(this, "Las contraseñas no son iguales", Toast.LENGTH_LONG).show()
         }
 
-        id++
-        return Usuarios.agregar( Usuario(id, nombre.toString(), nickname.toString(), email.toString(), password.toString()) )
+        val registro: Boolean = Usuarios.agregar( Usuario(0, nombre.toString(), nickname.toString(), email.toString(), password.toString()) )
+
+        if (registro){
+            Toast.makeText(this, "Usuario registrado exitosamente", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, LoginActivity::class.java))
+        }else{
+            Toast.makeText(this, "El correo ingresado ya se encuentra registrado", Toast.LENGTH_LONG).show()
+        }
+
+
     }
 }
