@@ -7,10 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.databinding.ActivityMainBinding
 
@@ -25,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val correo = sp.getString("correo_usuario", "")
+        val tipo = sp.getString("tipo_usuario", "")
 
         val btnSesion: Button = binding.btnSesion
 
@@ -33,9 +31,14 @@ class MainActivity : AppCompatActivity() {
             binding.barraInferior.visibility = View.GONE
             btnSesion.setOnClickListener { startActivity( Intent(this, LoginActivity::class.java) ) }
         }else{
-            btnSesion.setBackgroundResource(R.drawable.ic_logout)
-            binding.barraInferior.visibility = View.VISIBLE
-            btnSesion.setOnClickListener { limpiarSesion() }
+            if (tipo == "usuarrio"){
+                btnSesion.setBackgroundResource(R.drawable.ic_logout)
+                binding.barraInferior.visibility = View.VISIBLE
+                btnSesion.setOnClickListener { limpiarSesion() }
+
+            }else{
+                startActivity( Intent(this, ModeradorActivity::class.java) )
+            }
         }
     }
 

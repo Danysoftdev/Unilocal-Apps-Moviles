@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.ModeradorActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:background="@color/gray">
+
+        <ImageView
+            android:id="@+id/app_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/ic_launcher_round"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="245dp"/>
+
+        <Button
+            android:id="@+id/btnSesion"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_logout"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:paddingStart="5dp"
+        android:background="@drawable/fondo_forms">
+
+        <CheckBox
+            android:id="@+id/pendientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="@string/txt_pendiente"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/aceptados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:text="@string/txt_aceptado"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/rechazados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_rechazado"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lugaresRevisar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"/>
+
+</LinearLayout>

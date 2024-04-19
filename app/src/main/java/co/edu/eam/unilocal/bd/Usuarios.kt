@@ -7,11 +7,11 @@ object Usuarios {
     private val usuarios: ArrayList<Usuario> = ArrayList()
 
     init {
-        usuarios.add(Usuario(1, "Daniela", "dany", "daniela@email.com", "123"))
-        usuarios.add(Usuario(2, "Angie", "angie", "angie@email.com", "456"))
-        usuarios.add(Usuario(3, "Alejandro", "alejo", "alejandro@email.com", "789"))
-        usuarios.add(Usuario(4, "Marcos", "marcos", "marcos@email.com", "147"))
-        usuarios.add(Usuario(5, "Maria", "maria", "maria@email.com", "258"))
+        usuarios.add(Usuario(1, "Daniela", "dany", "daniela@email.com", "123", "usuario"))
+        usuarios.add(Usuario(2, "Angie", "angie", "angie@email.com", "456", "moderador"))
+        usuarios.add(Usuario(3, "Alejandro", "alejo", "alejandro@email.com", "789", "usuario"))
+        usuarios.add(Usuario(4, "Marcos", "marcos", "marcos@email.com", "147", "moderador"))
+        usuarios.add(Usuario(5, "Maria", "maria", "maria@email.com", "258", "usuario"))
     }
 
     fun listar(): ArrayList<Usuario> {
@@ -49,10 +49,6 @@ object Usuarios {
 
     }
 
-
-
-
-
     fun verificarCorreo(correo: String): Boolean {
 
         val user = usuarios.firstOrNull { u -> u.correo == correo }
@@ -78,6 +74,15 @@ object Usuarios {
 
         return usuarios.firstOrNull { u -> u.id == id }
 
+    }
+
+    fun getType(id: Int): String {
+        var usuario: Usuario? =  usuarios.firstOrNull { u -> u.id == id }
+        if (usuario != null) {
+            return usuario.tipo
+        }
+
+        return ""
     }
 
 }

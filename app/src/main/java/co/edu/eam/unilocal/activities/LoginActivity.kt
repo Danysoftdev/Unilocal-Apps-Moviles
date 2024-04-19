@@ -36,13 +36,20 @@ class LoginActivity : AppCompatActivity() {
         if ( correo.isNotEmpty() && password.isNotEmpty() ){
             try{
                 val user = Usuarios.login(correo.toString(), password.toString())
+                val tipo = Usuarios.getType(user.id)
 
                 val sharedPreferences = getSharedPreferences("sesion", Context.MODE_PRIVATE ).edit()
                 sharedPreferences.putString("id_usuario", user.id.toString())
                 sharedPreferences.putString("correo_usuario", user.correo)
                 sharedPreferences.putString("contra_usuario", user.password)
+                sharedPreferences.putString("tipo_usuario", user.tipo)
                 sharedPreferences.apply()
-                startActivity( Intent(this, MainActivity::class.java) )
+
+                if (tipo == "usuario"){
+                    startActivity( Intent(this, MainActivity::class.java) )
+                }else{
+                    startActivity( Intent(this, ModeradorActivity::class.java) )
+                }
 
             }catch(e:Exception){
                 Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_LONG).show()
