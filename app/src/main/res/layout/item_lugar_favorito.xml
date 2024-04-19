@@ -95,41 +95,15 @@
 
 
                 >
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
 
 
                     >
 
-                    <TextView
-                        android:id="@+id/comentarios"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:text="50" />
-                    <TextView
-                        android:id="@+id/corazones"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:text="350"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    ><Button
-                    android:id="@+id/btn_corazon"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:fontFamily="@font/font_awesome_6_free_solid_900"
-                    android:text="\uf086"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    />
                     <Button
                         android:id="@+id/btn_comentarios"
                         style="@style/Widget.AppCompat.Button.Borderless"
@@ -141,6 +115,17 @@
                         android:textSize="18sp"
 
                         />
+                    <Button
+                        android:id="@+id/btn_eliminar_favorito"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+
+                        android:fontFamily="@font/font_awesome_6_free_solid_900"
+                        android:text="\uf086"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
                 </LinearLayout>
 
 

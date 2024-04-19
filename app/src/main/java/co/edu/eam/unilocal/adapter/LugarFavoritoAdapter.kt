@@ -3,16 +3,27 @@ package co.edu.eam.unilocal.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
+import co.edu.eam.unilocal.activities.LugaresFavoritosActivity
 import co.edu.eam.unilocal.bd.Categorias
 import co.edu.eam.unilocal.bd.Comentarios
+import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
 
 class LugarFavoritoAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<LugarFavoritoAdapter.ViewHolder>() {
+    private var onLugarEliminadoListener: OnLugarEliminadoListener? = null
+
+    fun setOnLugarEliminadoListener(listener: LugaresFavoritosActivity) {
+        onLugarEliminadoListener = listener
+    }
+    interface OnLugarEliminadoListener {
+        fun onLugarEliminado()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_lugar_favorito,parent,false)
         return  ViewHolder(v)
@@ -22,11 +33,18 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<Lug
         holder.bind(lista[position])
     }
     override fun getItemCount() = lista.size
-    inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val nombre: TextView = itemView.findViewById(R.id.nombre_lugar)
         val categoria: TextView = itemView.findViewById(R.id.categoria_lugar)
         val calificacion: TextView = itemView.findViewById(R.id.calificacion_lugar)
         val comentario: TextView = itemView.findViewById(R.id.comentarios_lugar)
+        val btnEliminarLugar : Button = itemView.findViewById(R.id.btn_eliminar_favorito)
+        var codigoLugar : Int =0
+        init{
+            itemView.setOnClickListener(this)
+
+            btnEliminarLugar.setOnClickListener(this)
+        }
         fun bind(lugar: Lugar){
             val cate : Categoria? = Categorias.obtener(lugar.idCategoria)
             val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
@@ -40,7 +58,18 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<Lug
             }
             calificacion.text = "$promedioFormateado $estrellas"
             comentario.text = comentarios.size.toString() +" comentarios"
+            codigoLugar = lugar.id
 
+        }
+
+        override fun onClick(v: View?) {
+            when (v?.id) {
+                R.id.btn_eliminar_lugar -> {
+                    Usuarios.eliminarFavorito(1,codigoLugar)
+                    onLugarEliminadoListener?.onLugarEliminado()
+
+                }
+            }
         }
     }
 }

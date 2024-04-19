@@ -23,6 +23,7 @@
             android:gravity="center_vertical">
 
             <Button
+                android:id="@+id/regresar_lugares"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:textSize="22sp"
@@ -39,7 +40,7 @@
                 android:text="@string/txt_nuevo_lugar"/>
 
             <Button
-
+                android:id="@+id/ir_a_favoritos"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:textSize="22sp"

@@ -2,6 +2,7 @@ package co.edu.eam.unilocal.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -27,16 +28,20 @@ class MisLugaresActivity : AppCompatActivity() ,LugarAdapter.OnLugarEliminadoLis
         listaLugares = ArrayList()
 
         listaLugares = Lugares.buscarXUsuario(1)
+        if(listaLugares.isEmpty()){
+            binding.mensajeVacioLugares.visibility = View.VISIBLE
+        }else {
+            binding.mensajeVacioLugares.visibility = View.GONE
+            val adapter = LugarAdapter(listaLugares)
 
-        val adapter= LugarAdapter(listaLugares)
+            binding.listaLugares.adapter = adapter
+            binding.listaLugares.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        binding.listaLugares.adapter = adapter
-        binding.listaLugares.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-
-        adapter.setOnLugarEliminadoListener(this)
-        binding.btnLugares.setOnClickListener {
-            val intent = Intent(baseContext,CrearLugarActivity::class.java)
-            startActivity(intent)
+            adapter.setOnLugarEliminadoListener(this)
+            binding.btnLugares.setOnClickListener {
+                val intent = Intent(baseContext, CrearLugarActivity::class.java)
+                startActivity(intent)
+            }
         }
 
     }

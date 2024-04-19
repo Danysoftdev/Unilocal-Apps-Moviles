@@ -44,7 +44,14 @@ class CrearLugarActivity : AppCompatActivity() {
         cargarCiudades()
         cargarCategorias()
 
-
+        binding.regresarLugares.setOnClickListener {
+            val intent = Intent(baseContext, MisLugaresActivity::class.java)
+            startActivity(intent)
+        }
+        binding.irAFavoritos.setOnClickListener {
+            val intent = Intent(baseContext, LugaresFavoritosActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.btnCrearLugar.setOnClickListener { crearNuevoLugar() }
         }
