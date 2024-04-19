@@ -15,7 +15,7 @@ class ViewPagerAdapter(var fragment: FragmentActivity, var codigoLugar: Int): Fr
         return when(position){
             0 -> InfoLugarFragment.newInstance(codigoLugar)
             1 -> ComentariosLugarFragment.newInstance(codigoLugar)
-            else -> NovedadesLugarFragment()
+            else -> NovedadesLugarFragment.newInstance(codigoLugar)
         }
     }
 }

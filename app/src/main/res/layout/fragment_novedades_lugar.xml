@@ -5,10 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".fragments.NovedadesLugarFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/txt_novedades"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:text="@string/txt_novedades"
+        android:background="@drawable/fondo_forms"/>
 
 </FrameLayout>

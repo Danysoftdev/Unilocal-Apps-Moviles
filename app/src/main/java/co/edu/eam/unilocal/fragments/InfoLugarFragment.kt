@@ -32,8 +32,7 @@ class InfoLugarFragment : Fragment() {
 
         binding = FragmentInfoLugarBinding.inflate(inflater, container, false)
 
-        //Ojo tiene que llegar es el ID
-        lugar = Lugares.obtener(2)
+        lugar = Lugares.obtener(codigoLugar)
 
         if (lugar != null){
 

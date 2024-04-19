@@ -22,10 +22,6 @@ class Lugar(var id: Int,
     var horarios: ArrayList<Horario> = ArrayList()
     var fecha: Date = Date()
 
-    override fun toString(): String {
-        return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, direccion='$direccion', latitud=$latitud, longitud=$longitud, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, horarios=$horarios, fecha=$fecha)"
-    }
-
     fun verificarEstadoHorario(): String {
 
         val fecha = Calendar.getInstance()
@@ -74,15 +70,15 @@ class Lugar(var id: Int,
         val dia = fecha.get(Calendar.DAY_OF_WEEK)
 
         var mensaje = ""
-        var pos = 0
+        var pos: Int = 0
 
         for (horario in horarios){
-            pos = horario.diasSemana.indexOf(DiaSemana.entries[dia-1])
+            pos = horario.diasSemana.indexOf(DiaSemana.entries[dia-2])
 
             mensaje = if (pos != -1){
-                "${horario.diasSemana[pos+1].toString().lowercase()} a las ${horario.horaInicio}:00"
+                "Abre el ${horario.diasSemana[pos+1].toString().lowercase()} a las ${horario.horaInicio}:00"
             }else{
-                "${horario.diasSemana[0].toString().lowercase()} a las ${horario.horaInicio}:00"
+                "Abre el ${horario.diasSemana[0].toString().lowercase()} a las ${horario.horaInicio}:00"
             }
             break
         }
@@ -102,6 +98,10 @@ class Lugar(var id: Int,
 
         return promedio
 
+    }
+
+    override fun toString(): String {
+        return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, direccion='$direccion', latitud=$latitud, longitud=$longitud, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, horarios=$horarios, fecha=$fecha)"
     }
 
 
