@@ -21,8 +21,7 @@ class DetalleLugarActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityDetalleLugarBinding
     private var lugar: Lugar? = null
-    //Recordar cambiar a = 0, cuando ya se tenga la parte de los resultados de búsqueda
-    var codigoLugar: Int = 2
+    var codigoLugar: Int = 0
     private var usuario: Usuario? = null
     var codigoUsuario: Int = 2
 
@@ -32,7 +31,7 @@ class DetalleLugarActivity : AppCompatActivity() {
         binding = ActivityDetalleLugarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //codigoLugar = intent.extras!!.getInt("codigoLugar")
+        codigoLugar = intent.extras!!.getInt("codigoLugar")
         lugar = Lugares.obtener(codigoLugar)
         cargarInformacionSuperior(lugar)
         cargarTabs()

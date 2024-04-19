@@ -22,24 +22,25 @@
             android:name=".activities.RecuperarContraActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LogiinActivity"
+            android:name=".activities.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
-        <activity
             android:name=".activities.DetalleLugarActivity"
-            android:exported="true" >
+            android:exported="false" >
+        </activity>
+        <activity
+            android:name=".activities.ResultadoBusquedaActivity"
+            android:exported="false" >
+        </activity>
+        <activity
+            android:name=".activities.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.MainActivity"
-            android:exported="false"/>
 
     </application>
 
