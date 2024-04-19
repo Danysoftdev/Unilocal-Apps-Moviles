@@ -24,13 +24,14 @@ class ComentariosLugarFragment : Fragment() {
     var listaComentarios: ArrayList<Comentario> = ArrayList()
     private  lateinit var adapter: ComentarioAdapter
     private var estrellas: Int = 0
-    var codigoUsuario: Int = 1
+    private var codigoUsuario: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (arguments != null){
             codigoLugar = requireArguments().getInt("codigoLugar")
+            codigoUsuario = requireArguments().getInt("codigoUsuario")
         }
 
     }
@@ -43,7 +44,11 @@ class ComentariosLugarFragment : Fragment() {
 
         binding = FragmentComentariosLugarBinding.inflate(inflater, container, false)
 
-
+        if (codigoUsuario == 0){
+            binding.nombreLayout.visibility = View.GONE
+            binding.barraEstrellas.visibility = View.GONE
+            binding.separador.visibility = View.GONE
+        }
 
         listaComentarios = Comentarios.listar(codigoLugar)
         adapter = ComentarioAdapter(requireContext(), listaComentarios)
@@ -100,9 +105,10 @@ class ComentariosLugarFragment : Fragment() {
     }
 
     companion object{
-        fun newInstance(codigoLugar: Int): ComentariosLugarFragment{
+        fun newInstance(codigoLugar: Int, codigoUsuario: Int): ComentariosLugarFragment{
             val args = Bundle()
             args.putInt("codigoLugar", codigoLugar)
+            args.putInt("codigoUsuario", codigoUsuario)
             val fragmento = ComentariosLugarFragment()
             fragmento.arguments = args
             return fragmento

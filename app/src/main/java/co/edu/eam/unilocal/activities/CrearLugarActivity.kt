@@ -20,6 +20,7 @@ import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityCrearLugarBinding
 import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Ciudad
+import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
 
 
@@ -154,7 +155,7 @@ class CrearLugarActivity : AppCompatActivity() {
 
 
             if(nombre.isNotEmpty() && descripcion.isNotEmpty()&& telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != 0 && idCategoria != 0 && latitudS.isNotEmpty() && longitudS.isNotEmpty()){
-                val nuevoLugar = Lugar(9,nombre,descripcion,1,false,idCategoria,direccion, latitud, longitud,idCiudad, novedades)
+                val nuevoLugar = Lugar(9,nombre,descripcion,1,Estado.PENDIENTE,idCategoria,direccion, latitud, longitud,idCiudad, novedades)
                 val telefonos:ArrayList<String> = ArrayList()
                 telefonos.add(telefono)
                 nuevoLugar.telefonos = telefonos

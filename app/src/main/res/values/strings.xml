@@ -63,6 +63,15 @@
     <string name="txt_fecha_comentario">Fecha del comentario</string>
     <string name="txt_comentario">Comentario</string>
 
+    <!-- TEXTOS DEL MODERADOR ACRIVITY -->
+    <string name="txt_pendiente">Pendientes</string>
+    <string name="txt_aceptado">Aceptados</string>
+    <string name="txt_rechazado">Rechazados</string>
+
+    <!-- TEXTOS DEL MODERADOR ADAPTER -->
+    <string name="nombre_moderador">Nombre moderador</string>
+    <string name="estado_solicitud">Estado</string>
+
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

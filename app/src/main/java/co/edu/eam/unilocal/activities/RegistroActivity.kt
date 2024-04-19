@@ -42,7 +42,7 @@ class RegistroActivity : AppCompatActivity() {
             Toast.makeText(this, "Las contraseñas no son iguales", Toast.LENGTH_LONG).show()
         }
 
-        val registro: Boolean = Usuarios.agregar( Usuario(0, nombre.toString(), nickname.toString(), email.toString(), password.toString()) )
+        val registro: Boolean = Usuarios.agregar( Usuario(0, nombre.toString(), nickname.toString(), email.toString(), password.toString(), "usuario") )
 
         if (registro){
             Toast.makeText(this, "Usuario registrado exitosamente", Toast.LENGTH_LONG).show()

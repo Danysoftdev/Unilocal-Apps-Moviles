@@ -31,6 +31,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
+            android:id="@+id/barra_estrellas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -80,6 +81,7 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/separador"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginBottom="15dp"

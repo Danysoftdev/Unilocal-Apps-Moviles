@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,7 @@ class DetalleLugarActivity : AppCompatActivity() {
     private var lugar: Lugar? = null
     var codigoLugar: Int = 0
     private var usuario: Usuario? = null
-    var codigoUsuario: Int = 2
+    var codigoUsuario: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +35,16 @@ class DetalleLugarActivity : AppCompatActivity() {
 
         val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val codigo = sp.getString("id_usuario", "")
-        codigoUsuario = codigo!!.toInt()
+
+        if (codigo!!.isNotEmpty()){
+
+            codigoUsuario = codigo.toInt()
+            usuario = Usuarios.getById(codigoUsuario)
+            binding.btnGuardarLugar.visibility = View.VISIBLE
+            binding.btnGuardarLugar.setOnClickListener { guardarLugarFavoritos() }
+        }else{
+            binding.btnGuardarLugar.visibility = View.GONE
+        }
 
 
         codigoLugar = intent.extras!!.getInt("codigoLugar")
@@ -42,9 +52,8 @@ class DetalleLugarActivity : AppCompatActivity() {
         cargarInformacionSuperior(lugar)
         cargarTabs()
 
-        usuario = Usuarios.getById(codigoUsuario)
 
-        binding.btnGuardarLugar.setOnClickListener { guardarLugarFavoritos() }
+
     }
 
     private fun cargarInformacionSuperior(lugar: Lugar?){
@@ -85,7 +94,7 @@ class DetalleLugarActivity : AppCompatActivity() {
 
         if (codigoLugar != 0){
 
-            binding.viewPager.adapter = ViewPagerAdapter(this, codigoLugar)
+            binding.viewPager.adapter = ViewPagerAdapter(this, codigoLugar, codigoUsuario)
             TabLayoutMediator(binding.tabsLugar, binding.viewPager){tab, pos ->
                 when(pos){
                     0 -> tab.text = "Información"
