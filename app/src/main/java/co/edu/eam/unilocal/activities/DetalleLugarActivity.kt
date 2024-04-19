@@ -34,11 +34,11 @@ class DetalleLugarActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
-        val codigo = sp.getString("id_usuario", "")
+        val codigo = sp.getInt("id_usuario", 0)
 
-        if (codigo!!.isNotEmpty()){
+        if (codigo > 0){
 
-            codigoUsuario = codigo.toInt()
+            codigoUsuario = codigo
             usuario = Usuarios.getById(codigoUsuario)
             binding.btnGuardarLugar.visibility = View.VISIBLE
             binding.btnGuardarLugar.setOnClickListener { guardarLugarFavoritos() }

@@ -2,6 +2,7 @@ package co.edu.eam.unilocal.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +30,9 @@ class MisFavoritosFragment : Fragment() , LugarFavoritoAdapter.OnLugarEliminadoL
         binding = FragmentMisFavoritosBinding.inflate(inflater,container,false)
         val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val codigoUsuario = sp.getInt("id_usuario",-1)
+        Log.e("MisFavoritosFragment", codigoUsuario.toString())
         listaLugaresFavoritos = Usuarios.buscar(codigoUsuario).favoritos
+        Log.e("MisFavoritosFragment", listaLugaresFavoritos.toString())
         if(listaLugaresFavoritos.isEmpty()){
             binding.mensajeVacioFavoritos.visibility = View.VISIBLE
         }else {
