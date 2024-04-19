@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".activities.RegistroActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-
 
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Datos de registro" />
-
+            android:text="Datos de registro"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nombre_registro_layout"
+        android:layout_width="300dp"
+        android:layout_height="70dp">
         <EditText
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
@@ -29,7 +30,11 @@
             android:inputType="text"
             android:hint="Nombre" />
 
-
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nickname_registro_layout"
+        android:layout_width="300dp"
+        android:layout_height="70dp">
         <EditText
             android:id="@+id/txtNickname"
             android:layout_width="match_parent"
@@ -38,6 +43,11 @@
             android:inputType="text"
             android:hint="Nickname" />
 
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_registro_layout"
+        android:layout_width="300dp"
+        android:layout_height="70dp">
         <EditText
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
@@ -46,6 +56,11 @@
             android:inputType="textEmailAddress"
             android:hint="Email" />
 
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_registro_layout"
+        android:layout_width="300dp"
+        android:layout_height="70dp">
         <EditText
             android:id="@+id/txtPassword"
             android:layout_width="match_parent"
@@ -53,6 +68,13 @@
             android:ems="10"
             android:hint="Contraseña"
             android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/confirmarPassword_registro_layout"
+        android:layout_width="300dp"
+        android:layout_height="70dp">
+
 
         <EditText
             android:id="@+id/txtConfirmarPassword"
@@ -62,10 +84,13 @@
             android:hint="Confirmar contraseña"
             android:inputType="textPassword" />
 
+    </com.google.android.material.textfield.TextInputLayout>
+
+
         <Button
             android:id="@+id/btnRegistro"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="registrarse" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:text="Registrarse" />
+
+</LinearLayout>

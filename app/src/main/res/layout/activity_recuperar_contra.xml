@@ -19,19 +19,24 @@
             android:id="@+id/textView"
             android:layout_width="150dp"
             android:layout_height="34dp"
+            android:textColor="@color/black"
             android:hint="Recuperar contraseña"
-            tools:layout_editor_absoluteX="130dp"
-            tools:layout_editor_absoluteY="208dp" />
+          />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_layout"
+            android:layout_width="300dp"
+            android:layout_height="70dp">
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:hint="Email"
+                />
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:hint="Email"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="294dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
 
         <Button
@@ -40,8 +45,8 @@
             android:layout_height="wrap_content"
             android:text="Enviar codigo"
             android:onClick="irALCodigo"
-            tools:layout_editor_absoluteX="138dp"
-            tools:layout_editor_absoluteY="393dp" />
+           android:layout_marginTop="20dp"
+           />
 
     </LinearLayout>
 
