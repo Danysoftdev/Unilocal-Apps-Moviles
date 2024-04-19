@@ -2,25 +2,40 @@ package co.edu.eam.unilocal.activities
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import co.edu.eam.unilocal.R
+import co.edu.eam.unilocal.bd.Usuarios
+import co.edu.eam.unilocal.databinding.ActivityRecuperarContraBinding
 
 class RecuperarContraActivity : AppCompatActivity() {
+
+    lateinit var binding: ActivityRecuperarContraBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_recuperar_contra)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+        binding = ActivityRecuperarContraBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btnEnviarCodigo.setOnClickListener { irAlCodigo() }
     }
 
     fun irAlCodigo(){
-        startActivity( Intent( this, IngresarCodigoActivity::class.java ) )
+
+        val email: String = binding.email.text.toString()
+
+        if (email.isEmpty()){
+            Toast.makeText(this, "Debe ingresar un correo", Toast.LENGTH_LONG).show()
+        }else{
+
+            if (!Usuarios.verificarCorreo(email)){
+                Toast.makeText(this, "Debe ingresar el correo con el que se registró", Toast.LENGTH_LONG).show()
+            }else{
+                val codigo = (1000..9999).random()
+
+                startActivity(Intent(this, IngresarCodigoActivity::class.java))
+                finish()
+
+            }
+        }
     }
 }
