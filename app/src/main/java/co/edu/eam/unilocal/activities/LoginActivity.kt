@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
                 val user = Usuarios.login(correo.toString(), password.toString())
 
                 val sharedPreferences = getSharedPreferences("sesion", Context.MODE_PRIVATE ).edit()
-                sharedPreferences.putInt("id_usuario", user.id)
+                sharedPreferences.putString("id_usuario", user.id.toString())
                 sharedPreferences.putString("correo_usuario", user.correo)
                 sharedPreferences.putString("contra_usuario", user.password)
                 sharedPreferences.apply()
