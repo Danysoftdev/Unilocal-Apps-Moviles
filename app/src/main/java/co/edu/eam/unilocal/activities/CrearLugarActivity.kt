@@ -160,8 +160,9 @@ class CrearLugarActivity : AppCompatActivity() {
                 telefonos.add(telefono)
                 nuevoLugar.telefonos = telefonos
                 Lugares.crear(nuevoLugar)
-                val intent = Intent(baseContext,MisLugaresActivity::class.java)
+                val intent = Intent(baseContext,MainActivity::class.java)
                 startActivity(intent)
+
                 Toast.makeText(this,"SE CREÓ CORRECTAMENTE",Toast.LENGTH_LONG).show()
 
                 Log.e("CrearLugarActivity", Lugares.listarRechazados().toString())

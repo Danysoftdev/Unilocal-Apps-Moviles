@@ -1,5 +1,6 @@
 package co.edu.eam.unilocal.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ import co.edu.eam.unilocal.models.Lugar
 class LugarFavoritoAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<LugarFavoritoAdapter.ViewHolder>() {
     private var onLugarEliminadoListener: OnLugarEliminadoListener? = null
 
-    fun setOnLugarEliminadoListener(listener: LugaresFavoritosActivity) {
+    fun setOnLugarEliminadoListener(listener: OnLugarEliminadoListener) {
         onLugarEliminadoListener = listener
     }
     interface OnLugarEliminadoListener {
@@ -65,8 +66,15 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<Lug
         override fun onClick(v: View?) {
             when (v?.id) {
                 R.id.btn_eliminar_lugar -> {
-                    Usuarios.eliminarFavorito(1,codigoLugar)
-                    onLugarEliminadoListener?.onLugarEliminado()
+                    val contexto = v?.context
+                    val sp = contexto?.getSharedPreferences("sesion", Context.MODE_PRIVATE)
+                    val codigoUsuario = sp?.getInt("id_usuario",-1)
+
+                    if (codigoUsuario != null) {
+                        Usuarios.eliminarFavorito(codigoUsuario,codigoLugar)
+                        onLugarEliminadoListener?.onLugarEliminado()
+                    }
+
 
                 }
             }
