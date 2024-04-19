@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -28,10 +29,12 @@ class MainActivity : AppCompatActivity() {
         val btnSesion: Button = binding.btnSesion
 
         if( correo!!.isEmpty() ){
-            btnSesion.text = "Iniciar sesión"
+            btnSesion.setBackgroundResource(R.drawable.ic_login)
+            binding.barraInferior.visibility = View.GONE
             btnSesion.setOnClickListener { startActivity( Intent(this, LoginActivity::class.java) ) }
         }else{
-            btnSesion.text ="Cerrar sesión"
+            btnSesion.setBackgroundResource(R.drawable.ic_logout)
+            binding.barraInferior.visibility = View.VISIBLE
             btnSesion.setOnClickListener { limpiarSesion() }
         }
     }
@@ -40,8 +43,9 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("sesion", Context.MODE_PRIVATE ).edit()
         sharedPreferences.clear()
+        sharedPreferences.apply()
 
-        startActivity( Intent(this, LoginActivity::class.java) )
+        startActivity( Intent(this, MainActivity::class.java) )
 
     }
 
