@@ -79,7 +79,7 @@ object Lugares {
         return lugares.filter { l -> l.idCreador ==idCreador }.toCollection(ArrayList())
     }
     fun ordenarPorCorazones(): ArrayList<Lugar> {
-        val lugaresActivos = lugares.filter { it.estado }
+        val lugaresActivos = lugares.filter { it.estado.name ==  "APROBADO" }
         return lugaresActivos.sortedByDescending { it.corazones}.toCollection(ArrayList())
     }
     fun eliminar(idLugar: Int) {

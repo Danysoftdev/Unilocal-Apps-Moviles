@@ -1,6 +1,7 @@
 package co.edu.eam.unilocal.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.CheckBox
@@ -27,9 +28,10 @@ class ModeradorActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
-        val codigo = sp.getString("id_usuario", "")
-        if (codigo!!.isNotEmpty()){
-            codigoModerador = codigo.toInt()
+        val codigo = sp.getInt("id_usuario", -1)
+
+        if (codigo>0 ){
+            codigoModerador = codigo
             Log.e("ModeradorActivity", codigoModerador.toString())
             listaLugares = ArrayList()
         }
@@ -82,6 +84,9 @@ class ModeradorActivity : AppCompatActivity() {
             }
             binding.lugaresRevisar.adapter!!.notifyDataSetChanged()
         }
+        binding.btnSesion.setOnClickListener {
+            limpiarSesion()
+        }
 
         Log.e("ModeradorActivity", listaLugares.toString())
 
@@ -89,4 +94,14 @@ class ModeradorActivity : AppCompatActivity() {
         binding.lugaresRevisar.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
     }
+    fun limpiarSesion() {
+
+        val sharedPreferences = getSharedPreferences("sesion", Context.MODE_PRIVATE).edit()
+        sharedPreferences.clear()
+        sharedPreferences.apply()
+
+        startActivity(Intent(this, MainActivity::class.java))
+
+    }
+
 }

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
             btnSesion.setOnClickListener { startActivity( Intent(this, LoginActivity::class.java) ) }
         }else{
-            if (tipo == "usuarrio"){
+            if (tipo == "usuario"){
                 btnSesion.setBackgroundResource(R.drawable.ic_logout)
                 binding.barraInferior.visibility = View.VISIBLE
                 btnSesion.setOnClickListener { limpiarSesion() }
@@ -54,12 +54,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnSesion.setOnClickListener { startActivity(Intent(this, LoginActivity::class.java)) }
-        } else {
+        } /*else {
             btnSesion.setBackgroundResource(R.drawable.ic_logout)
             binding.barraInferior.visibility = View.VISIBLE
             btnSesion.setOnClickListener { limpiarSesion() }
 
-        }
+        }*/
         reemplazarFragmento(1, MENU_INICIO)
         binding.barraInferior.setOnItemSelectedListener {
             when (it.itemId) {
