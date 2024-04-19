@@ -1,6 +1,7 @@
 package co.edu.eam.unilocal.models
 
 class Usuario (var id:Int, var nombre: String, var nickname: String, var correo: String, var password: String) {
+    var favoritos:ArrayList<Lugar> = ArrayList()
 
     var favoritos: ArrayList<Lugar> = ArrayList()
 

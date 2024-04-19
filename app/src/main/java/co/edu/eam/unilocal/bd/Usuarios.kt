@@ -36,6 +36,23 @@ object Usuarios {
         return usuario
     }
 
+    fun buscar(id: Int): Usuario {
+        return usuarios.first { u -> u.id == id }
+    }
+    fun eliminarFavorito(idUsuario: Int,idLugar: Int ){
+        val usuario = usuarios.find { u -> u.id == idUsuario}
+
+        if (usuario != null && usuario.favoritos.isNotEmpty()){
+            usuario.favoritos.removeIf { it.id == idLugar }
+        }
+
+
+    }
+
+
+
+
+
     fun verificarCorreo(correo: String): Boolean{
 
         val user = usuarios.firstOrNull { u -> u.correo == correo }
@@ -61,4 +78,5 @@ object Usuarios {
         return usuarios.firstOrNull { u -> u.id == id }
 
     }
+
 }

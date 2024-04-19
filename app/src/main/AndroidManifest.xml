@@ -13,6 +13,18 @@
         android:theme="@style/Theme.Unilocal"
         tools:targetApi="31">
         <activity
+
+            android:name=".activities.ComentariosLugarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.LugaresFavoritosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.TopSemanalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MisLugaresActivity"
+
             android:name=".activities.RegistroActivity"
             android:exported="false" />
         <activity
@@ -34,6 +46,7 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
+
             android:exported="true">
 
             <intent-filter>
@@ -42,6 +55,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activities.CrearLugarActivity"
+            android:exported="false">
+
+        </activity>
+        
+
+
 
     </application>
 

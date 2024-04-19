@@ -14,13 +14,18 @@ class Lugar(var id: Int,
             var direccion: String,
             var latitud: Float,
             var longitud: Float,
-            var idCiudad: Int
+            var idCiudad: Int,
+            var novedades:String,
+
 ) {
 
     var imagenes: ArrayList<String> = ArrayList()
     var telefonos: List<String> = ArrayList()
     var horarios: ArrayList<Horario> = ArrayList()
+    var comentarios:ArrayList<Comentario> = ArrayList()
     var fecha: Date = Date()
+    var corazones: Int = 0
+
 
     fun verificarEstadoHorario(): String {
 
@@ -100,8 +105,9 @@ class Lugar(var id: Int,
 
     }
 
+
     override fun toString(): String {
-        return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, direccion='$direccion', latitud=$latitud, longitud=$longitud, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, horarios=$horarios, fecha=$fecha)"
+        return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, direccion='$direccion', latitud=$latitud, longitud=$longitud, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, horarios=$horarios, fecha=$fecha,corazones=$corazones,novedades=$novedades)"
     }
 
 

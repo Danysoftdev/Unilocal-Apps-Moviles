@@ -1,6 +1,24 @@
 <resources>
+
+    <!-- TEXTOS DE INICIO-->
+    <string name="app_name">app</string>
+    <string name="txt_busqueda">Escriba el lugar</string>
+    <string name="txt_btn_registro">Ir a registro</string>
+    <string name="txt_btn_login">Ir a login</string>
+
+    <!-- TEXTOS DE LOGIN-->
+    <string name="txt_email">Escriba su correo</string>
+    <string name="txt_password">Escriba su contraseña</string>
+    <string name="txt_login">Iniciar sesión</string>
+    <string name="txt_registro">Registrarse</string>
+
+    <!-- TEXTOS DE REGISTRO-->
+    <string name="txt_nombre">Escriba su nombre</string>
+    <string name="txt_nickname">Escriba su nickname</string>
+
     <string name="app_name">Unilocal</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <!-- TEXTOS DE CREAR LUGAR-->
     <string name="txt_nombre_lugar">Nombre</string>
@@ -8,6 +26,17 @@
     <string name="txt_direccion">Dirección</string>
     <string name="txt_descripcion">Descripcion</string>
     <string name="txt_novedades">Novedades</string>
+
+    <string name="txt_longitud">Longitud</string>
+    <string name="txt_Latitud">Latitud</string>
+
+    <string name="btn_crear_lugar">Crear lugar</string>
+    <string name="txt_nuevo_lugar">Nuevo lugar</string>
+
+    <!-- TEXTOS DE VALIDACIONES-->
+    <string name="es_obligatorio">Este campo es obligatario</string>
+
+
     <string name="btn_crear_lugar">Crear lugar</string>
     <string name="txt_nuevo_lugar">Nuevo lugar</string>
 
@@ -51,5 +80,6 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
 
 </resources>

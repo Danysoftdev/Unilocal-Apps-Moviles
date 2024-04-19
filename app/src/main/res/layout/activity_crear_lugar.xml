@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities.CrearLugarActivity">
+
+        <LinearLayout
+            android:layout_width="370dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <Button
+                android:id="@+id/regresar_lugares"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:fontFamily="@font/font_awesome_6_free_solid_900"
+                android:text="\uf053"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:text="@string/txt_nuevo_lugar"/>
+
+            <Button
+                android:id="@+id/ir_a_favoritos"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:fontFamily="@font/font_awesome_6_free_solid_900"
+                android:text="\uf007"
+
+                />
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nombreLayout"
+            style="@style/lugar_form">
+
+            <EditText
+                android:id="@+id/nombre_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/txt_nombre_lugar"
+                android:inputType="text"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/direccionLayout"
+            style="@style/lugar_form">
+
+            <EditText
+                android:id="@+id/direccion_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/txt_direccion"
+                android:inputType="text"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descripcionLayout"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp">
+
+            <EditText
+                android:id="@+id/descripcion_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txt_descripcion"
+                android:gravity="left"
+                android:minLines="9"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecciona una categoría:"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+           />
+        <Spinner
+            android:id="@+id/categoria_lugar"
+            style="@style/lugar_form"
+            android:background="@drawable/spinner_border"></Spinner>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecciona la ciduad:"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            />
+        <Spinner
+            android:id="@+id/ciudad_lugar"
+            style="@style/lugar_form"
+            android:background="@drawable/spinner_border"
+            ></Spinner>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/telefonoLayout"
+            style="@style/lugar_form">
+
+            <EditText
+                android:id="@+id/telefono_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/txt_telefono"
+                android:inputType="phone"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/novedadesLayout"
+            style="@style/lugar_form">
+
+            <EditText
+                android:id="@+id/novedades_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/txt_novedades"
+                android:inputType="textEmailAddress"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/latitudLayout"
+            style="@style/lugar_form">
+
+            <EditText
+                android:id="@+id/latitud_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/txt_Latitud"
+                android:inputType="phone"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/longitudLayout"
+            style="@style/lugar_form">
+
+            <EditText
+                android:id="@+id/longitud_lugar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/txt_longitud"
+                android:inputType="phone"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/btn_crear_lugar"
+            android:layout_width="150dp"
+
+            android:layout_height="50dp"
+            android:text="@string/btn_crear_lugar"/>
+    </LinearLayout>
+
+</ScrollView>
