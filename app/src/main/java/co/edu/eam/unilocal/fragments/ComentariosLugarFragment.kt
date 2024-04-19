@@ -1,5 +1,6 @@
 package co.edu.eam.unilocal.fragments
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,6 +32,7 @@ class ComentariosLugarFragment : Fragment() {
         if (arguments != null){
             codigoLugar = requireArguments().getInt("codigoLugar")
         }
+
     }
 
     override fun onCreateView(
@@ -40,6 +42,8 @@ class ComentariosLugarFragment : Fragment() {
     ): View? {
 
         binding = FragmentComentariosLugarBinding.inflate(inflater, container, false)
+
+
 
         listaComentarios = Comentarios.listar(codigoLugar)
         adapter = ComentarioAdapter(requireContext(), listaComentarios)

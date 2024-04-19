@@ -1,7 +1,6 @@
 <resources>
 
     <!-- TEXTOS DE INICIO-->
-    <string name="app_name">app</string>
     <string name="txt_busqueda">Escriba el lugar</string>
     <string name="txt_btn_registro">Ir a registro</string>
     <string name="txt_btn_login">Ir a login</string>
@@ -37,9 +36,6 @@
     <string name="es_obligatorio">Este campo es obligatario</string>
 
 
-    <string name="btn_crear_lugar">Crear lugar</string>
-    <string name="txt_nuevo_lugar">Nuevo lugar</string>
-
     <!-- TEXTOS DEL DETALLE LUGAR -->
     <string name="txt_calificacion_promedio_lugar">Calificación promedio</string>
     <string name="txt_categoriga_lugar">Categoria</string>
@@ -66,10 +62,6 @@
     <string name="txt_nombre_persona_comentario">Nombre de la persona</string>
     <string name="txt_fecha_comentario">Fecha del comentario</string>
     <string name="txt_comentario">Comentario</string>
-
-
-    <!-- TEXTOS DE INICIO -->
-    <string name="txt_busqueda">Escriba el lugar</string>
 
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>

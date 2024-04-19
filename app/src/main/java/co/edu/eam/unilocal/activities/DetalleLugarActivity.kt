@@ -1,5 +1,6 @@
 package co.edu.eam.unilocal.activities
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -30,6 +31,11 @@ class DetalleLugarActivity : AppCompatActivity() {
 
         binding = ActivityDetalleLugarBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        val codigo = sp.getString("id_usuario", "")
+        codigoUsuario = codigo!!.toInt()
+
 
         codigoLugar = intent.extras!!.getInt("codigoLugar")
         lugar = Lugares.obtener(codigoLugar)

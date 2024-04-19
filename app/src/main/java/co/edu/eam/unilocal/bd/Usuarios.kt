@@ -53,15 +53,16 @@ object Usuarios {
 
 
 
-    fun verificarCorreo(correo: String): Boolean{
+    fun verificarCorreo(correo: String): Boolean {
 
         val user = usuarios.firstOrNull { u -> u.correo == correo }
 
-        if( user == null ){
+        if (user == null) {
             return false
-        }else{
+        } else {
             return true
         }
+    }
 
     fun getNameById(id: Int): String{
         var nombre = ""
