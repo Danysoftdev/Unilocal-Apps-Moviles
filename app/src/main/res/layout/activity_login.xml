@@ -44,7 +44,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
         <Button
             android:inputType="text"
             android:gravity="center"
@@ -52,6 +51,8 @@
             android:layout_width="254dp"
             android:layout_height="45dp"
             android:ems="10"
+            android:textColor="@color/black"
+            android:backgroundTint="#DFDFDF"
             android:text="¿Has olvidado tu contraseña?"
             tools:layout_editor_absoluteX="87dp"
             tools:layout_editor_absoluteY="359dp" />
@@ -60,16 +61,16 @@
 
         <Button
             android:id="@+id/btnIniciar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
             android:text="Iniciar sesion"
             tools:layout_editor_absoluteX="63dp"
             tools:layout_editor_absoluteY="431dp" />
 
         <Button
             android:id="@+id/btnRegistrarse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
 
             android:text="Registrarse"
             tools:layout_editor_absoluteX="236dp"
