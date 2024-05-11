@@ -38,7 +38,7 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<Lug
         val nombre: TextView = itemView.findViewById(R.id.nombre_lugar)
         val categoria: TextView = itemView.findViewById(R.id.categoria_lugar)
         val calificacion: TextView = itemView.findViewById(R.id.calificacion_lugar)
-        val comentario: TextView = itemView.findViewById(R.id.comentarios_lugar)
+        //val comentario: TextView = itemView.findViewById(R.id.comentarios_lugar)
         val btnEliminarLugar : Button = itemView.findViewById(R.id.btn_eliminar_favorito)
         var codigoLugar : Int =0
         init{
@@ -58,7 +58,7 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<Lug
                 categoria.text= cate.nombre
             }
             calificacion.text = "$promedioFormateado $estrellas"
-            comentario.text = comentarios.size.toString() +" comentarios"
+            //comentario.text = comentarios.size.toString() +" comentarios"
             codigoLugar = lugar.id
 
         }
