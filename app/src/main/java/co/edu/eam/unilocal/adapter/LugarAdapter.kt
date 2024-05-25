@@ -1,12 +1,15 @@
 package co.edu.eam.unilocal.adapter
 
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.R
@@ -39,7 +42,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
     inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView),OnClickListener{
         val nombre:TextView= itemView.findViewById(R.id.nombre_lugar)
         val categoria:TextView= itemView.findViewById(R.id.categoria_lugar)
-        val calificacion:TextView= itemView.findViewById(R.id.calificacion_lugar)
+        val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar)
         val comentario:TextView= itemView.findViewById(R.id.comentarios_lugar)
         val irAComentariosButton: Button = itemView.findViewById(R.id.ir_comentarios_lugar)
         val btnEliminarLugar : Button = itemView.findViewById(R.id.btn_eliminar_lugar)
@@ -55,6 +58,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
             val cate : Categoria? = Categorias.obtener(lugar.idCategoria)
             val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
             val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
+
             val estrellas = "\uF005".repeat(promedio.toInt()) //
             val promedioFormateado = String.format("%.1f", promedio)
 
@@ -62,8 +66,14 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
             if (cate != null) {
                 categoria.text= cate.nombre
             }
-            calificacion.text = "$promedioFormateado $estrellas"
+            val calificacion = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
+            for (i in 0..calificacion){
+                (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
+            }
+            /*calificacion.text = "$promedioFormateado $estrellas"
+            calificacion.setTextColor(Color.YELLOW)*/
             comentario.text = comentarios.size.toString() +" comentarios"
+
             codigoLugar = lugar.id
         }
 
