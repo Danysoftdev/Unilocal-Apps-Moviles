@@ -32,6 +32,26 @@
     <string name="btn_crear_lugar">Crear lugar</string>
     <string name="txt_nuevo_lugar">Nuevo lugar</string>
 
+    <string name="txt_creacion_exitosa">Lugar creado exitosamente. En revisión por un moderador</string>
+    <string name="txt_creacion_fallida">Por favor complete todos los campos</string>
+    <string name="txt_seleccion_inconclusa">Por favor seleccione una ubicación en el mapa</string>
+
+    <string name="paso_1">Paso 1/3: Información básica del lugar</string>
+    <string name="default_ciudad">Elija una ciudad</string>
+    <string name="default_categoria">Elija una categoria</string>
+    <string name="validacion_ciudad">Por favor, elija una ciudad</string>
+    <string name="validacion_categoria">Por favor, elija una categoria</string>
+
+    <string name="paso_2">Paso 2/3: Selección de horarios del lugar</string>
+    <string name="btn_agregar_horario">Agregar horario</string>
+    <string name="hora_cierre">Hora cierre</string>
+    <string name="hora_inicio">Hora inicio</string>
+    <string name="horario_del_lugar">Horario del lugar</string>
+    <string name="agregar_horario">Añadir horario</string>
+
+    <string name="paso_3">Paso 3/3: Elegir ubicación del lugar</string>
+    <string name="horario_validacion">Es necesario asignar al menos un horario</string>
+
     <!-- TEXTOS DE VALIDACIONES-->
     <string name="es_obligatorio">Este campo es obligatario</string>
 

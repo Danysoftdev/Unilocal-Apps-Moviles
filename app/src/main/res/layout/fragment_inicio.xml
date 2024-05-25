@@ -4,11 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.InicioFragment">
-
-    <View
+    
+    <fragment
+        android:id="@+id/mapa_principal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#a6eca8"/>
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnCentrarUbicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/ic_ubicacion" />
+
+    
     <LinearLayout
         android:id="@+id/layout_barra_superior"
         android:layout_width="match_parent"
@@ -23,9 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             class="co.edu.eam.unilocal.fragments.MenuPrincipalFragment"/>
-
-
-
 
     </LinearLayout>
 

@@ -1,7 +1,10 @@
 package co.edu.eam.unilocal.activities
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -11,27 +14,38 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import co.edu.eam.unilocal.R
+import co.edu.eam.unilocal.adapters.CrearLugarAdapter
 import co.edu.eam.unilocal.bd.Categorias
 import co.edu.eam.unilocal.bd.Ciudades
 import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityCrearLugarBinding
+import co.edu.eam.unilocal.fragments.crearlugar.FormularioCrearLugarFragment
+import co.edu.eam.unilocal.fragments.crearlugar.HorariosCrearLugarFragment
+import co.edu.eam.unilocal.fragments.crearlugar.MapaCrearLugarFragment
 import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Ciudad
 import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
+import co.edu.eam.unilocal.models.Posicion
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.snackbar.Snackbar
 
 
-class CrearLugarActivity : AppCompatActivity() {
+class CrearLugarActivity : AppCompatActivity(){
 
     lateinit var binding: ActivityCrearLugarBinding
-    var posCiudad:Int = 0
-    var posCategoria:Int =0
-
-    lateinit var ciudades :ArrayList<Ciudad>
-    lateinit var categorias :ArrayList<Categoria>
+    var lugar:Lugar? = null
+    var posicionActual:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,140 +53,61 @@ class CrearLugarActivity : AppCompatActivity() {
         binding = ActivityCrearLugarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ciudades = Ciudades.listar()
-        categorias = Categorias.listar()
+        lugar = Lugar()
 
-        cargarCiudades()
-        cargarCategorias()
+        binding.itemsForm.adapter = CrearLugarAdapter(this)
+        binding.itemsForm.isUserInputEnabled = false
 
-        binding.regresarLugares.setOnClickListener {
-            val intent = Intent(baseContext, MisLugaresActivity::class.java)
-            startActivity(intent)
-        }
-        binding.irAFavoritos.setOnClickListener {
-            val intent = Intent(baseContext, LugaresFavoritosActivity::class.java)
-            startActivity(intent)
-        }
+        binding.btnSgte.setOnClickListener { pasarSiguienteFormulario() }
 
-        binding.btnCrearLugar.setOnClickListener { crearNuevoLugar() }
-        }
+    }
 
-        fun cargarCiudades(){
-            val lista = mutableListOf("Elige una ciudad")
-            lista.addAll(ciudades.map { c -> c.nombre })
-            val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,lista)
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.ciudadLugar.adapter = adapter
+    fun pasarSiguienteFormulario(){
 
-            binding.ciudadLugar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    if (position == 0) {
-                        Toast.makeText(baseContext, "Por favor, elige una ciudad válida", Toast.LENGTH_LONG).show()
-                    } else {
+        val myFragment = supportFragmentManager.findFragmentByTag("f" + binding.itemsForm.currentItem)
 
-                        posCiudad = position-1
-                    }
-                }
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-            }
-        }
-    fun cargarCategorias(){
-        val lista = mutableListOf("Elige una categoría")
-        lista.addAll(categorias.map { c -> c.nombre })
-        val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,lista)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.categoriaLugar.adapter = adapter
+        if(posicionActual==0){
+            lugar = (myFragment as FormularioCrearLugarFragment).crearNuevoLugar()
 
-        binding.categoriaLugar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                /*Toast.makeText(baseContext,"EL elemento seleccionado fue ${parent!!.getItemAtPosition(position).toString()}",Toast.LENGTH_LONG).show()*/
-                if (position == 0) {
-                    Toast.makeText(baseContext, "Por favor, elige una categoría válida", Toast.LENGTH_LONG).show()
-                } else {
-                    posCategoria = position-1
-                }
+            if(lugar == null){
+                Snackbar.make(binding.root, getString(R.string.txt_creacion_fallida), Snackbar.LENGTH_LONG).show()
+            }else{
+                binding.itemsForm.setCurrentItem(1, true)
+                posicionActual++
+                binding.barraProgreso.progress = 2
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        }else if(posicionActual==1){
+
+            val horarios = (myFragment as HorariosCrearLugarFragment).horarios
+
+            if( horarios.isEmpty() ){
+                Snackbar.make(binding.root, getString(R.string.horario_validacion), Snackbar.LENGTH_LONG).show()
+            }else{
+                lugar!!.horarios = horarios
+                binding.itemsForm.setCurrentItem(2, true)
+                posicionActual++
+                binding.barraProgreso.progress = 3
+            }
+
+        }else{
+
+            val posicion = (myFragment as MapaCrearLugarFragment).posicion
+
+            if(posicion == null){
+                Snackbar.make(binding.root, getString(R.string.txt_seleccion_inconclusa), Snackbar.LENGTH_LONG).show()
+            }else{
+                lugar!!.posicion = posicion
+
+                Lugares.crear(lugar!!)
+                Snackbar.make(binding.root, getString(R.string.txt_creacion_exitosa), Snackbar.LENGTH_LONG).show()
+
 
             }
 
         }
 
     }
-        fun crearNuevoLugar(){
 
-            //CAPTURAMOS LOS VALORES DE TODOS LOS CAMPOS
-            val nombre = binding.nombreLugar.text.toString()
-            val descripcion = binding.descripcionLugar.text.toString()
-            val direccion = binding.direccionLugar.text.toString()
-            val telefono = binding.telefonoLugar.text.toString()
-            val novedades = binding.novedadesLugar.text.toString()
-            val latitudS = binding.latitudLugar.text.toString()
-            val longitudS = binding.latitudLugar.text.toString()
-            val latitud = latitudS.toFloat()
-            val longitud = latitudS.toFloat()
-            val idCiudad = ciudades[posCiudad].id
-            val idCategoria = categorias[posCategoria].id
-
-            //SE VALIDA QUE LOS CAMPOS ESTÉN COMPLETOS DE LO CONTRARIO MUESTRA UNA ALERTA
-            if(nombre.isEmpty()){
-                binding.nombreLayout.error = getString(R.string.es_obligatorio)
-            }else{
-                binding.nombreLayout.error = null
-            }
-            if(descripcion.isEmpty()){
-                binding.descripcionLayout.error = getString(R.string.es_obligatorio)
-            }else{
-                binding.descripcionLayout.error = null
-            }
-            if(direccion.isEmpty()){
-                binding.direccionLayout.error = getString(R.string.es_obligatorio)
-            }else{
-                binding.direccionLayout.error = null
-            }
-            if(telefono.isEmpty()){
-                binding.telefonoLayout.error = getString(R.string.es_obligatorio)
-            }else{
-                binding.telefonoLayout.error = null
-            }
-            if(novedades.isEmpty()){
-                binding.novedadesLayout.error = getString(R.string.es_obligatorio)
-            }else{
-                binding.novedadesLayout.error = null
-            }
-            if(latitudS.isEmpty()){
-                binding.latitudLayout.error = getString(R.string.es_obligatorio)
-            }else{
-                binding.latitudLayout.error = null
-            }
-            if(longitudS.isEmpty()){
-                binding.longitudLayout.error = getString(R.string.es_obligatorio)
-            }else{
-                binding.novedadesLayout.error = null
-            }
-
-
-            if(nombre.isNotEmpty() && descripcion.isNotEmpty()&& telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != 0 && idCategoria != 0 && latitudS.isNotEmpty() && longitudS.isNotEmpty()){
-                val nuevoLugar = Lugar(9,nombre,descripcion,1,Estado.PENDIENTE,idCategoria,direccion, latitud, longitud,idCiudad, novedades)
-                val telefonos:ArrayList<String> = ArrayList()
-                telefonos.add(telefono)
-                nuevoLugar.telefonos = telefonos
-                Lugares.crear(nuevoLugar)
-                val intent = Intent(baseContext,MainActivity::class.java)
-                startActivity(intent)
-
-                Toast.makeText(this,"SE CREÓ CORRECTAMENTE",Toast.LENGTH_LONG).show()
-
-                Log.e("CrearLugarActivity", Lugares.listarRechazados().toString())
-            }
-
-
-
-
-        }
-
-
-    }
+}
 
