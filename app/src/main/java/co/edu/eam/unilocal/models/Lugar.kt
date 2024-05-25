@@ -5,19 +5,55 @@ import java.util.Calendar
 import java.util.Date
 
 
-class Lugar(var id: Int,
-            var nombre: String,
-            var descripcion: String,
-            var idCreador: Int,
-            var estado: Estado,
-            var idCategoria: Int,
-            var direccion: String,
-            var latitud: Float,
-            var longitud: Float,
-            var idCiudad: Int,
-            var novedades:String,
+class Lugar() {
 
-) {
+    var id: Int = 0
+    var nombre: String = ""
+    var descripcion: String = ""
+    var idCreador: Int = 0
+    var estado: Estado = Estado.PENDIENTE
+    var idCategoria: Int = 0
+    var direccion: String = ""
+    var posicion: Posicion = Posicion()
+    var idCiudad: Int = 0
+    var novedades:String = ""
+
+    constructor(id: Int, nombre: String, descripcion: String, idCreador: Int, estado: Estado, idCategoria: Int, direccion: String, posicion: Posicion, idCiudad: Int, novedades: String):this(){
+        this.id = id
+        this.nombre = nombre
+        this.descripcion = descripcion
+        this.idCreador = idCreador
+        this.estado = estado
+        this.idCategoria = idCategoria
+        this.direccion = direccion
+        this.posicion = posicion
+        this.idCiudad = idCiudad
+        this.novedades = novedades
+    }
+
+    constructor(id: Int, nombre: String, descripcion: String, idCreador: Int, estado: Estado, idCategoria: Int, direccion: String, idCiudad: Int, novedades: String):this(){
+        this.id = id
+        this.nombre = nombre
+        this.descripcion = descripcion
+        this.idCreador = idCreador
+        this.estado = estado
+        this.idCategoria = idCategoria
+        this.direccion = direccion
+        this.idCiudad = idCiudad
+        this.novedades = novedades
+    }
+
+    constructor(nombre: String, descripcion: String, idCreador: Int, estado: Estado, idCategoria: Int, direccion: String, idCiudad: Int, novedades: String) : this() {
+        this.nombre = nombre
+        this.descripcion = descripcion
+        this.idCreador = idCreador
+        this.estado = estado
+        this.idCategoria = idCategoria
+        this.direccion = direccion
+        this.idCiudad = idCiudad
+        this.novedades = novedades
+
+    }
 
     var imagenes: ArrayList<String> = ArrayList()
     var telefonos: List<String> = ArrayList()
@@ -107,7 +143,7 @@ class Lugar(var id: Int,
 
 
     override fun toString(): String {
-        return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, direccion='$direccion', latitud=$latitud, longitud=$longitud, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, horarios=$horarios, fecha=$fecha,corazones=$corazones,novedades=$novedades)"
+        return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, direccion='$direccion', posicion=$posicion, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, horarios=$horarios, fecha=$fecha,corazones=$corazones,novedades=$novedades)"
     }
 
 

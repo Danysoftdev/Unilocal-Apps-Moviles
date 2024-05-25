@@ -32,4 +32,12 @@ object Horarios {
         entreSemana.add(DiaSemana.VIERNES)
         return entreSemana
     }
+
+    fun agregarHorario(horario:Horario):Horario{
+        horario.id = horarios.size + 1
+        horarios.add( horario )
+        return horario
+    }
+
+
 }
