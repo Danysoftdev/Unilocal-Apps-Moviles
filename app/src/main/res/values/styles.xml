@@ -2,10 +2,9 @@
 <resources>
 
     <style name="lugar_form">
-        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">70dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_margin">5dp</item>
     </style>
 
     <style name="titulo_lugar">
@@ -44,6 +43,8 @@
         <item name="android:fontFamily">@font/font_awesome_6_free_solid_900</item>
         <item name="android:text">@string/ic_calificacion</item>
     </style>
+
+    <style name="DialogoTitulo" parent="ThemeOverlay.AppCompat.Dialog.Alert"></style>
 
 
 </resources>
