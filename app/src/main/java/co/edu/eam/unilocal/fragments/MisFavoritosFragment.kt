@@ -48,7 +48,8 @@ class MisFavoritosFragment : Fragment() , LugarFavoritoAdapter.OnLugarEliminadoL
     fun actualizarListaLugares() {
         val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val codigoUsuario = sp.getInt("id_usuario", -1)
-        listaLugaresFavoritos.clear() // Borra la lista existente
+        //listaLugaresFavoritos.clear() // Borra la lista existente
+        listaLugaresFavoritos = ArrayList()
         listaLugaresFavoritos.addAll(Usuarios.buscar(codigoUsuario).favoritos) // Vuelve a cargar la lista
         if (listaLugaresFavoritos.isEmpty()) {
             binding.mensajeVacioFavoritos.visibility = View.VISIBLE
@@ -59,6 +60,7 @@ class MisFavoritosFragment : Fragment() , LugarFavoritoAdapter.OnLugarEliminadoL
     }
     override fun onLugarEliminado() {
         actualizarListaLugares()
+
         Toast.makeText(requireActivity(),"SE ELIMINÓ CORRECTAMENTE", Toast.LENGTH_LONG).show()
     }
 

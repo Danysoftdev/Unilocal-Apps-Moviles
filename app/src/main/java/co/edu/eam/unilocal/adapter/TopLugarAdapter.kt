@@ -1,9 +1,12 @@
 package co.edu.eam.unilocal.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Categorias
@@ -27,7 +30,8 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
     inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView){
         val nombre:TextView= itemView.findViewById(R.id.nombre_lugar)
         val categoria:TextView= itemView.findViewById(R.id.categoria_lugar)
-        val calificacion:TextView= itemView.findViewById(R.id.calificacion_lugar)
+        /*val calificacion:TextView= itemView.findViewById(R.id.calificacion_lugar)*/
+        val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar)
         val comentario:TextView= itemView.findViewById(R.id.comentarios)
         val direccion:TextView= itemView.findViewById(R.id.direccion_lugar)
         val corazones:TextView= itemView.findViewById(R.id.corazones)
@@ -38,7 +42,10 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
             val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
             val estrellas = "\uF005".repeat(promedio.toInt()) //
             val promedioFormateado = String.format("%.1f", promedio)
-
+            val calificacion = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
+            for (i in 0..calificacion){
+                (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
+            }
             //ASIGNACION DE LOS ATRIBUTOS DEL LUGAR
             direccion.text = lugar.direccion
             corazones.text=lugar.corazones.toString()
@@ -46,7 +53,7 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
             if (cate != null) {
                 categoria.text= cate.nombre
             }
-            calificacion.text = "$promedioFormateado $estrellas"
+            /*calificacion.text = "$promedioFormateado $estrellas"*/
             comentario.text = comentarios.size.toString()
         }
     }

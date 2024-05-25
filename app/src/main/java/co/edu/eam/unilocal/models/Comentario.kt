@@ -11,7 +11,6 @@ class Comentario (var id: Int, var texto: String, var idUsuario: Int, var idLuga
     val fecha: String
 
     init {
-
         val currentDate = Calendar.getInstance().time
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         fecha = dateFormat.format(currentDate)
