@@ -2,20 +2,11 @@ package co.edu.eam.unilocal.activities
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.adapter.ComentarioLugarAdapter
-import co.edu.eam.unilocal.adapter.LugarAdapter
-import co.edu.eam.unilocal.bd.Comentarios
-import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityComentariosLugarBinding
-import co.edu.eam.unilocal.databinding.ActivityMisLugaresBinding
 import co.edu.eam.unilocal.models.Comentario
-import co.edu.eam.unilocal.models.Lugar
 
 class ComentariosLugarActivity : AppCompatActivity() {
     lateinit var binding: ActivityComentariosLugarBinding
@@ -30,7 +21,7 @@ class ComentariosLugarActivity : AppCompatActivity() {
         listaComentarios = ArrayList()
         codigoLugar = intent.extras!!.getInt("codigo")
 
-        listaComentarios = Comentarios.listar(codigoLugar)
+        //listaComentarios = Comentarios.listar(codigoLugar)
 
         if(listaComentarios.isEmpty()){
             binding.mensajeVacio.visibility = View.VISIBLE

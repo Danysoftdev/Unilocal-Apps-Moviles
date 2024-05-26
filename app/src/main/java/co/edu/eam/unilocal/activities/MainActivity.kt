@@ -18,6 +18,10 @@ import co.edu.eam.unilocal.fragments.InicioFragment
 import co.edu.eam.unilocal.fragments.MisFavoritosFragment
 import co.edu.eam.unilocal.fragments.MisLugaresFragment
 import co.edu.eam.unilocal.fragments.TopLugaresFragment
+import co.edu.eam.unilocal.models.Usuario
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,10 +35,35 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val user = FirebaseAuth.getInstance().currentUser
+        //val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+        var correo = ""
+        val tipo = ""
+        if (user!=null){
+            Firebase.firestore
+                .collection("usuarios")
+                .document(user.uid)
+                .get()
+                .addOnSuccessListener { u ->
 
-        val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
-        val correo = sp.getString("correo_usuario", "")
-        val tipo = sp.getString("tipo_usuario", "")
+
+                    val rol = u.toObject(Usuario::class.java)?.tipo
+                    correo = u.toObject(Usuario::class.java)?.correo ?: ""
+                    val btnSesion: Button = binding.btnSesion
+                    if(rol == "usuario") {
+
+                        btnSesion.setBackgroundResource(R.drawable.ic_logout)
+                        binding.barraInferior.visibility = View.VISIBLE
+                        btnSesion.setOnClickListener { limpiarSesion() }
+                    }else {
+                        startActivity( Intent(this, ModeradorActivity::class.java) )
+                    }
+
+
+                }
+        }
+
+
 
         val btnSesion: Button = binding.btnSesion
 
@@ -87,11 +116,9 @@ class MainActivity : AppCompatActivity() {
 
     fun limpiarSesion() {
 
-        val sharedPreferences = getSharedPreferences("sesion", Context.MODE_PRIVATE).edit()
-        sharedPreferences.clear()
-        sharedPreferences.apply()
-
+            FirebaseAuth.getInstance().signOut()
         startActivity(Intent(this, MainActivity::class.java))
+
 
     }
 

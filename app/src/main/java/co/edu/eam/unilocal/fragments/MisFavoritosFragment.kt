@@ -31,7 +31,7 @@ class MisFavoritosFragment : Fragment() , LugarFavoritoAdapter.OnLugarEliminadoL
         val sp = requireActivity().getSharedPreferences("sesion", Context.MODE_PRIVATE)
         val codigoUsuario = sp.getInt("id_usuario",-1)
         Log.e("MisFavoritosFragment", codigoUsuario.toString())
-        listaLugaresFavoritos = Usuarios.buscar(codigoUsuario).favoritos
+        listaLugaresFavoritos = ArrayList()// Usuarios.buscar(codigoUsuario).favoritos
         Log.e("MisFavoritosFragment", listaLugaresFavoritos.toString())
         if(listaLugaresFavoritos.isEmpty()){
             binding.mensajeVacioFavoritos.visibility = View.VISIBLE
@@ -50,7 +50,7 @@ class MisFavoritosFragment : Fragment() , LugarFavoritoAdapter.OnLugarEliminadoL
         val codigoUsuario = sp.getInt("id_usuario", -1)
         //listaLugaresFavoritos.clear() // Borra la lista existente
         listaLugaresFavoritos = ArrayList()
-        listaLugaresFavoritos.addAll(Usuarios.buscar(codigoUsuario).favoritos) // Vuelve a cargar la lista
+        //listaLugaresFavoritos.addAll(Usuarios.buscar(codigoUsuario).favoritos) // Vuelve a cargar la lista
         if (listaLugaresFavoritos.isEmpty()) {
             binding.mensajeVacioFavoritos.visibility = View.VISIBLE
         } else {

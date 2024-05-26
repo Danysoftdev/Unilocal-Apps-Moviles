@@ -20,7 +20,7 @@ class RecuperarContraActivity : AppCompatActivity() {
     }
 
     fun irAlCodigo(){
-
+/*
         val email: String = binding.email.text.toString()
 
         if (email.isEmpty()){
@@ -36,6 +36,6 @@ class RecuperarContraActivity : AppCompatActivity() {
                 finish()
 
             }
-        }
+        }*/
     }
 }

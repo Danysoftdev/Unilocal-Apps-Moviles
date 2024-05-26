@@ -37,7 +37,7 @@ class MenuPrincipalFragment : Fragment() {
                 val busqueda = binding.txtBusqueda.text.toString()
 
                 if (busqueda.isNotEmpty()){
-                    listaLugares = Lugares.buscarNombre(busqueda)
+                    //listaLugares = Lugares.buscarNombre(busqueda)
 
                     if (resultadoBusquedaActivity != null) {
 

@@ -6,12 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
-import co.edu.eam.unilocal.bd.Categorias
-import co.edu.eam.unilocal.bd.Comentarios
 import co.edu.eam.unilocal.bd.Usuarios
-import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Comentario
-import co.edu.eam.unilocal.models.Lugar
 
 class ComentarioLugarAdapter(var lista:ArrayList<Comentario>):RecyclerView.Adapter<ComentarioLugarAdapter.ViewHolder>() {
 
@@ -33,7 +29,7 @@ class ComentarioLugarAdapter(var lista:ArrayList<Comentario>):RecyclerView.Adapt
 
         fun bind(comentario: Comentario){
                 val cal = "\uF005".repeat(comentario.calificaicon) //
-                usuario.text = Usuarios.buscar(comentario.idUsuario).nombre
+                usuario.text = "DAVID" //Usuarios.buscar(comentario.idUsuario).nombre
                 texto.text = comentario.texto
                 estrellas.text = cal
 

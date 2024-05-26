@@ -9,10 +9,7 @@ import android.widget.TextView
 import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
-import co.edu.eam.unilocal.bd.Categorias
-import co.edu.eam.unilocal.bd.Comentarios
 import co.edu.eam.unilocal.models.Categoria
-import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
 
 class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLugarAdapter.ViewHolder>(){
@@ -37,12 +34,12 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
         val corazones:TextView= itemView.findViewById(R.id.corazones)
         fun bind(lugar: Lugar){
 
-            val cate : Categoria? = Categorias.obtener(lugar.idCategoria)
-            val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
-            val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
-            val estrellas = "\uF005".repeat(promedio.toInt()) //
-            val promedioFormateado = String.format("%.1f", promedio)
-            val calificacion = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
+            val cate : Categoria? = Categoria()//Categorias.obtener(lugar.idCategoria)
+            //val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
+            //val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
+            //val estrellas = "\uF005".repeat(promedio.toInt()) //
+            //val promedioFormateado = String.format("%.1f", promedio)
+            val calificacion = 2//lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
             for (i in 0..calificacion){
                 (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
             }
@@ -54,7 +51,7 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
                 categoria.text= cate.nombre
             }
             /*calificacion.text = "$promedioFormateado $estrellas"*/
-            comentario.text = comentarios.size.toString()
+            comentario.text ="2"// comentarios.size.toString()
         }
     }
 

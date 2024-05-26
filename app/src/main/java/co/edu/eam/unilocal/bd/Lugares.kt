@@ -6,7 +6,7 @@ import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.models.Posicion
 
 object Lugares {
-
+/*
     private val lugares: ArrayList<Lugar> = ArrayList()
 
     init {
@@ -87,5 +87,5 @@ object Lugares {
         lugares.removeIf { lugar -> lugar.id == idLugar }
     }
 
-
+*/
 }

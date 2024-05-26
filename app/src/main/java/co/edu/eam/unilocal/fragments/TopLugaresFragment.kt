@@ -24,7 +24,7 @@ class TopLugaresFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTopLugaresBinding.inflate(inflater,container,false)
-        listaLugares = Lugares.ordenarPorCorazones()
+        //listaLugares = Lugares.ordenarPorCorazones()
         val adapter = TopLugarAdapter(listaLugares)
 
         binding.listaLugares.adapter = adapter

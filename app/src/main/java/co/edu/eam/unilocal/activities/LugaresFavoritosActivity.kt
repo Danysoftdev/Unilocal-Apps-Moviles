@@ -22,7 +22,7 @@ class LugaresFavoritosActivity : AppCompatActivity(), LugarFavoritoAdapter.OnLug
 
         setContentView(binding.root)
         listaLugaresFavoritos = ArrayList()
-        listaLugaresFavoritos = Usuarios.buscar(1).favoritos
+        //listaLugaresFavoritos = Usuarios.buscar(1).favoritos
         if(listaLugaresFavoritos.isEmpty()){
             binding.mensajeVacioFavoritos.visibility = View.VISIBLE
         }else {

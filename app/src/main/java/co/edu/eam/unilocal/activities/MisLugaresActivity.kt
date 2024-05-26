@@ -27,7 +27,7 @@ class MisLugaresActivity : AppCompatActivity() ,LugarAdapter.OnLugarEliminadoLis
 
         listaLugares = ArrayList()
 
-        listaLugares = Lugares.buscarXUsuario(1)
+        //listaLugares = Lugares.buscarXUsuario(1)
         if(listaLugares.isEmpty()){
             binding.mensajeVacioLugares.visibility = View.VISIBLE
         }else {

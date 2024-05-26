@@ -1,9 +1,6 @@
 package co.edu.eam.unilocal.fragments.crearlugar
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,15 +9,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import co.edu.eam.unilocal.R
-import co.edu.eam.unilocal.activities.MainActivity
-import co.edu.eam.unilocal.bd.Categorias
-import co.edu.eam.unilocal.bd.Ciudades
-import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.FragmentFormularioCrearLugarBinding
 import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Ciudad
 import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class FormularioCrearLugarFragment : Fragment() {
 
@@ -41,11 +37,32 @@ class FormularioCrearLugarFragment : Fragment() {
 
         binding = FragmentFormularioCrearLugarBinding.inflate(inflater, container, false)
 
-        ciudades = Ciudades.listar()
-        categorias = Categorias.listar()
+        ciudades = ArrayList()
+        categorias = ArrayList()
 
-        cargarCiudades()
-        cargarCategorias()
+        Firebase.firestore.collection("categorias")
+            .get()
+            .addOnSuccessListener {
+                for (document in it) {
+                    val categoria = document.toObject(Categoria::class.java)
+                    categorias.add(categoria)
+                    cargarCategorias()
+
+                }
+            }
+        Firebase.firestore.collection("ciudades")
+            .get()
+            .addOnSuccessListener {
+                for (document in it) {
+                    val ciudad = document.toObject(Ciudad::class.java)
+                    ciudades.add(ciudad)
+                    cargarCiudades()
+
+                }
+            }
+
+
+
 
         return binding.root
 
@@ -148,11 +165,25 @@ class FormularioCrearLugarFragment : Fragment() {
 
         if(nombre.isNotEmpty() && descripcion.isNotEmpty()&& telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != 0 && idCategoria != 0 ){
 
-            nuevoLugar = Lugar(7,nombre,descripcion,1, Estado.PENDIENTE,idCategoria,direccion, idCiudad, novedades)
+            //nuevoLugar = Lugar(nombre,descripcion,1, Estado.PENDIENTE,idCategoria,direccion, idCiudad, novedades)
+            val user = FirebaseAuth.getInstance().currentUser
 
-            val telefonos:ArrayList<String> = ArrayList()
+            if(user != null) {
+                nuevoLugar = Lugar(
+                    nombre,
+                    descripcion,
+                    user.uid,
+                    Estado.PENDIENTE,
+                    idCategoria,
+                    direccion,
+                    idCiudad,
+                    novedades
+                )
+            }
+
+            val telefonos: ArrayList<String> = ArrayList()
             telefonos.add(telefono)
-            nuevoLugar.telefonos = telefonos
+            nuevoLugar!!.telefonos = telefonos
         }
 
         return nuevoLugar
