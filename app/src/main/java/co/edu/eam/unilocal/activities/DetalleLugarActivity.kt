@@ -13,31 +13,48 @@ import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.models.Usuario
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.Date
 
 class DetalleLugarActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetalleLugarBinding
     private var lugar: Lugar? = null
     private var codigoLugar: String = ""
-    private var usuario: Usuario? = null
-    private var codigo: Int = 0
+    private var usuario: FirebaseUser? = null
+    private var esFavorito = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetalleLugarBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        usuario = FirebaseAuth.getInstance().currentUser
+        codigoLugar = intent.extras?.getString("codigoLugar").orEmpty()
+        usuario?.let {
+            Firebase.firestore
+                .collection("usuarios")
+                .document(it.uid)
+                .collection("favoritos")
+                .document(codigoLugar)
+                .get()
+                .addOnSuccessListener { l ->
 
-        if (codigo > 0) {
-            usuario = Usuario() //Usuarios.getById(codigoUsuario)
+                    if(l.exists()){
+                        esFavorito = true
+                    }
+
+                }
+        }
+
+        if (usuario != null) {
             binding.btnGuardarLugar.visibility = View.VISIBLE
-            binding.btnGuardarLugar.setOnClickListener { guardarLugarFavoritos() }
+            binding.btnGuardarLugar.setOnClickListener { guardarLugarFavoritos( esFavorito) }
         } else {
             binding.btnGuardarLugar.visibility = View.GONE
         }
-
-        codigoLugar = intent.extras?.getString("codigoLugar").orEmpty()
 
         if (codigoLugar.isNotEmpty()) {
             Firebase.firestore.collection("lugares").document(codigoLugar)
@@ -88,11 +105,45 @@ class DetalleLugarActivity : AppCompatActivity() {
         }.attach()
     }
 
-    private fun guardarLugarFavoritos() {
+    private fun guardarLugarFavoritos(valor:Boolean) {
+
+        val fecha = HashMap<String, Date>()
+        fecha.put("fecha", Date())
+
+
+        if(!valor){
+            esFavorito = true
+          //  binding.btnFavorito.typeface = typefaceSolid
+           // binding.btnFavorito.text = '\uf004'.toString()
+
+            Firebase.firestore
+                .collection("usuarios")
+                .document(usuario!!.uid)
+                .collection("favoritos")
+                .document(codigoLugar)
+                .set( fecha )
+                Toast.makeText(this, "Añadido a los lugares favoritos", Toast.LENGTH_LONG).show()
+        }else{
+            esFavorito = false
+            //binding.btnFavorito.typeface = typefaceRegular
+            //binding.btnFavorito.text = '\uf004'.toString()
+
+            Firebase.firestore
+                .collection("usuarios")
+                .document(usuario!!.uid)
+                .collection("favoritos")
+                .document(codigoLugar)
+                .delete()
+            Toast.makeText(this, "Eliminado de los lugares favoritos", Toast.LENGTH_LONG).show()
+
+        }
+
+
+        /*
         usuario?.let {
             it.favoritos.add(lugar!!)
             Toast.makeText(this, "Añadido a los lugares favoritos", Toast.LENGTH_LONG).show()
-        }
+        }*/
     }
 }
 

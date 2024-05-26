@@ -49,7 +49,7 @@ class ComentariosLugarFragment : Fragment() {
         adapter = ComentarioAdapter(requireContext(), listaComentarios)
 
         user = FirebaseAuth.getInstance().currentUser
-        
+
         binding.listaComentarios.layoutManager = LinearLayoutManager(requireContext())
         binding.listaComentarios.adapter = adapter
 

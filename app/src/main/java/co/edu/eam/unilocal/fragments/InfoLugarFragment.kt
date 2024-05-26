@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import co.edu.eam.unilocal.databinding.FragmentInfoLugarBinding
 import co.edu.eam.unilocal.models.Lugar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -16,9 +18,11 @@ class InfoLugarFragment : Fragment() {
 
     private lateinit var binding: FragmentInfoLugarBinding
     private var codigoLugar: String = ""
+    var user: FirebaseUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        user = FirebaseAuth.getInstance().currentUser!!
         arguments?.let {
             codigoLugar = it.getString("codigoLugar", "")
         }
