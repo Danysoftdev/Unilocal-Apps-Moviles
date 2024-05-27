@@ -38,19 +38,19 @@ class ModeradorActivity : AppCompatActivity() {
 
         var vecesClick: Int = 0
 
-        listaLugares.addAll(Lugares.listar())
+        //listaLugares.addAll(Lugares.listar())
 
         binding.aceptados.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
                 vecesClick++
                 if (vecesClick > 1){
-                    listaLugares.addAll(Lugares.listarAprobados())
+                   // listaLugares.addAll(Lugares.listarAprobados())
                 }else{
                     listaLugares.clear()
-                    listaLugares.addAll(Lugares.listarAprobados())
+                    //listaLugares.addAll(Lugares.listarAprobados())
                 }
             }else{
-                listaLugares.removeAll(Lugares.listarAprobados())
+               // listaLugares.removeAll(Lugares.listarAprobados())
             }
             binding.lugaresRevisar.adapter!!.notifyDataSetChanged()
         }
@@ -59,13 +59,13 @@ class ModeradorActivity : AppCompatActivity() {
             if (isChecked){
                 vecesClick++
                 if (vecesClick > 1){
-                    listaLugares.addAll(Lugares.listarPendientes())
+                   // listaLugares.addAll(Lugares.listarPendientes())
                 }else{
                     listaLugares.clear()
-                    listaLugares.addAll(Lugares.listarPendientes())
+                //listaLugares.addAll(Lugares.listarPendientes())
                 }
             }else{
-                listaLugares.removeAll(Lugares.listarPendientes())
+               //listaLugares.removeAll(Lugares.listarPendientes())
             }
             binding.lugaresRevisar.adapter!!.notifyDataSetChanged()
         }
@@ -74,13 +74,13 @@ class ModeradorActivity : AppCompatActivity() {
             if (isChecked){
                 vecesClick++
                 if (vecesClick > 1){
-                    listaLugares.addAll(Lugares.listarRechazados())
+                  //  listaLugares.addAll(Lugares.listarRechazados())
                 }else{
                     listaLugares.clear()
-                    listaLugares.addAll(Lugares.listarRechazados())
+                  //  listaLugares.addAll(Lugares.listarRechazados())
                 }
             }else{
-                listaLugares.removeAll(Lugares.listarRechazados())
+                //listaLugares.removeAll(Lugares.listarRechazados())
             }
             binding.lugaresRevisar.adapter!!.notifyDataSetChanged()
         }

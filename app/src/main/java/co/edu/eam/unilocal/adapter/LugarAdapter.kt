@@ -14,12 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.activities.ComentariosLugarActivity
-import co.edu.eam.unilocal.bd.Categorias
-import co.edu.eam.unilocal.bd.Ciudades
-import co.edu.eam.unilocal.bd.Comentarios
-import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.models.Categoria
-import co.edu.eam.unilocal.models.Comentario
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapter.ViewHolder>(){
     private var onLugarEliminadoListener: OnLugarEliminadoListener? = null
@@ -46,7 +43,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
         val comentario:TextView= itemView.findViewById(R.id.comentarios_lugar)
         val irAComentariosButton: Button = itemView.findViewById(R.id.ir_comentarios_lugar)
         val btnEliminarLugar : Button = itemView.findViewById(R.id.btn_eliminar_lugar)
-        var codigoLugar : Int =0
+        var codigoLugar : String =""
 
         init{
             itemView.setOnClickListener(this)
@@ -55,26 +52,40 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
         }
         fun bind(lugar: Lugar){
 
-            val cate : Categoria? = Categorias.obtener(lugar.idCategoria)
-            val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
-            val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
+            Firebase.firestore.collection("categorias")
+                .whereEqualTo("id", lugar.idCategoria)
+                .get()
+                .addOnSuccessListener {
+                    for (document in it) {
+                        val categoria = document.toObject(Categoria::class.java)
+                        categoria.nombre?.let { categoria ->
+                            this.categoria.text = categoria
+                        }
+                    }
+                }
+           Firebase.firestore.collection("comentarios")
+               .whereEqualTo("idLugar", lugar.key)
+               .get()
+               .addOnSuccessListener {
+                   comentario.text = it.size().toString() +" comentarios"
+               }
+            //val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
+           // val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
 
-            val estrellas = "\uF005".repeat(promedio.toInt()) //
-            val promedioFormateado = String.format("%.1f", promedio)
+           // val estrellas = "\uF005".repeat(promedio.toInt()) //
+           // val promedioFormateado = String.format("%.1f", promedio)
 
             nombre.text = lugar.nombre
-            if (cate != null) {
-                categoria.text= cate.nombre
-            }
-            val calificacion = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
+
+            val calificacion = lugar.obtenerCalificacionPromedio(ArrayList())
             for (i in 0..calificacion){
                 (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
             }
             /*calificacion.text = "$promedioFormateado $estrellas"
             calificacion.setTextColor(Color.YELLOW)*/
-            comentario.text = comentarios.size.toString() +" comentarios"
+            //comentario.text = comentarios.size.toString() +" comentarios"
 
-            codigoLugar = lugar.id
+            codigoLugar = lugar.key
         }
 
         override fun onClick(v: View?) {
@@ -88,7 +99,9 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
                     itemView.context.startActivity(intent)
                 }
                 R.id.btn_eliminar_lugar -> {
-                    Lugares.eliminar(codigoLugar)
+                    Firebase.firestore.collection("lugares")
+                        .document(codigoLugar)
+                        .delete()
                     onLugarEliminadoListener?.onLugarEliminado()
 
                 }

@@ -1,16 +1,18 @@
 package co.edu.eam.unilocal.models
 
+import android.content.ContentValues
 import co.edu.eam.unilocal.models.Horario
+import co.edu.eam.unilocal.sqllite.LugarContrato
 import java.util.Calendar
 import java.util.Date
 
 
 class Lugar() {
 
-    var id: Int = 0
+    var key: String=""
     var nombre: String = ""
     var descripcion: String = ""
-    var idCreador: Int = 0
+    var idCreador: String = ""
     var estado: Estado = Estado.PENDIENTE
     var idCategoria: Int = 0
     var direccion: String = ""
@@ -18,8 +20,8 @@ class Lugar() {
     var idCiudad: Int = 0
     var novedades:String = ""
 
-    constructor(id: Int, nombre: String, descripcion: String, idCreador: Int, estado: Estado, idCategoria: Int, direccion: String, posicion: Posicion, idCiudad: Int, novedades: String):this(){
-        this.id = id
+    constructor( nombre: String, descripcion: String, idCreador: String, estado: Estado, idCategoria: Int, direccion: String, posicion: Posicion, idCiudad: Int, novedades: String):this(){
+
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
@@ -31,8 +33,8 @@ class Lugar() {
         this.novedades = novedades
     }
 
-    constructor(id: Int, nombre: String, descripcion: String, idCreador: Int, estado: Estado, idCategoria: Int, direccion: String, idCiudad: Int, novedades: String):this(){
-        this.id = id
+    constructor(  descripcion: String, idCreador: String, estado: Estado, idCategoria: Int, direccion: String, idCiudad: Int, novedades: String):this(){
+
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
@@ -43,7 +45,7 @@ class Lugar() {
         this.novedades = novedades
     }
 
-    constructor(nombre: String, descripcion: String, idCreador: Int, estado: Estado, idCategoria: Int, direccion: String, idCiudad: Int, novedades: String) : this() {
+    constructor(nombre: String, descripcion: String, idCreador: String, estado: Estado, idCategoria: Int, direccion: String, idCiudad: Int, novedades: String) : this() {
         this.nombre = nombre
         this.descripcion = descripcion
         this.idCreador = idCreador
@@ -113,16 +115,28 @@ class Lugar() {
         var mensaje = ""
         var pos: Int = 0
 
-        for (horario in horarios){
-            pos = horario.diasSemana.indexOf(DiaSemana.entries[dia-2])
+        if (dia < 1 || dia > 7) {
+            throw IllegalArgumentException("El valor de dia debe estar entre 1 y 7, pero es: $dia")
+        }
 
-            mensaje = if (pos != -1){
-                "Abre el ${horario.diasSemana[pos+1].toString().lowercase()} a las ${horario.horaInicio}:00"
-            }else{
-                "Abre el ${horario.diasSemana[0].toString().lowercase()} a las ${horario.horaInicio}:00"
+        for (horario in horarios) {
+            val indiceDiaSemana = dia - 2 // Ajuste para convertir dia en índice (0-6)
+
+            // Asegura que indiceDiaSemana esté dentro del rango válido de DiaSemana.entries
+            if (indiceDiaSemana >= 0 && indiceDiaSemana < DiaSemana.entries.size) {
+                pos = horario.diasSemana.indexOf(DiaSemana.entries[indiceDiaSemana])
+
+                mensaje = if (pos != -1 && pos + 1 < horario.diasSemana.size) {
+                    "Abre el ${horario.diasSemana[pos + 1].toString().lowercase()} a las ${horario.horaInicio}:00"
+                } else {
+                    "Abre el ${horario.diasSemana[0].toString().lowercase()} a las ${horario.horaInicio}:00"
+                }
+            } else {
+                mensaje = "Abre el ${horario.diasSemana[0].toString().lowercase()} a las ${horario.horaInicio}:00"
             }
             break
         }
+
 
         return mensaje
 
@@ -141,9 +155,25 @@ class Lugar() {
 
     }
 
+    fun toContentValues(): ContentValues {
+
+        val values = ContentValues()
+        values.put(LugarContrato.NOMBRE, nombre )
+        values.put(LugarContrato.DESCRIPCION, descripcion )
+        values.put(LugarContrato.LAT, posicion.lat )
+        values.put(LugarContrato.LNG, posicion.lng )
+        values.put(LugarContrato.DIRECCION, direccion )
+        values.put(LugarContrato.CATEGORIA, idCategoria )
+        values.put(LugarContrato.ID_CREADOR, idCreador )
+        values.put(LugarContrato.KEY_FIREBASE, key )
+
+        return values
+    }
+
+
 
     override fun toString(): String {
-        return "Lugar(id=$id, nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, direccion='$direccion', posicion=$posicion, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, horarios=$horarios, fecha=$fecha,corazones=$corazones,novedades=$novedades)"
+        return "Lugar( nombre='$nombre', descripcion='$descripcion', idCreador=$idCreador, estado=$estado, idCategoria=$idCategoria, direccion='$direccion', posicion=$posicion, idCiudad=$idCiudad, imagenes=$imagenes, telefonos=$telefonos, horarios=$horarios, fecha=$fecha,corazones=$corazones,novedades=$novedades)"
     }
 
 

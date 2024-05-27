@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.models.Comentario
+import co.edu.eam.unilocal.models.Usuario
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class ComentarioAdapter(val context: Context, var listaComentarios: ArrayList<Comentario>): RecyclerView.Adapter<ComentarioAdapter.ViewHolder>() {
 
@@ -38,8 +41,17 @@ class ComentarioAdapter(val context: Context, var listaComentarios: ArrayList<Co
         val descripcion: TextView = itemView.findViewById(R.id.comentario)
 
         fun bind(comentario: Comentario){
-            val nombre = Usuarios.getNameById(comentario.idUsuario)
-            nombrePersona.text = nombre
+            Firebase.firestore.collection("usuarios").
+            whereEqualTo("uid", comentario.idUsuario)
+                .get()
+                .addOnSuccessListener {
+                    for (document in it){
+                        val usuario = document.toObject(Usuario::class.java)
+                        usuario.key = document.id
+                        nombrePersona.text = usuario.nombre
+                    }
+            }
+
 
             val layoutEstrellas: LinearLayout = itemView.findViewById(R.id.estrellas)
 
@@ -54,7 +66,7 @@ class ComentarioAdapter(val context: Context, var listaComentarios: ArrayList<Co
 
             }
 
-            fechaComentario.text = comentario.fecha
+            fechaComentario.text = comentario.fecha.toString()
             descripcion.text = comentario.texto
         }
 

@@ -1,20 +1,36 @@
 package co.edu.eam.unilocal.models
 
-class Usuario () {
+import android.content.ContentValues
+import co.edu.eam.unilocal.sqllite.UsuarioContrato
 
-    var id:Int =0
-    var nombre:String = ""
-    var nickname: String = ""
-    var correo: String = ""
-    var password: String = ""
-    var tipo:String = ""
+class Usuario () {
+    constructor( nombre:String, nickname:String, correo:String, tipo:String):this(){
+        this.correo=correo
+        this.nombre=nombre
+        this.nickname=nickname
+        this.tipo=tipo
+    }
+
+    var key:String = ""
+    var uid:String = ""
+    var nombre: String= ""
+    var correo: String= ""
+    var nickname: String= ""
+    var tipo: String = ""
     var favoritos:ArrayList<Lugar> = ArrayList()
 
-    constructor(var id:Int, var nombre: String, var nickname: String, var correo: String, var password: String, var tipo: String){
+    fun toContentValues():ContentValues{
 
+        val values = ContentValues()
+        values.put(UsuarioContrato.NOMBRE, nombre )
+        values.put(UsuarioContrato.NICKNAME, nickname )
+        //values.put(UsuarioContrato.CORREO, correo )
+        //values.put(UsuarioContrato.PASSWORD, password )
+
+        return values
     }
 
     override fun toString(): String {
-        return "Usuario(id=$id, nombre='$nombre', nickname='$nickname', correo='$correo', password='$password', tipo='$tipo')"
+        return "Usuario( nombre='$nombre', nickname='$nickname', correo='$correo',  tipo='$tipo')"
     }
 }

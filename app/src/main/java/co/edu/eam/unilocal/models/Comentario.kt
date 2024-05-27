@@ -1,22 +1,39 @@
 package co.edu.eam.unilocal.models
 
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 //La fecha si va, es por pruebas mientras tanto
 
-class Comentario (var id: Int, var texto: String, var idUsuario: Int, var idLugar: Int, var calificaicon: Int, /*var fecha: LocalDateTime*/){
+class Comentario (){
 
-    val fecha: String
+    constructor( texto: String,  idUsuario: String,    calificaicon: Int, /*var fecha: LocalDateTime*/): this(){
 
+        this.texto = texto
+        this.idUsuario = idUsuario
+        this.calificaicon = calificaicon
+
+
+    }
+
+
+
+
+    var key:String = ""
+    var texto: String = ""
+    var idUsuario: String= ""
+    var calificaicon: Int = 0
+     var fecha: Date = Date()
     init {
         val currentDate = Calendar.getInstance().time
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        fecha = dateFormat.format(currentDate)
+        val fecha = dateFormat.format(currentDate)
     }
 
     override fun toString(): String {
-        return "Comentario(id=$id, texto='$texto', idUsuario=$idUsuario, idLugar=$idLugar, calificaicon=$calificaicon)"
+        return "Comentario(texto='$texto', idUsuario=$idUsuario,  calificaicon=$calificaicon)"
     }
 }

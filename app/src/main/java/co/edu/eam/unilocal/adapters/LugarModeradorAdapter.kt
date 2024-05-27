@@ -12,6 +12,7 @@ import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
+import co.edu.eam.unilocal.models.Usuario
 
 class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, var codigoModerador: Int): RecyclerView.Adapter<LugarModeradorAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
@@ -35,7 +36,7 @@ class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, var codigoModera
         val estado: TextView = itemView.findViewById(R.id.estadoSolicitud)
         val btnAprobar: ImageButton = itemView.findViewById(R.id.btnAprobar)
         val btnDesaprobar: ImageButton = itemView.findViewById(R.id.btnDesaprobar)
-        var codigo: Int = 0
+        var codigo: String = ""
 
         init {
             itemView.setOnClickListener(this)
@@ -44,14 +45,14 @@ class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, var codigoModera
         fun bind(lugar: Lugar){
             nombreLugar.text = lugar.nombre
 
-            val usuario = Usuarios.getById(codigoModerador)
+            val usuario = Usuario()// Usuarios.getById(codigoModerador)
             nombreModerador.text = usuario?.nombre
             estado.text = lugar.estado.name
 
             btnAprobar.setOnClickListener { lugar.estado = Estado.APROBADO }
             btnDesaprobar.setOnClickListener { lugar.estado = Estado.RECHAZADO }
 
-            codigo = lugar.id
+            codigo = lugar.key
         }
 
         override fun onClick(v: View?) {

@@ -12,6 +12,11 @@ import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.databinding.ActivityRegistroBinding
 import co.edu.eam.unilocal.models.Usuario
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegistroActivity : AppCompatActivity() {
 
@@ -41,16 +46,51 @@ class RegistroActivity : AppCompatActivity() {
         if( password.toString() != confirmarPass.toString() ){
             Toast.makeText(this, "Las contraseñas no son iguales", Toast.LENGTH_LONG).show()
         }
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.toString(), password.toString())
+            .addOnCompleteListener {
+                if (it.isSuccessful){
+                    val user = FirebaseAuth.getInstance().currentUser
+                    if(user != null){
+                        verificarEmail(user)
+                        val usuarioRegistro = Usuario(nombre.toString(), nickname.toString(),email.toString(), "usuario")
+                        usuarioRegistro.uid = user.uid
+                       Firebase.firestore.collection("usuarios")
+                           .document(user.uid)
+                           .set(usuarioRegistro)
+                       .addOnCompleteListener {
+                               Snackbar.make(binding.root, "Usuario registrado", Snackbar.LENGTH_LONG).show()
+                           val intent = Intent(this, MainActivity::class.java)
+                           intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                           startActivity( intent )
+                           finish()
 
-        val registro: Boolean = Usuarios.agregar( Usuario(0, nombre.toString(), nickname.toString(), email.toString(), password.toString(), "usuario") )
+                       }
+                    }
+
+                }else{
+                    Toast.makeText(this, "El correo ingresado ya se encuentra registrado", Toast.LENGTH_LONG).show()
+                }
+            }
+            .addOnFailureListener {
+                Snackbar.make(binding.root, "Error al registrar el usuario", Snackbar.LENGTH_LONG).show()
+            }
+/*
+        val registro: Boolean = Usuarios.agregar( Usuario( nombre.toString(), nickname.toString(), email.toString(), password.toString(), "usuario") )
 
         if (registro){
             Toast.makeText(this, "Usuario registrado exitosamente", Toast.LENGTH_LONG).show()
             startActivity(Intent(this, LoginActivity::class.java))
         }else{
             Toast.makeText(this, "El correo ingresado ya se encuentra registrado", Toast.LENGTH_LONG).show()
+        }*/
+
+
+    }
+    private fun verificarEmail(user: FirebaseUser){
+        user.sendEmailVerification().addOnCompleteListener{
+            if(it.isSuccessful){
+                Snackbar.make(binding.root, "Email enviado", Snackbar.LENGTH_LONG).show()
+            }
         }
-
-
     }
 }

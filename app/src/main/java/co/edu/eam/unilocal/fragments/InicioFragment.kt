@@ -12,8 +12,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.activities.DetalleLugarActivity
-import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.FragmentInicioBinding
+import co.edu.eam.unilocal.models.Estado
+import co.edu.eam.unilocal.models.Lugar
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -23,6 +24,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener {
 
@@ -71,10 +74,24 @@ class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener
         }
 
         val btnUbicacion = binding.btnCentrarUbicacion
+        Firebase.firestore.
+        collection("lugares").
+        whereEqualTo("estado",Estado.APROBADO).
+        get().addOnSuccessListener {
 
-        Lugares.listarAprobados().forEach {
-            gMap.addMarker(MarkerOptions().position(LatLng(it.posicion.lat, it.posicion.lng)).title(it.nombre))!!.tag = it.id
+            for(doc in it){
+                var lugar = doc.toObject(Lugar::class.java)
+                lugar.key = doc.id
+                gMap.addMarker(
+                    MarkerOptions().position(LatLng(lugar.posicion.lat, lugar.posicion.lng)).
+                    title(lugar.nombre)
+                )!!.tag = lugar.key
+            }
+
+        }.addOnFailureListener {
+            Log.e("Error", it.message.toString())
         }
+
 
         gMap.setOnInfoWindowClickListener(this)
 
@@ -124,7 +141,7 @@ class InicioFragment : Fragment(), OnMapReadyCallback, OnInfoWindowClickListener
 
     override fun onInfoWindowClick(p0: Marker) {
         val intent = Intent(requireContext(), DetalleLugarActivity::class.java)
-        intent.putExtra("codigoLugar", p0.tag.toString().toInt())
+        intent.putExtra("codigoLugar", p0.tag.toString())
         requireContext().startActivity(intent)
     }
 
