@@ -116,10 +116,10 @@ class LoginActivity : AppCompatActivity() {
                     startActivity( intent )
                     finish()
                 }else if(rol == "moderador") {
-                   /* val intent = Intent(this, ModeradorActivity::class.java)
+                    val intent = Intent(this, ModeradorActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity( intent )
-                    finish()*/
+                    finish()
                 }
 
 

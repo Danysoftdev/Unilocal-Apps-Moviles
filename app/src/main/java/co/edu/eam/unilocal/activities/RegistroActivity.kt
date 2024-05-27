@@ -74,16 +74,6 @@ class RegistroActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Snackbar.make(binding.root, "Error al registrar el usuario", Snackbar.LENGTH_LONG).show()
             }
-/*
-        val registro: Boolean = Usuarios.agregar( Usuario( nombre.toString(), nickname.toString(), email.toString(), password.toString(), "usuario") )
-
-        if (registro){
-            Toast.makeText(this, "Usuario registrado exitosamente", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, LoginActivity::class.java))
-        }else{
-            Toast.makeText(this, "El correo ingresado ya se encuentra registrado", Toast.LENGTH_LONG).show()
-        }*/
-
 
     }
     private fun verificarEmail(user: FirebaseUser){
