@@ -102,5 +102,8 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+    <!-- TEXTOS DEL RESULTADO BUSQUEDA ACTIVITY -->
+    <string name="no_coincidencias_lugares">No se encontraron lugares relacionados</string>
+
 
 </resources>

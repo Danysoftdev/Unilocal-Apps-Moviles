@@ -2,6 +2,7 @@ package co.edu.eam.unilocal.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,6 +14,8 @@ import co.edu.eam.unilocal.adapters.LugarBusquedaAdapter
 import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityResultadoBusquedaBinding
 import co.edu.eam.unilocal.models.Lugar
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class ResultadoBusquedaActivity : AppCompatActivity() {
 
@@ -29,12 +32,27 @@ class ResultadoBusquedaActivity : AppCompatActivity() {
         listaLugares = ArrayList()
 
         if (textoBusqueda.isNotEmpty()){
-           // listaLugares = Lugares.buscarNombre(textoBusqueda)
-            Log.e("ResultadoBusquedaActivity", listaLugares.toString())
-        }
+            Firebase.firestore
+                .collection("lugares")
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents){
+                        val lugar = document.toObject(Lugar::class.java)
+                        if (lugar.nombre.lowercase().contains(textoBusqueda.lowercase())){
+                            listaLugares.add(lugar)
+                        }
+                    }
 
-        actualizarRecyclerView(listaLugares)
-        binding.lugares.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                    Log.e("ResultadoBusquedaActivity", listaLugares.toString())
+
+                    actualizarRecyclerView(listaLugares)
+                    binding.lugares.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                }
+                .addOnFailureListener {
+                    Log.e("ResultadoLugares", "Problemas")
+                    Toast.makeText(this, getString(R.string.no_coincidencias_lugares), Toast.LENGTH_LONG).show()
+                }
+        }
 
     }
 
