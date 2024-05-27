@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.models.Comentario
+import co.edu.eam.unilocal.models.Usuario
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class ComentarioLugarAdapter(var lista:ArrayList<Comentario>):RecyclerView.Adapter<ComentarioLugarAdapter.ViewHolder>() {
 
@@ -23,13 +26,24 @@ class ComentarioLugarAdapter(var lista:ArrayList<Comentario>):RecyclerView.Adapt
     inner class ViewHolder(var itemView: View): RecyclerView.ViewHolder(itemView){
 
         val texto: TextView = itemView.findViewById(R.id.comentario)
-        val usuario: TextView = itemView.findViewById(R.id.autor_comentario)
+        val autor: TextView = itemView.findViewById(R.id.autor_comentario)
         val estrellas: TextView = itemView.findViewById(R.id.estrellas_comentario)
 
 
         fun bind(comentario: Comentario){
+
+            Firebase.firestore.collection("usuarios").
+            whereEqualTo("uid", comentario.idUsuario)
+                .get()
+                .addOnSuccessListener {
+                    for (document in it){
+                        val usuario = document.toObject(Usuario::class.java)
+                        usuario.key = document.id
+                        autor.text = usuario.nombre
+                    }
+                }
                 val cal = "\uF005".repeat(comentario.calificaicon) //
-                usuario.text = "DAVID" //Usuarios.buscar(comentario.idUsuario).nombre
+
                 texto.text = comentario.texto
                 estrellas.text = cal
 

@@ -15,7 +15,6 @@ import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.activities.ComentariosLugarActivity
 import co.edu.eam.unilocal.models.Categoria
-import co.edu.eam.unilocal.models.Comentario
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -77,9 +76,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
            // val promedioFormateado = String.format("%.1f", promedio)
 
             nombre.text = lugar.nombre
-            /*if (cate != null) {
-                categoria.text= cate.nombre
-            }*/
+
             val calificacion = lugar.obtenerCalificacionPromedio(ArrayList())
             for (i in 0..calificacion){
                 (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)

@@ -18,11 +18,11 @@ class InfoLugarFragment : Fragment() {
 
     private lateinit var binding: FragmentInfoLugarBinding
     private var codigoLugar: String = ""
-    var user: FirebaseUser? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        user = FirebaseAuth.getInstance().currentUser!!
+
         arguments?.let {
             codigoLugar = it.getString("codigoLugar", "")
         }
