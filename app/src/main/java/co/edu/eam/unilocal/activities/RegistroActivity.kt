@@ -40,11 +40,13 @@ class RegistroActivity : AppCompatActivity() {
 
         if( nombre.isEmpty() || nickname.isEmpty() || email.isEmpty()
             || password.isEmpty() || confirmarPass.isEmpty() ){
-            Toast.makeText(this, "Los campos son obligatorios", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getText(R.string.txt_campos_obligatorios), Toast.LENGTH_LONG).show()
+            return
         }
 
         if( password.toString() != confirmarPass.toString() ){
-            Toast.makeText(this, "Las contraseñas no son iguales", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getText(R.string.txt_contrasenas_diferentes), Toast.LENGTH_LONG).show()
+            return
         }
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.toString(), password.toString())
             .addOnCompleteListener {
@@ -58,7 +60,7 @@ class RegistroActivity : AppCompatActivity() {
                             .document(user.uid)
                             .set(usuarioRegistro)
                             .addOnCompleteListener {
-                                Snackbar.make(binding.root, "Usuario registrado", Snackbar.LENGTH_LONG).show()
+                                Snackbar.make(binding.root, getText(R.string.txt_usuario_registrado), Snackbar.LENGTH_LONG).show()
                                 val intent = Intent(this, MainActivity::class.java)
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                 startActivity( intent )
@@ -68,18 +70,18 @@ class RegistroActivity : AppCompatActivity() {
                     }
 
                 }else{
-                    Toast.makeText(this, "El correo ingresado ya se encuentra registrado", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getText(R.string.txt_correo_ya_registrado), Toast.LENGTH_LONG).show()
                 }
             }
             .addOnFailureListener {
-                Snackbar.make(binding.root, "Error al registrar el usuario", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, getText(R.string.txt_usuario_error), Snackbar.LENGTH_LONG).show()
             }
 
     }
     private fun verificarEmail(user: FirebaseUser){
         user.sendEmailVerification().addOnCompleteListener{
             if(it.isSuccessful){
-                Snackbar.make(binding.root, "Email enviado", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root,getText(R.string.txt_correo_enviado), Snackbar.LENGTH_LONG).show()
             }
         }
     }

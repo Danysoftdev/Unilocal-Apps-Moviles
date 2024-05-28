@@ -89,7 +89,7 @@ class MapaCrearLugarFragment : Fragment(), OnMapReadyCallback {
                                     latLng, 15F)
                             )
 
-                            gMap.addMarker(MarkerOptions().position(latLng).title("Aquí estás"))
+                            gMap.addMarker(MarkerOptions().position(latLng).title(getString(R.string.txt_posicion)))
                         }
                     } else {
                         gMap.moveCamera(

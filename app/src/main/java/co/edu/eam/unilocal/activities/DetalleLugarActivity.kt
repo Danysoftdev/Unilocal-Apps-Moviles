@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.Date
-
+import co.edu.eam.unilocal.R
 class DetalleLugarActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetalleLugarBinding
@@ -137,9 +137,9 @@ class DetalleLugarActivity : AppCompatActivity() {
         binding.viewPager.adapter = ViewPagerAdapter(this, codigoLugar)
         TabLayoutMediator(binding.tabsLugar, binding.viewPager) { tab, pos ->
             when (pos) {
-                0 -> tab.text = "Información"
-                1 -> tab.text = "Comentario"
-                2 -> tab.text = "Novedades"
+                0 -> tab.text = getText(R.string.txt_informacion)
+                1 -> tab.text = getText(R.string.txt_comentario)
+                2 -> tab.text = getText(R.string.txt_novedades)
             }
         }.attach()
     }
@@ -176,7 +176,7 @@ class DetalleLugarActivity : AppCompatActivity() {
                             .set(lugar!!)
                     }
                 }
-            Toast.makeText(this, "Añadido a los lugares favoritos", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getText(R.string.txt_anadido_favorito), Toast.LENGTH_LONG).show()
         }else{
             esFavorito = false
             //binding.btnFavorito.typeface = typefaceRegular
@@ -202,7 +202,7 @@ class DetalleLugarActivity : AppCompatActivity() {
                             .set(lugar!!)
                     }
                 }
-            Toast.makeText(this, "Eliminado de los lugares favoritos", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getText(R.string.txt_lugar_favorito_eliminado), Toast.LENGTH_LONG).show()
 
         }
 

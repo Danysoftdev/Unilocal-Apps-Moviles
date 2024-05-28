@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.models.Lugar
@@ -78,13 +79,11 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
                .whereEqualTo("idLugar", lugar.key)
                .get()
                .addOnSuccessListener {
+
+
                    comentario.text = it.size().toString() +" comentarios"
                }
-            //val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
-           // val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
 
-           // val estrellas = "\uF005".repeat(promedio.toInt()) //
-           // val promedioFormateado = String.format("%.1f", promedio)
 
             nombre.text = lugar.nombre
 
@@ -92,9 +91,6 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
             for (i in 0..calificacion){
                 (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
             }
-            /*calificacion.text = "$promedioFormateado $estrellas"
-            calificacion.setTextColor(Color.YELLOW)*/
-            //comentario.text = comentarios.size.toString() +" comentarios"
 
             codigoLugar = lugar.key
 
@@ -123,14 +119,8 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
                         )
                     }
                     prom.text = total.toString()
-                    comentario.text = comentarios.size.toString()+" comentarios"
+                    comentario.text = comentarios.size.toString()
                 }
-
-
-
-
-
-
 
         }
 

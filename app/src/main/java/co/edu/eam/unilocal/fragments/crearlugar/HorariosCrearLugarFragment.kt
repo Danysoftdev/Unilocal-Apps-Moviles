@@ -34,7 +34,7 @@ class HorariosCrearLugarFragment : Fragment(), HorariosDialogoFragment.OnHorario
         val dialog = HorariosDialogoFragment()
         dialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogoTitulo)
         dialog.listener = this
-        dialog.show(childFragmentManager, "Agregar")
+        dialog.show(childFragmentManager, getString(R.string.txt_agregar))
 
     }
 

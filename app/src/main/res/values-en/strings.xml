@@ -167,4 +167,29 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+    <!-- TEXTOS  -->
+
+        <string name="txt_inicio">Home</string>
+        <string name="txt_lugaress">My places</string>
+        <string name="txt_favoritos">Favorites</string>
+        <string name="txt_top_semanal">Weekly top</string>
+        <string name="txt_lugar_eliminado">Place successfully deleted</string>
+        <string name="txt_posicion">You are here</string>
+        <string name="txt_advertencia_comentario">You must write a comment and select the stars</string>
+        <string name="txt_comentario_enviado">The comment has been sent</string>
+        <string name="txt_agregar">Add</string>
+        <string name="txt_campos_obligatorios">Fields are required</string>
+        <string name="txt_contrasenas_diferentes">Passwords do not match</string>
+        <string name="txt_usuario_registrado">User registered</string>
+        <string name="txt_usuario_error">Error registering user</string>
+        <string name="txt_correo_enviado">Email sent</string>
+        <string name="txt_correo_ya_registrado">The entered email is already registered</string>
+        <string name="txt_login_incorrecto">Incorrect login</string>
+        <string name="txt_anadido_favorito">Added to favorite places</string>
+        <string name="txt_lugar_favorito_eliminado">Removed from favorite places</string>
+        <string name="txt_informacion">Information</string>
+
+
+
+
 </resources>

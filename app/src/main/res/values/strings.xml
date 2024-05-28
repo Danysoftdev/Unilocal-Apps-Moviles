@@ -68,6 +68,7 @@
     <string name="horario_del_lugar">Horario del lugar</string>
     <string name="agregar_horario">Añadir horario</string>
 
+
     <string name="paso_3">Paso 3/3: Elegir ubicación del lugar</string>
     <string name="horario_validacion">Es necesario asignar al menos un horario</string>
 
@@ -169,13 +170,27 @@
 
     <!-- TEXTOS  -->
     <string name="txt_inicio" >Inicio</string>
-    <string name="txt_lugares" >Mis lugares</string>
+    <string name="txt_lugaress" >Mis lugares</string>
     <string name="txt_favoritos" >Favoritos</string>
     <string name="txt_top_semanal" >Top semanal</string>
     <string name="txt_lugar_eliminado" >Lugar eliminado correctamente</string>
     <string name="txt_posicion" >Aquí estás</string>
     <string name="txt_advertencia_comentario" >Debe escribir el comentario y seleccionar las estrellas</string>
     <string name="txt_comentario_enviado" >Se ha enviado el comentario</string>
+    <string name="txt_agregar">Agregar</string>
+    <string name="txt_campos_obligatorios">Los campos son obligatorios</string>
+    <string name="txt_contrasenas_diferentes">Las contraseñas no son iguales</string>
+    <string name="txt_usuario_registrado">Usuario registrado</string>
+    <string name="txt_usuario_error">Usuario registrado</string>
+    <string name="txt_correo_enviado">Error al registrar el usuario</string>
+    <string name="txt_correo_ya_registrado">El correo ingresado ya se encuentra registrado</string>
+    <string name="txt_login_incorrecto">Login incorrecto</string>
+    <string name="txt_anadido_favorito">Añadido a los lugares favoritos</string>
+    <string name="txt_lugar_favorito_eliminado" >Eliminado de los lugares favoritos</string>
+    <string name="txt_informacion">Informacion</string>
+
+
+
 
 
 

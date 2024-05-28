@@ -9,7 +9,7 @@
         android:id="@+id/menuLugares"
         android:enabled="true"
         android:icon="@drawable/ic_mis_lugares"
-        android:title="@string/txt_lugares"/>
+        android:title="@string/txt_lugaress"/>
 
     <item
         android:id="@+id/menuFavoritos"

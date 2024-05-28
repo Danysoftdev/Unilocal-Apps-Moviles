@@ -104,7 +104,7 @@ class FormularioCrearLugarFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    /*Toast.makeText(baseContext,"EL elemento seleccionado fue ${parent!!.getItemAtPosition(position).toString()}",Toast.LENGTH_LONG).show()*/
+
                     if (position == 0) {
                         Toast.makeText(
                             requireContext(),
@@ -165,7 +165,7 @@ class FormularioCrearLugarFragment : Fragment() {
 
         if(nombre.isNotEmpty() && descripcion.isNotEmpty()&& telefono.isNotEmpty() && direccion.isNotEmpty() && idCiudad != 0 && idCategoria != 0 ){
 
-            //nuevoLugar = Lugar(nombre,descripcion,1, Estado.PENDIENTE,idCategoria,direccion, idCiudad, novedades)
+
             val user = FirebaseAuth.getInstance().currentUser
 
             if(user != null) {

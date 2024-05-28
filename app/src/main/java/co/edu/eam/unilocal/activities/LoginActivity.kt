@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
                             hacerRedireccion(user)
                         }
                     }else{
-                        Snackbar.make(binding.root, "Login incorrecto", Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(binding.root, getText(R.string.txt_login_incorrecto), Snackbar.LENGTH_LONG).show()
                     }
 
                 }
@@ -68,29 +68,9 @@ class LoginActivity : AppCompatActivity() {
                     Snackbar.make(binding.root, it.message.toString(), Snackbar.LENGTH_LONG).show()
                 }
 
-            /*try{
-               val user = Usuarios.login(correo.toString(), password.toString())
-                val tipo = Usuarios.getType(user.id)
-
-                val sharedPreferences = getSharedPreferences("sesion", Context.MODE_PRIVATE ).edit()
-                sharedPreferences.putInt("id_usuario", user.id)
-                sharedPreferences.putString("correo_usuario", user.correo)
-                sharedPreferences.putString("contra_usuario", user.password)
-                sharedPreferences.putString("tipo_usuario", user.tipo)
-                sharedPreferences.apply()
-
-                if (tipo == "usuario"){
-                    startActivity( Intent(this, MainActivity::class.java) )
-                }else{
-                    startActivity( Intent(this, ModeradorActivity::class.java) )
-                }
-
-            }catch(e:Exception){
-                Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_LONG).show()
-            }*/
 
         }else{
-            Toast.makeText(this, "Los campos son obligatorios", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getText(R.string.txt_campos_obligatorios), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -116,11 +96,6 @@ class LoginActivity : AppCompatActivity() {
                     startActivity( intent )
                     finish()
                 }else if(rol == "moderador") {
-
-                   /* val intent = Intent(this, ModeradorActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    startActivity( intent )
-                    finish()*/
 
                     val intent = Intent(this, ModeradorActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

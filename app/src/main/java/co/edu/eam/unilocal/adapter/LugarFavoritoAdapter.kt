@@ -42,8 +42,6 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
         val nombre: TextView = itemView.findViewById(R.id.nombre_lugar_fav)
         val categoria: TextView = itemView.findViewById(R.id.categoria_lugar_fav)
         val direccion:TextView= itemView.findViewById(R.id.direccion_lugar_fav)
-        //val calificacion: TextView = itemView.findViewById(R.id.calificacion_lugar)
-//        val comentario: TextView = itemView.findViewById(R.id.comentarios_lugar)
         val btnEliminarLugar : Button = itemView.findViewById(R.id.btn_eliminar_favorito)
         var codigoLugar : String =""
         init{
@@ -52,17 +50,6 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
         }
         fun bind(lugar: Lugar){
             Log.d("LugarFavoritoAdapter", "Binding lugar: ${lugar.nombre}, ${lugar.direccion}")
-            //val cate : Categoria? = Categoria()//Categorias.obtener(lugar.idCategoria)
-            //val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
-            //  val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
-            /* val estrellas = "\uF005".repeat(promedio.toInt()) //
-             val promedioFormateado = String.format("%.1f", promedio)*/
-            // val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar)
-            //val calificacion = 2//lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
-
-            /* for (i in 0..calificacion){
-                 (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
-             }*/
             nombre.text = lugar.nombre.toUpperCase()
             Firebase.firestore.collection("categorias")
                 .whereEqualTo("id", lugar.idCategoria)
@@ -75,16 +62,9 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
                         }
                     }
                 }
-            /*Firebase.firestore.collection("comentarios")
-                .whereEqualTo("idLugar", lugar.key)
-                .get()
-                .addOnSuccessListener {
-                    comentario.text = it.size().toString() +" comentarios"
-                }*/
             direccion.text = lugar.direccion
 
-            //calificacion.text = "$promedioFormateado $estrellas"
-            //comentario.text = comentarios.size.toString() +" comentarios"
+
             codigoLugar = lugar.key
 
         }
