@@ -17,63 +17,65 @@ import com.google.firebase.ktx.Firebase
 
 class ComentariosLugarActivity : AppCompatActivity() {
     lateinit var binding: ActivityComentariosLugarBinding
-    lateinit var listaComentarios:ArrayList<Comentario>
-    var codigoLugar:String = ""
-    private  lateinit var adapter: ComentarioLugarAdapter
+    lateinit var listaComentarios: ArrayList<Comentario>
+    var codigoLugar: String = ""
+    private lateinit var adapter: ComentarioLugarAdapter
 
     private var user: FirebaseUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding =ActivityComentariosLugarBinding.inflate(layoutInflater)
+        binding = ActivityComentariosLugarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         listaComentarios = ArrayList()
-        codigoLugar = intent.extras!!.getString("codigo","")
+        codigoLugar = intent.extras!!.getString("codigo", "")
         adapter = ComentarioLugarAdapter(listaComentarios)
 
-        binding.listaComentarios.layoutManager = LinearLayoutManager(this,
-            LinearLayoutManager.VERTICAL,false)
+        binding.listaComentarios.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.VERTICAL, false
+        )
         binding.listaComentarios.adapter = adapter
 
         cargarComentarios()
-        if(listaComentarios.isEmpty()){
+        if (listaComentarios.isEmpty()) {
             binding.mensajeVacio.visibility = View.VISIBLE
-        }else{
+        } else {
             binding.mensajeVacio.visibility = View.GONE
 
-        user = FirebaseAuth.getInstance().currentUser
+            user = FirebaseAuth.getInstance().currentUser
 
-        if (user != null) {
-            cargarComentarios()
-        } else {
-            binding.mensajeVacio.visibility = View.VISIBLE
-
-        }
-
-
-
-    }
-    private fun cargarComentarios(){
-        Firebase.firestore.collection("lugares")
-            .document(codigoLugar)
-            .collection("comentarios")
-            .get()
-            .addOnSuccessListener {
-                for (document in it){
-                    val comentario = document.toObject(Comentario::class.java)
-                    comentario.key = document.id
-                    listaComentarios.add(comentario)
-                }
-                adapter.notifyDataSetChanged()
-
-                if (listaComentarios.isEmpty()) {
-                    binding.mensajeVacio.visibility = View.VISIBLE
-                } else {
-                    binding.mensajeVacio.visibility = View.GONE
-                }
+            if (user != null) {
+                cargarComentarios()
+            } else {
+                binding.mensajeVacio.visibility = View.VISIBLE
 
             }
+
+
+        }
     }
-}
+        private fun cargarComentarios() {
+            Firebase.firestore.collection("lugares")
+                .document(codigoLugar)
+                .collection("comentarios")
+                .get()
+                .addOnSuccessListener {
+                    for (document in it) {
+                        val comentario = document.toObject(Comentario::class.java)
+                        comentario.key = document.id
+                        listaComentarios.add(comentario)
+                    }
+                    adapter.notifyDataSetChanged()
+
+                    if (listaComentarios.isEmpty()) {
+                        binding.mensajeVacio.visibility = View.VISIBLE
+                    } else {
+                        binding.mensajeVacio.visibility = View.GONE
+                    }
+
+                }
+        }
+    }

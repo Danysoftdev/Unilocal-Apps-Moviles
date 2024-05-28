@@ -11,6 +11,7 @@ import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.models.Categoria
+import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -27,8 +28,6 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(lista[position])
     }
-
-
 
     inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView) {
         private val nombre: TextView = itemView.findViewById(R.id.nombre_lugar)
@@ -80,7 +79,6 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
                     }
                     comentario.text = comentarios.size.toString()
                 }
-
         }
     }
 }

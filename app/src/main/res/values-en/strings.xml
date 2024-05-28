@@ -1,3 +1,170 @@
 <resources>
 
+    <!-- TEXTOS DE INICIO-->
+    <string name="txt_busqueda">Write the place</string>
+    <string name="txt_btn_registro">Go to register</string>
+    <string name="txt_btn_login">Go to login</string>
+
+    <!-- TEXTOS DE SESION Y AUTENTICACION -->
+
+    <!-- TEXTOS DE LOGIN-->
+    <string name="txt_email">Enter your email</string>
+    <string name="txt_password">Enter your password</string>
+    <string name="txt_login">Login</string>
+    <string name="txt_registro">Register</string>
+
+    <!-- TEXTOS DE REGISTRO-->
+    <string name="txt_titulo_registro">Registration data</string>
+    <string name="txt_nombre">Enter your name</string>
+    <string name="txt_nickname">Enter your nickname</string>
+    <string name="txt_btn_registrarse">Register</string>
+    <string name="txt_contrasena_olvidada">Forgot your password?</string>
+
+    <!-- TEXTOS DE ENVIAR CODIGO DE RECUPERACION-->
+    <string name="txt_titulo_recuperar">Recover password</string>
+    <string name="txt_btn_enviar_codigo">Send code</string>
+
+    <!-- TEXTOS DE INGRESAR CODIGO DE RECUPERACION-->
+    <string name="txt_titulo">Change password</string>
+    <string name="txt_btn_ingresar_codigo">Enter the code</string>
+    <string name="txt_contraseña">Password</string>
+    <string name="txt_confirmar_contraseña">Confirm password</string>
+    <string name="txt_btn_confirmar_contraseña">Confirm password change</string>
+
+
+    <string name="app_name">Unilocal</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--                  -->
+    <!-- TEXTOS DE LUGARES-->
+
+    <!-- TEXTOS DE CREAR LUGAR-->
+    <string name="txt_nombre_lugar">Name</string>
+    <string name="txt_telefono">Phone</string>
+    <string name="txt_direccion">Address</string>
+    <string name="txt_descripcion">Description</string>
+    <string name="txt_novedades">News</string>
+
+    <string name="txt_longitud">Longitude</string>
+    <string name="txt_Latitud">Latitude</string>
+
+    <string name="btn_crear_lugar">Create place</string>
+    <string name="txt_nuevo_lugar">New place</string>
+
+    <string name="txt_creacion_exitosa">Place successfully created. Under review by a moderator</string>
+    <string name="txt_creacion_fallida">Please fill out all fields</string>
+    <string name="txt_seleccion_inconclusa">Please select a location on the map</string>
+
+    <string name="paso_1">Step 1/3: Basic information of the place</string>
+    <string name="default_ciudad">Choose a city</string>
+    <string name="default_categoria">Choose a category</string>
+    <string name="validacion_ciudad">Please choose a city</string>
+    <string name="validacion_categoria">Please choose a category</string>
+
+    <string name="paso_2">Step 2/3: Select place hours</string>
+    <string name="btn_agregar_horario">Add schedule</string>
+    <string name="hora_cierre">Closing time</string>
+    <string name="hora_inicio">Opening time</string>
+    <string name="horario_del_lugar">Place schedule</string>
+    <string name="agregar_horario">Add schedule</string>
+
+    <string name="paso_3">Step 3/3: Choose location of the place</string>
+    <string name="horario_validacion">At least one schedule is required</string>
+
+    <!-- TEXTOS DE VALIDACIONES-->
+    <string name="es_obligatorio">This field is mandatory</string>
+
+    <!-- TEXTOS DE LUGARES FAVORITOS -->
+    <string name="txt_sin_lugares_favoritos">No favorite places</string>
+
+    <!-- TEXTOS DE LUGARES -->
+    <string name="txt_sin_lugares">You have no places</string>
+    <string name="txt_lugares">PLACES</string>
+
+    <!-- TEXTOS DEL DETALLE LUGAR -->
+    <string name="txt_calificacion_promedio_lugar">Average rating</string>
+    <string name="txt_categoriga_lugar">Category</string>
+    <string name="txt_estado_horario_lugar">Schedule status</string>
+    <string name="txt_horario_lugar">Schedule</string>
+    <string name="txt_guardar_lugar">Save</string>
+    <string name="txt_detalle">DETAIL</string>
+
+
+    <!-- TEXTOS DEL INFO LUGAR FRAGMENT -->
+    <string name="ic_ubicacion">\uf124</string>
+    <string name="txt_ubicacion_lugar">Place location</string>
+    <string name="ic_horario">\uf017</string>
+    <string name="txt_horarios_lugar">Place hours</string>
+    <string name="ic_telefono">\uf095</string>
+    <string name="txt_telefono_lugar">Place phone</string>
+    <string name="ic_info">\uf05a</string>
+    <string name="txt_descripcion_lugar">Place description</string>
+    <string name="ic_calificacion">\uf005</string>
+
+    <!-- TEXTOS DEL LUGAR ITEM -->
+    <string name="txt_categoria">Category</string>
+    <string name="txt_comentarios">Comments</string>
+    <string name="txt_ver_comentarios">View comments</string>
+    <string name="txt_btn_eliminar">\uf1f8</string>
+
+    <!-- TEXTOS DEL LUGAR FAVORITO ITEM -->
+    <string name="txt_btn_comentarios">\uf004</string>
+
+    <!-- TEXTOS DEL LUGAR TOP SEMANAL ITEM -->
+    <string name="txt_cant_corazones">50</string>
+    <string name="txt_cant_comentarios">350</string>
+
+    <!-- TEXTOS DE LUGAR BUSQUEDA-->
+    <string name="txt_estado">Open</string>
+    <string name="txt_horario">Schedule</string>
+
+    <!-- TEXTOS DE MIS FAVORITOS FRAGMENT-->
+    <string name="txt_titulo_mis_favoritos">MY FAVORITES</string>
+
+    <string name="txt_titulo_mis_lugares">MY PLACES</string>
+
+    <string name="txt_top">TOP</string>
+
+    <!-- TEXTOS DE COMENTARIO LUGAR-->
+    <string name="txt_centro">Comments</string>
+    <string name="txt_btn_user">\uf007</string>
+    <string name="txt_btn_back">\uf053</string>
+    <string name="txt_sin_comentarios">No comments</string>
+
+    <!-- TEXTOS DEL COMENTARIOS LUGAR FRAGMENT -->
+    <string name="txt_descripcion_comentario">Write your comment</string>
+    <string name="txt_btn_comentar">Comment</string>
+
+    <!-- TEXTOS DEL COMENTARIO ADAPTER -->
+    <string name="txt_nombre_persona_comentario">Commenters name</string>
+    <string name="txt_fecha_comentario">Comment date</string>
+    <string name="txt_comentario">Comment</string>
+    <string name="txt_comentarios_mayus">COMMENTS</string>
+
+
+    <!-- TEXTOS DEL COMENTARIOS LUGAR ITEM -->
+    <string name="txt_fecha">01/14/2021</string>
+    <string name="txt_nombre_usuario">User</string>
+
+
+    <!-- TEXTOS DEL MODERADOR -->
+    <!-- TEXTOS DEL MODERADOR ACTIVITY -->
+    <string name="txt_pendiente">Pending</string>
+    <string name="txt_aceptado">Accepted</string>
+    <string name="txt_rechazado">Rejected</string>
+
+    <!-- TEXTOS DEL MODERADOR ADAPTER -->
+    <string name="nombre_moderador">Moderator name</string>
+    <string name="estado_solicitud">Status</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
 </resources>

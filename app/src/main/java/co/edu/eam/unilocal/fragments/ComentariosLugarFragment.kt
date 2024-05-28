@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlin.math.log
-
+import co.edu.eam.unilocal.R
 class ComentariosLugarFragment : Fragment() {
 
     lateinit var binding: FragmentComentariosLugarBinding
@@ -111,7 +111,7 @@ class ComentariosLugarFragment : Fragment() {
                 .addOnSuccessListener {
 
                     limpiarFormulario()
-                    Snackbar.make(binding.root, "Se ha enviado el comentario", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root,getText(R.string.txt_comentario_enviado) , Snackbar.LENGTH_LONG).show()
 
                     listaComentarios.add(comentario)
                     adapter.notifyItemInserted(listaComentarios.size-1)
@@ -121,7 +121,7 @@ class ComentariosLugarFragment : Fragment() {
                 }
 
         }else{
-            Snackbar.make(binding.root, "Debe escribir el comentario y seleccionar las estrellas", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(binding.root, getText(R.string.txt_advertencia_comentario), Snackbar.LENGTH_LONG).show()
         }
     }
 

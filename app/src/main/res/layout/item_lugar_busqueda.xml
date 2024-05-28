@@ -100,14 +100,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:text="Abierto"
+                    android:text="@string/txt_estado"
                     android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/horario_lugar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Horario"
+                    android:text="@string/txt_horario"
                     android:textColor="@color/black"/>
 
             </LinearLayout>

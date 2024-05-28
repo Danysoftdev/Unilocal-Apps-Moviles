@@ -54,24 +54,11 @@ class ModeradorActivity : AppCompatActivity() {
             binding.lugaresRevisar.adapter!!.notifyDataSetChanged()
         }
 
-
-        var vecesClick: Int = 0
-
-
         //listaLugares.addAll(Lugares.listar())
 
         binding.aceptados.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
                 vecesClick++
-
-                if (vecesClick > 1){
-                   // listaLugares.addAll(Lugares.listarAprobados())
-                }else{
-                    listaLugares.clear()
-                    //listaLugares.addAll(Lugares.listarAprobados())
-                }
-            }else{
-
                 if (vecesClick >= 1){
                     listaLugares.clear()
                     Firebase.firestore.
@@ -88,7 +75,7 @@ class ModeradorActivity : AppCompatActivity() {
                     }.addOnFailureListener {
                         Log.e("Error", it.message.toString())
                     }
-      // listaLugares.addAll(Lugares.listarAprobados())
+                    // listaLugares.addAll(Lugares.listarAprobados())
                 }else{
                     listaLugares.clear()
                     Firebase.firestore.
@@ -119,8 +106,7 @@ class ModeradorActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     Log.e("Error", it.message.toString())
                 }
-
-               // listaLugares.removeAll(Lugares.listarAprobados())
+                // listaLugares.removeAll(Lugares.listarAprobados())
             }
             binding.lugaresRevisar.adapter!!.notifyDataSetChanged()
         }
@@ -128,10 +114,6 @@ class ModeradorActivity : AppCompatActivity() {
         binding.pendientes.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
                 vecesClick++
-
-                if (vecesClick > 1){
-                   // listaLugares.addAll(Lugares.listarPendientes())
-
                 if (vecesClick >=1){
                     listaLugares.clear()
                     Firebase.firestore.
@@ -148,15 +130,9 @@ class ModeradorActivity : AppCompatActivity() {
                     }.addOnFailureListener {
                         Log.e("Error", it.message.toString())
                     }
-
                 }else{
 
                     listaLugares.clear()
-
-                //listaLugares.addAll(Lugares.listarPendientes())
-                }
-            }else{
-
                     Firebase.firestore.
                     collection("lugares").
                     whereEqualTo("estado", Estado.PENDIENTE).
@@ -172,7 +148,7 @@ class ModeradorActivity : AppCompatActivity() {
                     }.addOnFailureListener {
                         Log.e("Error", it.message.toString())
                     }
-                //listaLugares.addAll(Lugares.listarPendientes())
+                    //listaLugares.addAll(Lugares.listarPendientes())
                 }
             }else{
                 Firebase.firestore.
@@ -189,8 +165,7 @@ class ModeradorActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     Log.e("Error", it.message.toString())
                 }
-
-               //listaLugares.removeAll(Lugares.listarPendientes())
+                //listaLugares.removeAll(Lugares.listarPendientes())
             }
             binding.lugaresRevisar.adapter!!.notifyDataSetChanged()
         }
@@ -198,15 +173,6 @@ class ModeradorActivity : AppCompatActivity() {
         binding.rechazados.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
                 vecesClick++
-
-                if (vecesClick > 1){
-                  //  listaLugares.addAll(Lugares.listarRechazados())
-                }else{
-                    listaLugares.clear()
-                  //  listaLugares.addAll(Lugares.listarRechazados())
-                }
-            }else{
-
                 if (vecesClick >= 1){
                     listaLugares.clear()
                     Firebase.firestore.
@@ -224,7 +190,7 @@ class ModeradorActivity : AppCompatActivity() {
                     }.addOnFailureListener {
                         Log.e("Error", it.message.toString())
                     }
-                  //  listaLugares.addAll(Lugares.listarRechazados())
+                    //  listaLugares.addAll(Lugares.listarRechazados())
                 }else{
                     listaLugares.clear()
                     Firebase.firestore.
@@ -240,7 +206,7 @@ class ModeradorActivity : AppCompatActivity() {
                     }.addOnFailureListener {
                         Log.e("Error", it.message.toString())
                     }
-                  //  listaLugares.addAll(Lugares.listarRechazados())
+                    //  listaLugares.addAll(Lugares.listarRechazados())
                 }
             }else{
                 Firebase.firestore.
@@ -256,7 +222,6 @@ class ModeradorActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     Log.e("Error", it.message.toString())
                 }
-
                 //listaLugares.removeAll(Lugares.listarRechazados())
             }
             binding.lugaresRevisar.adapter!!.notifyDataSetChanged()

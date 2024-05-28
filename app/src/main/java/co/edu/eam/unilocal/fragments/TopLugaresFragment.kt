@@ -28,7 +28,6 @@ class TopLugaresFragment : Fragment() {
     ): View? {
 
         binding = FragmentTopLugaresBinding.inflate(inflater,container,false)
-        //listaLugares = Lugares.ordenarPorCorazones()
         val adapter = TopLugarAdapter(listaLugares)
 
         binding.listaLugares.adapter = adapter

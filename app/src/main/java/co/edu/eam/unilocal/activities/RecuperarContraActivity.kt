@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.databinding.ActivityRecuperarContraBinding
 
-import com.google.firebase.auth.FireBaseAuth;
+import com.google.firebase.auth.FirebaseAuth;
 
 class RecuperarContraActivity : AppCompatActivity() {
-
+/*
     Button btn;
     EditText txtEmail
     FireBaseAuth mAuth;
@@ -73,6 +73,6 @@ class RecuperarContraActivity : AppCompatActivity() {
             }
         })
 
-    }
+    }*/
 
 }

@@ -32,9 +32,7 @@ class MisFavoritosFragment : Fragment(), LugarFavoritoAdapter.OnLugarEliminadoLi
     ): View? {
         binding = FragmentMisFavoritosBinding.inflate(inflater, container, false)
 
-
         adapter = LugarFavoritoAdapter(listaLugaresFavoritos,this)
-
         adapter.setOnLugarEliminadoListener(this)
 
         binding.listaFavoritos.layoutManager = LinearLayoutManager(requireActivity())
@@ -43,11 +41,9 @@ class MisFavoritosFragment : Fragment(), LugarFavoritoAdapter.OnLugarEliminadoLi
         user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
             actualizarListaLugares()
-
         }
         else {
             binding.mensajeVacioFavoritos.visibility = View.VISIBLE
-
         }
         return binding.root
     }
@@ -69,21 +65,6 @@ class MisFavoritosFragment : Fragment(), LugarFavoritoAdapter.OnLugarEliminadoLi
                             if (lugar != null) {
                                 lugar.key = l.id
                                 listaLugaresFavoritos.add(lugar)
-
-                                adapter.notifyDataSetChanged()
-                            }
-                        }
-
-
-
-                }
-
-                if (listaLugaresFavoritos.isEmpty()) {
-                    binding.mensajeVacioFavoritos.visibility = View.VISIBLE
-                } else {
-                    binding.mensajeVacioFavoritos.visibility = View.GONE
-                }
-
 
                             }
                             adapter.notifyDataSetChanged()
@@ -110,7 +91,7 @@ class MisFavoritosFragment : Fragment(), LugarFavoritoAdapter.OnLugarEliminadoLi
 
     override fun onLugarEliminado() {
         actualizarListaLugares()
-        Toast.makeText(requireActivity(), "Se eliminó correctamente", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireActivity(), getText(R.string.txt_lugar_eliminado), Toast.LENGTH_LONG).show()
 
     }
 }

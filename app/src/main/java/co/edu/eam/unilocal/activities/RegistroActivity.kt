@@ -54,37 +54,18 @@ class RegistroActivity : AppCompatActivity() {
                         verificarEmail(user)
                         val usuarioRegistro = Usuario(nombre.toString(), nickname.toString(),email.toString(), "usuario")
                         usuarioRegistro.uid = user.uid
-                       Firebase.firestore.collection("usuarios")
-                           .document(user.uid)
-                           .set(usuarioRegistro)
-                       .addOnCompleteListener {
-                               Snackbar.make(binding.root, "Usuario registrado", Snackbar.LENGTH_LONG).show()
-                           val intent = Intent(this, MainActivity::class.java)
-                           intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                           startActivity( intent )
-                           finish()
+                        Firebase.firestore.collection("usuarios")
+                            .document(user.uid)
+                            .set(usuarioRegistro)
+                            .addOnCompleteListener {
+                                Snackbar.make(binding.root, "Usuario registrado", Snackbar.LENGTH_LONG).show()
+                                val intent = Intent(this, MainActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                startActivity( intent )
+                                finish()
 
-                       }
+                            }
                     }
-
-
-                }else{
-                    Toast.makeText(this, "El correo ingresado ya se encuentra registrado", Toast.LENGTH_LONG).show()
-                }
-            }
-            .addOnFailureListener {
-                Snackbar.make(binding.root, "Error al registrar el usuario", Snackbar.LENGTH_LONG).show()
-            }
-/*
-        val registro: Boolean = Usuarios.agregar( Usuario( nombre.toString(), nickname.toString(), email.toString(), password.toString(), "usuario") )
-
-        if (registro){
-            Toast.makeText(this, "Usuario registrado exitosamente", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, LoginActivity::class.java))
-        }else{
-            Toast.makeText(this, "El correo ingresado ya se encuentra registrado", Toast.LENGTH_LONG).show()
-        }*/
-
 
                 }else{
                     Toast.makeText(this, "El correo ingresado ya se encuentra registrado", Toast.LENGTH_LONG).show()

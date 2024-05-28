@@ -28,7 +28,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="DETALLE"/>
+                android:text="@string/txt_detalle"/>
 
 
         </LinearLayout>

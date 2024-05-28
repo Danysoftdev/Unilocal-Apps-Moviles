@@ -54,20 +54,16 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
             Log.d("LugarFavoritoAdapter", "Binding lugar: ${lugar.nombre}, ${lugar.direccion}")
             //val cate : Categoria? = Categoria()//Categorias.obtener(lugar.idCategoria)
             //val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
-          //  val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
-           /* val estrellas = "\uF005".repeat(promedio.toInt()) //
-            val promedioFormateado = String.format("%.1f", promedio)*/
-           // val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar)
+            //  val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
+            /* val estrellas = "\uF005".repeat(promedio.toInt()) //
+             val promedioFormateado = String.format("%.1f", promedio)*/
+            // val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar)
             //val calificacion = 2//lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
 
-           /* for (i in 0..calificacion){
-                (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
-            }*/
-
-            nombre.text = lugar.nombre
-
+            /* for (i in 0..calificacion){
+                 (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
+             }*/
             nombre.text = lugar.nombre.toUpperCase()
-
             Firebase.firestore.collection("categorias")
                 .whereEqualTo("id", lugar.idCategoria)
                 .get()
@@ -118,10 +114,6 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
                             .delete()
 
                             .addOnSuccessListener {
-                                onLugarEliminadoListener?.onLugarEliminado()
-
-
-                            .addOnSuccessListener {
 
                                 Firebase.firestore
                                     .collection("lugares")
@@ -139,7 +131,6 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
                                     }
                                 onLugarEliminadoListener?.onLugarEliminado()
                                 recargarFragmento()
-
                             }
 
                     }

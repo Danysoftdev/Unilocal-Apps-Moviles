@@ -18,6 +18,7 @@
     <string name="txt_nombre">Escriba su nombre</string>
     <string name="txt_nickname">Escriba su nickname</string>
     <string name="txt_btn_registrarse">Registrarse</string>
+    <string name="txt_contrasena_olvidada">¿Has olvidado tu contraseña?</string>
 
     <!-- TEXTOS DE ENVIAR COIDGO DE RECUPERAION-->
     <string name="txt_titulo_recuperar">Recuperar contraseña</string>
@@ -78,6 +79,7 @@
 
     <!-- TEXTOS DE LUGARES FAVORITOS -->
     <string name="txt_sin_lugares">No tienes lugares</string>
+    <string name="txt_lugares">LUGARES</string>
 
     <!-- TEXTOS DEL DETALLE LUGAR -->
     <string name="txt_calificacion_promedio_lugar">Calificación promedio</string>
@@ -85,6 +87,8 @@
     <string name="txt_estado_horario_lugar">Estado horario</string>
     <string name="txt_horario_lugar">Horario</string>
     <string name="txt_guardar_lugar">Guardar</string>
+    <string name="txt_detalle">DETALLE</string>
+
 
     <!-- TEXTOS DEL INFO LUGAR FRAGMENT -->
     <string name="ic_ubicacion">\uf124</string>
@@ -115,7 +119,11 @@
     <string name="txt_horario">Horario</string>
 
     <!-- TEXTOS DE MIS FAVORITOS FRAGMENT-->
-    <string name="txt_titulo_mis_favoritos">Mis favoritos</string>
+    <string name="txt_titulo_mis_favoritos">MIS FAVORTIOS</string>
+
+    <string name="txt_titulo_mis_lugares">MIS LUGARES</string>
+
+    <string name="txt_top">TOP</string>
 
     <!-- TEXTOS DE COMETARIO LUGAR-->
     <string name="txt_centro">Cometarios</string>
@@ -131,10 +139,12 @@
     <string name="txt_nombre_persona_comentario">Nombre de la persona</string>
     <string name="txt_fecha_comentario">Fecha del comentario</string>
     <string name="txt_comentario">Comentario</string>
+    <string name="txt_comentarios_mayus">COMENTARIOS</string>
+
 
     <!-- TEXTOS DEL COMENTARIOS LUGAR ITEM -->
     <string name="txt_fecha">14/01/2021</string>
-    <string name="txt_nombre_usuario">Liliana Martinez</string>
+    <string name="txt_nombre_usuario">Usuario</string>
 
 
     <!-- TEXTOS DEL MODERADOR -->
@@ -156,6 +166,19 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <!-- TEXTOS  -->
+    <string name="txt_inicio" >Inicio</string>
+    <string name="txt_lugares" >Mis lugares</string>
+    <string name="txt_favoritos" >Favoritos</string>
+    <string name="txt_top_semanal" >Top semanal</string>
+    <string name="txt_lugar_eliminado" >Lugar eliminado correctamente</string>
+    <string name="txt_posicion" >Aquí estás</string>
+    <string name="txt_advertencia_comentario" >Debe escribir el comentario y seleccionar las estrellas</string>
+    <string name="txt_comentario_enviado" >Se ha enviado el comentario</string>
+
+
+
 
 
 </resources>

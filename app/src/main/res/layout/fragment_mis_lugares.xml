@@ -14,7 +14,7 @@
             android:id="@+id/mensaje_vacio_lugares"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No tienes lugares"/>
+            android:text="@string/txt_sin_lugares"/>
     </LinearLayout>
 
     <LinearLayout
@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="MIS LUGARES"/>
+                android:text="@string/txt_titulo_mis_lugares"/>
 
 
         </LinearLayout>
