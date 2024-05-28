@@ -72,6 +72,11 @@
     <string name="paso_3">Paso 3/3: Elegir ubicación del lugar</string>
     <string name="horario_validacion">Es necesario asignar al menos un horario</string>
 
+    <string name="seleccion_imagenes">Selección de imágenes</string>
+    <string name="seleccion_archivo">Seleccionar archivo</string>
+    <string name="tomar_foto">Tomar foto</string>
+
+
     <!-- TEXTOS DE VALIDACIONES-->
     <string name="es_obligatorio">Este campo es obligatario</string>
 
@@ -168,6 +173,11 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+
+    <!-- TEXTOS DEL RESULTADO BUSQUEDA ACTIVITY -->
+    <string name="no_coincidencias_lugares">No se encontraron lugares relacionados</string>
+    <string name="loading">Loading...</string>
+
     <!-- TEXTOS  -->
     <string name="txt_inicio" >Inicio</string>
     <string name="txt_lugaress" >Mis lugares</string>
@@ -188,9 +198,6 @@
     <string name="txt_anadido_favorito">Añadido a los lugares favoritos</string>
     <string name="txt_lugar_favorito_eliminado" >Eliminado de los lugares favoritos</string>
     <string name="txt_informacion">Informacion</string>
-
-
-
 
 
 

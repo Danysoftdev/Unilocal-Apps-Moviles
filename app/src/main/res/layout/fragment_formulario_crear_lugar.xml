@@ -130,6 +130,58 @@
                     android:inputType="textEmailAddress"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/gray"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp" />
+
+            <TextView
+                style="@style/lugar_form"
+                android:layout_height="41dp"
+                android:text="@string/seleccion_imagenes"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp"
+                android:weightSum="100"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_sel_archivo"
+                    android:layout_width="0dp"
+                    android:layout_weight="50"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/seleccion_archivo" />
+
+                <Button
+                    android:id="@+id/btn_tomar_foto"
+                    android:layout_width="0dp"
+                    android:layout_weight="40"
+                    android:layout_height="60dp"
+                    android:text="@string/tomar_foto" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/imagenes_sel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal" />
+
+
         </LinearLayout>
 
     </ScrollView>

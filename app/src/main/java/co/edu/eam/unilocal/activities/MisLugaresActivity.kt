@@ -1,5 +1,5 @@
 package co.edu.eam.unilocal.activities
-/*
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -17,7 +17,7 @@ import co.edu.eam.unilocal.models.Lugar
 
 class MisLugaresActivity : AppCompatActivity() ,LugarAdapter.OnLugarEliminadoListener{
 
-    lateinit var binding : ActivityMisLugaresBinding
+    /*lateinit var binding : ActivityMisLugaresBinding
     lateinit var listaLugares:ArrayList<Lugar>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,11 +44,11 @@ class MisLugaresActivity : AppCompatActivity() ,LugarAdapter.OnLugarEliminadoLis
             }
         }
 
-    }
+    }*/
 
     override fun onLugarEliminado() {
 
     recreate()
         Toast.makeText(this,"SE ELIMINÓ CORRECTAMENTE",Toast.LENGTH_LONG).show()
     }
-}*/
+}

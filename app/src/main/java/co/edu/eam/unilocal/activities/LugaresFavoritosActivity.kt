@@ -15,8 +15,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-/*
+
 class LugaresFavoritosActivity : AppCompatActivity(), LugarFavoritoAdapter.OnLugarEliminadoListener {
+    override fun onLugarEliminado() {
+        TODO("Not yet implemented")
+    }
+
+}
     /*lateinit var binding: ActivityLugaresFavoritosBinding
     lateinit var listaLugaresFavoritos:ArrayList<Lugar>
     private var user: FirebaseUser? = null
@@ -65,5 +70,4 @@ class LugaresFavoritosActivity : AppCompatActivity(), LugarFavoritoAdapter.OnLug
         recreate()
         Toast.makeText(this,"SE ELIMINÓ CORRECTAMENTE", Toast.LENGTH_LONG).show()
     }
-    }*/
-*/
+}*/
