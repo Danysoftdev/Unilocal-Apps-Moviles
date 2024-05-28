@@ -1,6 +1,5 @@
 package co.edu.eam.unilocal.fragments
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,30 +9,33 @@ import android.widget.TextView
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.edu.eam.unilocal.R
+import co.edu.eam.unilocal.adapter.LugarAdapter
 import co.edu.eam.unilocal.adapters.ComentarioAdapter
-import co.edu.eam.unilocal.bd.Comentarios
 import co.edu.eam.unilocal.databinding.FragmentComentariosLugarBinding
 import co.edu.eam.unilocal.models.Comentario
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlin.math.log
 
 class ComentariosLugarFragment : Fragment() {
 
     lateinit var binding: FragmentComentariosLugarBinding
-    private var codigoLugar: Int = 0
-    var listaComentarios: ArrayList<Comentario> = ArrayList()
+    private var codigoLugar: String = ""
+    lateinit var listaComentarios: ArrayList<Comentario>
     private  lateinit var adapter: ComentarioAdapter
     private var estrellas: Int = 0
-    private var codigoUsuario: Int = 0
+    private var codigoUsuario: String = ""
+    private var user: FirebaseUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if (arguments != null){
-            codigoLugar = requireArguments().getInt("codigoLugar")
-            codigoUsuario = requireArguments().getInt("codigoUsuario")
-        }
+            codigoLugar = requireArguments().getString("codigoLugar","")
 
+        }
     }
 
     override fun onCreateView(
@@ -41,27 +43,52 @@ class ComentariosLugarFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        listaComentarios = ArrayList()
 
         binding = FragmentComentariosLugarBinding.inflate(inflater, container, false)
+        adapter = ComentarioAdapter(requireContext(), listaComentarios)
 
-        if (codigoUsuario == 0){
+        user = FirebaseAuth.getInstance().currentUser
+
+        binding.listaComentarios.layoutManager = LinearLayoutManager(requireContext())
+        binding.listaComentarios.adapter = adapter
+
+        if (user != null) {
+            cargarComentarios()
+            codigoUsuario = user!!.uid
+            binding.nombreLayout.visibility = View.VISIBLE
+            binding.barraEstrellas.visibility = View.VISIBLE
+            binding.separador.visibility = View.VISIBLE
+
+        } else {
+            cargarComentarios()
             binding.nombreLayout.visibility = View.GONE
             binding.barraEstrellas.visibility = View.GONE
             binding.separador.visibility = View.GONE
-        }
 
-        listaComentarios = Comentarios.listar(codigoLugar)
-        adapter = ComentarioAdapter(requireContext(), listaComentarios)
-        binding.listaComentarios.adapter = adapter
-        binding.listaComentarios.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        }
 
         for (i in 0 until binding.listaEstrellas.childCount){
             (binding.listaEstrellas[i] as TextView).setOnClickListener {presionarEstrella(i)}
         }
-
         binding.btComentar.setOnClickListener { crearComentario() }
 
         return binding.root
+    }
+
+    private fun cargarComentarios(){
+        Firebase.firestore.collection("lugares")
+            .document(codigoLugar)
+            .collection("comentarios")
+            .get()
+            .addOnSuccessListener {
+                for (document in it){
+                    val comentario = document.toObject(Comentario::class.java)
+                    comentario.key = document.id
+                    listaComentarios.add(comentario)
+                }
+                adapter.notifyDataSetChanged()
+            }
     }
 
     private fun presionarEstrella(pos:Int){
@@ -72,20 +99,26 @@ class ComentariosLugarFragment : Fragment() {
         }
 
     }
-
     fun crearComentario(){
-
         val texto = binding.txtComentario.text.toString()
 
         if (texto.isNotEmpty() && estrellas > 0){
-            val comentario = Comentarios.crear(Comentario(0, texto, codigoUsuario, codigoLugar, estrellas))
+            val comentario =Comentario(texto,  codigoUsuario,  estrellas)
+            Firebase.firestore.collection("lugares")
+                .document(codigoLugar)
+                .collection("comentarios")
+                .add(comentario)
+                .addOnSuccessListener {
 
-            limpiarFormulario()
-            Snackbar.make(binding.root, "Se ha enviado el comentario", Snackbar.LENGTH_LONG).show()
+                    limpiarFormulario()
+                    Snackbar.make(binding.root, "Se ha enviado el comentario", Snackbar.LENGTH_LONG).show()
 
-            listaComentarios.add(comentario)
-            adapter.notifyItemInserted(listaComentarios.size-1)
-
+                    listaComentarios.add(comentario)
+                    adapter.notifyItemInserted(listaComentarios.size-1)
+                }
+                .addOnFailureListener {
+                    Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()
+                }
 
         }else{
             Snackbar.make(binding.root, "Debe escribir el comentario y seleccionar las estrellas", Snackbar.LENGTH_LONG).show()
@@ -105,10 +138,9 @@ class ComentariosLugarFragment : Fragment() {
     }
 
     companion object{
-        fun newInstance(codigoLugar: Int, codigoUsuario: Int): ComentariosLugarFragment{
+        fun newInstance(codigoLugar: String): ComentariosLugarFragment{
             val args = Bundle()
-            args.putInt("codigoLugar", codigoLugar)
-            args.putInt("codigoUsuario", codigoUsuario)
+            args.putString("codigoLugar", codigoLugar)
             val fragmento = ComentariosLugarFragment()
             fragmento.arguments = args
             return fragmento

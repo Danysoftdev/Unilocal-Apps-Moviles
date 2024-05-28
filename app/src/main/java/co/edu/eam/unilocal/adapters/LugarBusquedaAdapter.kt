@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.activities.DetalleLugarActivity
-import co.edu.eam.unilocal.bd.Comentarios
 
 class LugarBusquedaAdapter(var listaLugares: ArrayList<Lugar>): RecyclerView.Adapter<LugarBusquedaAdapter.ViewHolder>() {
 
@@ -37,7 +36,7 @@ class LugarBusquedaAdapter(var listaLugares: ArrayList<Lugar>): RecyclerView.Ada
         val estado: TextView = itemView.findViewById(R.id.estado_lugar)
         val horario: TextView = itemView.findViewById(R.id.horario_lugar)
         val imagen: ImageView = itemView.findViewById(R.id.imagen_lugar)
-        var codigo: Int = 0
+        var codigo: String = ""
 
         init {
             itemView.setOnClickListener(this)
@@ -47,11 +46,11 @@ class LugarBusquedaAdapter(var listaLugares: ArrayList<Lugar>): RecyclerView.Ada
 
             nombre.text = lugar.nombre
 
-            val calificacion = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
+            val calificacion = 2//lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
             for (i in 0..calificacion){
                 (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
             }
-            cantidadComentarios.text = "(${Comentarios.obtenerCantidadComentarios(lugar.id)})"
+            //cantidadComentarios.text = "(${Comentarios.obtenerCantidadComentarios(lugar.id)})"
 
             direccion.text = lugar.direccion
 
@@ -63,7 +62,7 @@ class LugarBusquedaAdapter(var listaLugares: ArrayList<Lugar>): RecyclerView.Ada
                 estado.setTextColor(Color.RED)
                 horario.text = lugar.obtenerHoraApertura()
             }
-            codigo = lugar.id
+            codigo = lugar.key
         }
 
         override fun onClick(v: View?) {

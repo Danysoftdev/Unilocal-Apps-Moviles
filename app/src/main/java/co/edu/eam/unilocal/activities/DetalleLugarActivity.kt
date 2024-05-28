@@ -1,6 +1,5 @@
 package co.edu.eam.unilocal.activities
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -10,110 +9,204 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import co.edu.eam.unilocal.adapters.ViewPagerAdapter
-import co.edu.eam.unilocal.bd.Categorias
-import co.edu.eam.unilocal.bd.Comentarios
-import co.edu.eam.unilocal.bd.Lugares
-import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.databinding.ActivityDetalleLugarBinding
+import co.edu.eam.unilocal.models.Categoria
+import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.models.Usuario
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import java.util.Date
 
 class DetalleLugarActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityDetalleLugarBinding
+    private lateinit var binding: ActivityDetalleLugarBinding
     private var lugar: Lugar? = null
-    var codigoLugar: Int = 0
-    private var usuario: Usuario? = null
-    var codigoUsuario: Int = 0
+    private var codigoLugar: String = ""
+    private var usuario: FirebaseUser? = null
+    private var esFavorito = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityDetalleLugarBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        usuario = FirebaseAuth.getInstance().currentUser
+        codigoLugar = intent.extras?.getString("codigoLugar").orEmpty()
+        usuario?.let {
+            Firebase.firestore
+                .collection("usuarios")
+                .document(it.uid)
+                .collection("favoritos")
+                .document(codigoLugar)
+                .get()
+                .addOnSuccessListener { l ->
 
-        val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
-        val codigo = sp.getInt("id_usuario", 0)
+                    if(l.exists()){
+                        esFavorito = true
+                    }
 
-        if (codigo > 0){
+                }
+        }
 
-            codigoUsuario = codigo
-            usuario = Usuarios.getById(codigoUsuario)
+        if (usuario != null) {
             binding.btnGuardarLugar.visibility = View.VISIBLE
-            binding.btnGuardarLugar.setOnClickListener { guardarLugarFavoritos() }
-        }else{
+            binding.btnGuardarLugar.setOnClickListener { guardarLugarFavoritos( esFavorito) }
+        } else {
             binding.btnGuardarLugar.visibility = View.GONE
         }
 
+        if (codigoLugar.isNotEmpty()) {
+            Firebase.firestore.collection("lugares").document(codigoLugar)
+                .get()
+                .addOnSuccessListener { document ->
+                    lugar = document.toObject(Lugar::class.java)
+                    lugar?.key = document.id
+                    lugar?.let {
 
-        codigoLugar = intent.extras!!.getInt("codigoLugar")
-        lugar = Lugares.obtener(codigoLugar)
-        cargarInformacionSuperior(lugar)
-        cargarTabs()
-
-
-
-    }
-
-    private fun cargarInformacionSuperior(lugar: Lugar?){
-
-        if (lugar != null){
-
-            val nombre: TextView = binding.nombreLugar
-            val categoria: TextView = binding.categoriaLugar
-            val estadoHorario: TextView = binding.estadoHorarioLugar
-            val horario: TextView = binding.horarioLugar
-
-            nombre.text = lugar.nombre
-
-            val calificacion = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
-            for (i in 0..calificacion){
-                (binding.listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
-            }
-
-            val cantidadComentatios: TextView = binding.cantidadComentarios
-            cantidadComentatios.text = "(${Comentarios.obtenerCantidadComentarios(lugar.id).toString()})"
-
-            val categoryPlace = Categorias.obtener(lugar.idCategoria)
-            categoria.text = categoryPlace?.nombre
-            estadoHorario.text = lugar.verificarEstadoHorario()
-            if (lugar.verificarEstadoHorario() == "Abierto"){
-                estadoHorario.setTextColor(Color.GREEN)
-                horario.text = lugar.obtenerHoraCierre()
-            }else{
-                estadoHorario.setTextColor(Color.RED)
-                horario.text = lugar.obtenerHoraApertura()
-            }
-        }
-
-
-    }
-
-    private fun cargarTabs(){
-
-        if (codigoLugar != 0){
-
-            binding.viewPager.adapter = ViewPagerAdapter(this, codigoLugar, codigoUsuario)
-            TabLayoutMediator(binding.tabsLugar, binding.viewPager){tab, pos ->
-                when(pos){
-                    0 -> tab.text = "Información"
-                    1 -> tab.text = "Comentario"
-                    2 -> tab.text = "Novedades"
+                        cargarInformacionSuperior(it)
+                        cargarTabs()
+                    }
                 }
-            }.attach()
+                .addOnFailureListener {
+                    Toast.makeText(this, "Error al cargar el lugar", Toast.LENGTH_LONG).show()
+                }
         }
+    }
+
+    private fun cargarInformacionSuperior(lugar: Lugar) {
+
+        binding.nombreLugar.text = lugar.nombre
+        binding.estadoHorarioLugar.text = lugar.verificarEstadoHorario()
+
+        if (lugar.verificarEstadoHorario() == "Abierto") {
+            binding.estadoHorarioLugar.setTextColor(Color.GREEN)
+            binding.horarioLugar.text = lugar.obtenerHoraCierre()
+        } else {
+            binding.estadoHorarioLugar.setTextColor(Color.RED)
+            binding.horarioLugar.text = lugar.obtenerHoraApertura()
+        }
+
+        Firebase.firestore.collection("categorias")
+            .whereEqualTo("id", lugar.idCategoria)
+            .get()
+            .addOnSuccessListener {
+                for (document in it) {
+                    val categoria = document.toObject(Categoria::class.java)
+                    categoria.nombre?.let { categoria ->
+                        binding.categoriaLugar.text = categoria
+                    }
+                }
+            }
+        Firebase.firestore.collection("lugares")
+            .document(lugar.key)
+            .collection("comentarios")
+            .get()
+            .addOnSuccessListener { result ->
+                val comentarios = ArrayList<Comentario>()
+                var promedio = 0.0
+                var cantidad = 0
+                for (document in result) {
+                    val comentario = document.toObject(Comentario::class.java)
+                    comentarios.add(comentario)
+                    promedio += comentario.calificaicon
+                    cantidad++
+                }
+
+                val total = if (cantidad > 0) promedio / cantidad else 0.0
+                Log.e("total", total.toString())
+                val estrellas = total.toInt()
+                for (i in 0 until binding.listaEstrellas.childCount) {
+                    (binding.listaEstrellas[i] as TextView).setTextColor(
+                        if (i < estrellas) Color.YELLOW else Color.GRAY
+                    )
+                }
+                binding.calificacionPromedio.text = total.toString()
+                binding.cantidadComentarios.text = "("+comentarios.size.toString()+")"
+            }
+
+
+
+
 
     }
 
-    private fun guardarLugarFavoritos(){
+    private fun cargarTabs() {
+        binding.viewPager.adapter = ViewPagerAdapter(this, codigoLugar)
+        TabLayoutMediator(binding.tabsLugar, binding.viewPager) { tab, pos ->
+            when (pos) {
+                0 -> tab.text = "Información"
+                1 -> tab.text = "Comentario"
+                2 -> tab.text = "Novedades"
+            }
+        }.attach()
+    }
 
-        if (usuario != null){
+    private fun guardarLugarFavoritos(valor:Boolean) {
 
-            usuario!!.favoritos.add(lugar!!)
+        val fecha = HashMap<String, Date>()
+        fecha.put("fecha", Date())
 
-            Toast.makeText(this, "Añadido a los lugares favoritos", Toast.LENGTH_LONG).show()
+
+        if(!valor){
+            esFavorito = true
+          //  binding.btnFavorito.typeface = typefaceSolid
+           // binding.btnFavorito.text = '\uf004'.toString()
+
+            Firebase.firestore
+                .collection("usuarios")
+                .document(usuario!!.uid)
+                .collection("favoritos")
+                .document(codigoLugar)
+                .set( fecha )
+
+            Firebase.firestore
+                .collection("lugares")
+                .document(codigoLugar)
+                .get()
+                .addOnSuccessListener { document ->
+                    lugar = document.toObject(Lugar::class.java)
+                    lugar?.let {
+                        lugar!!.corazones++
+                        Firebase.firestore
+                            .collection("lugares")
+                            .document(codigoLugar)
+                            .set(lugar!!)
+                    }
+                }
+                Toast.makeText(this, "Añadido a los lugares favoritos", Toast.LENGTH_LONG).show()
+        }else{
+            esFavorito = false
+            //binding.btnFavorito.typeface = typefaceRegular
+            //binding.btnFavorito.text = '\uf004'.toString()
+
+            Firebase.firestore
+                .collection("usuarios")
+                .document(usuario!!.uid)
+                .collection("favoritos")
+                .document(codigoLugar)
+                .delete()
+            Firebase.firestore
+                .collection("lugares")
+                .document(codigoLugar)
+                .get()
+                .addOnSuccessListener { document ->
+                    lugar = document.toObject(Lugar::class.java)
+                    lugar?.let {
+                        lugar!!.corazones--
+                        Firebase.firestore
+                            .collection("lugares")
+                            .document(codigoLugar)
+                            .set(lugar!!)
+                    }
+                }
+            Toast.makeText(this, "Eliminado de los lugares favoritos", Toast.LENGTH_LONG).show()
+
         }
+
+
 
     }
 }

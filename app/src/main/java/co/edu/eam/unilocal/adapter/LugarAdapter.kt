@@ -2,6 +2,7 @@ package co.edu.eam.unilocal.adapter
 
 import android.content.Intent
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -14,12 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.activities.ComentariosLugarActivity
-import co.edu.eam.unilocal.bd.Categorias
-import co.edu.eam.unilocal.bd.Ciudades
-import co.edu.eam.unilocal.bd.Comentarios
-import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Comentario
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapter.ViewHolder>(){
     private var onLugarEliminadoListener: OnLugarEliminadoListener? = null
@@ -46,7 +45,8 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
         val comentario:TextView= itemView.findViewById(R.id.comentarios_lugar)
         val irAComentariosButton: Button = itemView.findViewById(R.id.ir_comentarios_lugar)
         val btnEliminarLugar : Button = itemView.findViewById(R.id.btn_eliminar_lugar)
-        var codigoLugar : Int =0
+        var codigoLugar : String =""
+        val prom: TextView = itemView.findViewById(R.id.calificacion_promedio_mi)
 
         init{
             itemView.setOnClickListener(this)
@@ -55,26 +55,53 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
         }
         fun bind(lugar: Lugar){
 
-            val cate : Categoria? = Categorias.obtener(lugar.idCategoria)
-            val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
-            val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
-
-            val estrellas = "\uF005".repeat(promedio.toInt()) //
-            val promedioFormateado = String.format("%.1f", promedio)
-
             nombre.text = lugar.nombre
-            if (cate != null) {
-                categoria.text= cate.nombre
-            }
-            val calificacion = lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
-            for (i in 0..calificacion){
-                (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
-            }
-            /*calificacion.text = "$promedioFormateado $estrellas"
-            calificacion.setTextColor(Color.YELLOW)*/
-            comentario.text = comentarios.size.toString() +" comentarios"
+            codigoLugar = lugar.key
 
-            codigoLugar = lugar.id
+            Firebase.firestore.collection("categorias")
+                .whereEqualTo("id", lugar.idCategoria)
+                .get()
+                .addOnSuccessListener {
+                    for (document in it) {
+                        val categoria = document.toObject(Categoria::class.java)
+                        categoria.nombre?.let { categoria ->
+                            this.categoria.text = categoria
+                        }
+                    }
+                }
+            Firebase.firestore.collection("lugares")
+                .document(lugar.key)
+                .collection("comentarios")
+                .get()
+                .addOnSuccessListener { result ->
+                    val comentarios = ArrayList<Comentario>()
+                    var promedio = 0.0
+                    var cantidad = 0
+                    for (document in result) {
+                        val comentario = document.toObject(Comentario::class.java)
+                        comentarios.add(comentario)
+                        promedio += comentario.calificaicon
+                        cantidad++
+                    }
+
+                    val total = if (cantidad > 0) promedio / cantidad else 0.0
+
+                    Log.e("total", total.toString())
+                    val estrellas = total.toInt()
+                    for (i in 0 until listaEstrellas.childCount) {
+                        (listaEstrellas[i] as TextView).setTextColor(
+                            if (i < estrellas) Color.YELLOW else Color.GRAY
+                        )
+                    }
+                    prom.text = total.toString()
+                    comentario.text = comentarios.size.toString()+" comentarios"
+                }
+
+
+
+
+
+
         }
 
         override fun onClick(v: View?) {
@@ -88,7 +115,9 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
                     itemView.context.startActivity(intent)
                 }
                 R.id.btn_eliminar_lugar -> {
-                    Lugares.eliminar(codigoLugar)
+                    Firebase.firestore.collection("lugares")
+                        .document(codigoLugar)
+                        .delete()
                     onLugarEliminadoListener?.onLugarEliminado()
 
                 }

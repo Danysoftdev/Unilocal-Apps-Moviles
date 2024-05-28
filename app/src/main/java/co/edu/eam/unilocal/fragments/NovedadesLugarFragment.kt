@@ -9,18 +9,20 @@ import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.FragmentNovedadesLugarBinding
 import co.edu.eam.unilocal.models.Lugar
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class NovedadesLugarFragment : Fragment() {
 
     lateinit var binding: FragmentNovedadesLugarBinding
     private var lugar: Lugar? = null
-    private var codigoLugar: Int = 0
+    private var codigoLugar: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (arguments != null){
-            codigoLugar = requireArguments().getInt("codigoLugar")
+            codigoLugar = requireArguments().getString("codigoLugar","")
         }
     }
 
@@ -32,17 +34,23 @@ class NovedadesLugarFragment : Fragment() {
 
         binding = FragmentNovedadesLugarBinding.inflate(inflater, container, false)
 
-        lugar = Lugares.obtener(codigoLugar)
 
-        //binding.txtNovedades.text = lugar.novedades
+        Firebase.firestore.collection("lugares").document(codigoLugar)
+            .get()
+            .addOnSuccessListener {
+                lugar = it.toObject(Lugar::class.java)
+                binding.txtNovedades.text = lugar?.novedades
+            }
+
+
 
         return binding.root
     }
 
     companion object{
-        fun newInstance(codigoLugar: Int): NovedadesLugarFragment{
+        fun newInstance(codigoLugar: String): NovedadesLugarFragment{
             val args = Bundle()
-            args.putInt("codigoLugar", codigoLugar)
+            args.putString("codigoLugar", codigoLugar)
             val fragmento = NovedadesLugarFragment()
             fragmento.arguments = args
             return fragmento

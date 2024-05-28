@@ -1,5 +1,7 @@
 package co.edu.eam.unilocal.adapters
 
+import android.nfc.Tag
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,13 +9,23 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
+import co.edu.eam.unilocal.activities.ModeradorActivity
 import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
+import co.edu.eam.unilocal.models.Usuario
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlin.math.log
 
-class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, var codigoModerador: Int): RecyclerView.Adapter<LugarModeradorAdapter.ViewHolder>() {
+class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, val activity: AppCompatActivity): RecyclerView.Adapter<LugarModeradorAdapter.ViewHolder>() {
+    private var user: FirebaseUser? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -35,7 +47,7 @@ class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, var codigoModera
         val estado: TextView = itemView.findViewById(R.id.estadoSolicitud)
         val btnAprobar: ImageButton = itemView.findViewById(R.id.btnAprobar)
         val btnDesaprobar: ImageButton = itemView.findViewById(R.id.btnDesaprobar)
-        var codigo: Int = 0
+        var codigo: String = ""
 
         init {
             itemView.setOnClickListener(this)
@@ -43,18 +55,37 @@ class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, var codigoModera
 
         fun bind(lugar: Lugar){
             nombreLugar.text = lugar.nombre
-
-            val usuario = Usuarios.getById(codigoModerador)
-            nombreModerador.text = usuario?.nombre
+            user =  FirebaseAuth.getInstance().currentUser
+            Firebase.firestore.collection("usuarios").document(user!!.uid).get().addOnSuccessListener {
+                val usuario = it.toObject(Usuario::class.java)
+                nombreModerador.text = usuario?.nombre
+            }
+            //val usuario = Usuario()// Usuarios.getById(codigoModerador)
+           // nombreModerador.text = usuario?.nombre
             estado.text = lugar.estado.name
+            codigo = lugar.key
+            btnAprobar.setOnClickListener {
+                lugar.estado = Estado.APROBADO
+                Firebase.firestore.collection("lugares").document(codigo).set(lugar)
+                    .addOnSuccessListener {
+                        activity.recreate()
+                    }
 
-            btnAprobar.setOnClickListener { lugar.estado = Estado.APROBADO }
-            btnDesaprobar.setOnClickListener { lugar.estado = Estado.RECHAZADO }
+            }
+            btnDesaprobar.setOnClickListener {
+                lugar.estado = Estado.RECHAZADO
+                Firebase.firestore.collection("lugares").document(codigo).set(lugar)
+                    .addOnSuccessListener {
+                        activity.recreate()
 
-            codigo = lugar.id
+                    }
+            }
+
         }
 
         override fun onClick(v: View?) {
+
+
         }
 
     }

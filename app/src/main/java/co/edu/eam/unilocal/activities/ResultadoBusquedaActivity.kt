@@ -29,7 +29,7 @@ class ResultadoBusquedaActivity : AppCompatActivity() {
         listaLugares = ArrayList()
 
         if (textoBusqueda.isNotEmpty()){
-            listaLugares = Lugares.buscarNombre(textoBusqueda)
+           // listaLugares = Lugares.buscarNombre(textoBusqueda)
             Log.e("ResultadoBusquedaActivity", listaLugares.toString())
         }
 

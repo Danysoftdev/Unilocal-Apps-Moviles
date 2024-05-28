@@ -1,44 +1,17 @@
 package co.edu.eam.unilocal.activities
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
-import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputBinding
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.adapters.CrearLugarAdapter
-import co.edu.eam.unilocal.bd.Categorias
-import co.edu.eam.unilocal.bd.Ciudades
-import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityCrearLugarBinding
 import co.edu.eam.unilocal.fragments.crearlugar.FormularioCrearLugarFragment
 import co.edu.eam.unilocal.fragments.crearlugar.HorariosCrearLugarFragment
 import co.edu.eam.unilocal.fragments.crearlugar.MapaCrearLugarFragment
-import co.edu.eam.unilocal.models.Categoria
-import co.edu.eam.unilocal.models.Ciudad
-import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
-import co.edu.eam.unilocal.models.Posicion
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class CrearLugarActivity : AppCompatActivity(){
@@ -99,8 +72,16 @@ class CrearLugarActivity : AppCompatActivity(){
             }else{
                 lugar!!.posicion = posicion
 
-                Lugares.crear(lugar!!)
-                Snackbar.make(binding.root, getString(R.string.txt_creacion_exitosa), Snackbar.LENGTH_LONG).show()
+                //Lugares.crear(lugar!!)
+                Firebase.firestore.collection("lugares")
+                    .add(lugar!!)
+                    .addOnSuccessListener {
+                        Snackbar.make(binding.root, getString(R.string.txt_creacion_exitosa), Snackbar.LENGTH_LONG).show()
+                    }
+                    .addOnFailureListener {
+                        Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()
+                    }
+
 
 
             }

@@ -1,5 +1,5 @@
 package co.edu.eam.unilocal.activities
-
+/*
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -27,7 +27,7 @@ class MisLugaresActivity : AppCompatActivity() ,LugarAdapter.OnLugarEliminadoLis
 
         listaLugares = ArrayList()
 
-        listaLugares = Lugares.buscarXUsuario(1)
+        //listaLugares = Lugares.buscarXUsuario(1)
         if(listaLugares.isEmpty()){
             binding.mensajeVacioLugares.visibility = View.VISIBLE
         }else {
@@ -51,4 +51,4 @@ class MisLugaresActivity : AppCompatActivity() ,LugarAdapter.OnLugarEliminadoLis
     recreate()
         Toast.makeText(this,"SE ELIMINÓ CORRECTAMENTE",Toast.LENGTH_LONG).show()
     }
-}
+}*/
