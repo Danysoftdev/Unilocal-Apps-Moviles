@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.activities.ComentariosLugarActivity
+import co.edu.eam.unilocal.activities.DetalleLugarActivity
 import co.edu.eam.unilocal.models.Categoria
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -47,6 +48,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
 
         init{
             itemView.setOnClickListener(this)
+            nombre.setOnClickListener(this)
             irAComentariosButton.setOnClickListener(this)
             btnEliminarLugar.setOnClickListener(this)
         }
@@ -89,9 +91,12 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
         }
 
         override fun onClick(v: View?) {
+
             when (v?.id) {
                 R.id.nombre_lugar -> {
-                    // Aquí puedes definir la acción para hacer clic en el nombre del lugar si lo necesitas
+                    val intent = Intent(itemView.context, DetalleLugarActivity::class.java)
+                    intent.putExtra("codigoLugar", codigoLugar)
+                    itemView.context.startActivity(intent)
                 }
                 R.id.ir_comentarios_lugar -> {
                     val intent = Intent(itemView.context, ComentariosLugarActivity::class.java)
