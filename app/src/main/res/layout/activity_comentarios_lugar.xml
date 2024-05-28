@@ -7,48 +7,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activities.ComentariosLugarActivity">
+
     <LinearLayout
-        android:layout_width="370dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <Button
-            android:id="@+id/regresar_lugares"
-            android:layout_width="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+        <LinearLayout
+            android:layout_width="370dp"
             android:layout_height="70dp"
-            android:textSize="22sp"
-            android:textColor="@color/black"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:fontFamily="@font/font_awesome_6_free_solid_900"
-            android:text="\uf053"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:text="Comentarios"/>
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        <Button
 
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:textSize="22sp"
-            android:textColor="@color/black"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:fontFamily="@font/font_awesome_6_free_solid_900"
-            android:text="\uf007"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="COMENTARIOS"/>
 
-            />
-    </LinearLayout>
+
+        </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lista_comentarios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+
     <LinearLayout
+
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -58,6 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sin comentarios"/>
+    </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

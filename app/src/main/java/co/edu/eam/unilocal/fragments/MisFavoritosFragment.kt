@@ -32,7 +32,9 @@ class MisFavoritosFragment : Fragment(), LugarFavoritoAdapter.OnLugarEliminadoLi
     ): View? {
         binding = FragmentMisFavoritosBinding.inflate(inflater, container, false)
 
-        adapter = LugarFavoritoAdapter(listaLugaresFavoritos)
+
+        adapter = LugarFavoritoAdapter(listaLugaresFavoritos,this)
+
         adapter.setOnLugarEliminadoListener(this)
 
         binding.listaFavoritos.layoutManager = LinearLayoutManager(requireActivity())
@@ -41,6 +43,11 @@ class MisFavoritosFragment : Fragment(), LugarFavoritoAdapter.OnLugarEliminadoLi
         user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
             actualizarListaLugares()
+
+        }
+        else {
+            binding.mensajeVacioFavoritos.visibility = View.VISIBLE
+
         }
         return binding.root
     }
@@ -62,6 +69,7 @@ class MisFavoritosFragment : Fragment(), LugarFavoritoAdapter.OnLugarEliminadoLi
                             if (lugar != null) {
                                 lugar.key = l.id
                                 listaLugaresFavoritos.add(lugar)
+
                                 adapter.notifyDataSetChanged()
                             }
                         }
@@ -75,6 +83,22 @@ class MisFavoritosFragment : Fragment(), LugarFavoritoAdapter.OnLugarEliminadoLi
                 } else {
                     binding.mensajeVacioFavoritos.visibility = View.GONE
                 }
+
+
+                            }
+                            adapter.notifyDataSetChanged()
+                            if (listaLugaresFavoritos.isEmpty()) {
+                                binding.mensajeVacioFavoritos.visibility = View.VISIBLE
+                            } else {
+                                binding.mensajeVacioFavoritos.visibility = View.GONE
+                            }
+                        }
+
+
+
+                }
+
+
 
             }
             .addOnFailureListener { exception ->

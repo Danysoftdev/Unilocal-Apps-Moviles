@@ -52,37 +52,11 @@ class RecuperarContraActivity : AppCompatActivity() {
     }
 
     fun irAlCodigo(){
-<<<<<<< HEAD
+
 
         val email: String = binding.email.text.toString().trim();
-=======
-/*
-        val email: String = binding.email.text.toString()
->>>>>>> 3ddfbd1330826106d78565794b7bfa6111d184bc
 
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches() ){
-            Toast.makeText(this, "Debe ingresar un correo válido", Toast.LENGTH_LONG).show();
-            return;
-        }else{
 
-            if (!Usuarios.verificarCorreo(email)){
-                Toast.makeText(this, "Debe ingresar el correo con el que se registró", Toast.LENGTH_LONG).show()
-            }else{
-                FireBaseAuth auth = FirebaseAuth.getInstance();
-                String emailAddress = email
-
-                auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>(){
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task){
-
-                    }
-                })
-
-                startActivity(Intent(this, IngresarCodigoActivity::class.java))
-                finish()
-
-            }
-        }*/
     }
 
     fun ResetPassowrd(){
@@ -98,6 +72,7 @@ class RecuperarContraActivity : AppCompatActivity() {
                 Toast.makeText(this, "hubo un error", Toast.LENGTH_LONG).show()
             }
         })
+
     }
 
 }

@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val user = FirebaseAuth.getInstance().currentUser
-        //val sp = getSharedPreferences("sesion", Context.MODE_PRIVATE)
+
         var correo = ""
         val tipo = ""
         if (user!=null){
@@ -46,13 +46,16 @@ class MainActivity : AppCompatActivity() {
                 .get()
                 .addOnSuccessListener { u ->
 
-
                     val rol = u.toObject(Usuario::class.java)?.tipo
                     correo = u.toObject(Usuario::class.java)?.correo ?: ""
                     val btnSesion: Button = binding.btnSesion
                     if(rol == "usuario") {
 
+
                         btnSesion.setBackgroundResource(R.drawable.ic_logout)
+
+                        btnSesion.setBackgroundResource(R.drawable.user_circle)
+
                         binding.barraInferior.visibility = View.VISIBLE
                         btnSesion.setOnClickListener { limpiarSesion() }
                     }else {
@@ -68,13 +71,13 @@ class MainActivity : AppCompatActivity() {
         val btnSesion: Button = binding.btnSesion
 
         if (correo!!.isEmpty()) {
-            btnSesion.setBackgroundResource(R.drawable.ic_login)
+            btnSesion.setBackgroundResource(R.drawable.user_plus)
             binding.barraInferior.visibility = View.GONE
 
             btnSesion.setOnClickListener { startActivity( Intent(this, LoginActivity::class.java) ) }
         }else{
             if (tipo == "usuario"){
-                btnSesion.setBackgroundResource(R.drawable.ic_logout)
+                btnSesion.setBackgroundResource(R.drawable.user_circle)
                 binding.barraInferior.visibility = View.VISIBLE
                 btnSesion.setOnClickListener { limpiarSesion() }
 
@@ -83,12 +86,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             btnSesion.setOnClickListener { startActivity(Intent(this, LoginActivity::class.java)) }
-        } /*else {
-            btnSesion.setBackgroundResource(R.drawable.ic_logout)
-            binding.barraInferior.visibility = View.VISIBLE
-            btnSesion.setOnClickListener { limpiarSesion() }
-
-        }*/
+        }
         reemplazarFragmento(1, MENU_INICIO)
         binding.barraInferior.setOnItemSelectedListener {
             when (it.itemId) {

@@ -12,7 +12,10 @@ import co.edu.eam.unilocal.adapter.TopLugarAdapter
 import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.FragmentMisLugaresBinding
 import co.edu.eam.unilocal.databinding.FragmentTopLugaresBinding
+import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class TopLugaresFragment : Fragment() {
@@ -23,6 +26,7 @@ class TopLugaresFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentTopLugaresBinding.inflate(inflater,container,false)
         //listaLugares = Lugares.ordenarPorCorazones()
         val adapter = TopLugarAdapter(listaLugares)
@@ -30,6 +34,18 @@ class TopLugaresFragment : Fragment() {
         binding.listaLugares.adapter = adapter
         binding.listaLugares.layoutManager = LinearLayoutManager(requireActivity(),
             LinearLayoutManager.VERTICAL,false)
+
+        Firebase.firestore.collection("lugares").
+            whereEqualTo("estado", Estado.APROBADO).
+        get().addOnSuccessListener {
+            for (document in it){
+                val lugar = document.toObject(Lugar::class.java)
+                lugar.key = document.id
+                listaLugares.add(lugar)
+            }
+            listaLugares.sortByDescending{ it.corazones }
+            adapter.notifyDataSetChanged()
+        }
         return binding.root
     }
 

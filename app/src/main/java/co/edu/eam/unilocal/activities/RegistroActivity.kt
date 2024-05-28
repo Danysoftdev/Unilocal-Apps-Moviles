@@ -67,6 +67,7 @@ class RegistroActivity : AppCompatActivity() {
                        }
                     }
 
+
                 }else{
                     Toast.makeText(this, "El correo ingresado ya se encuentra registrado", Toast.LENGTH_LONG).show()
                 }
@@ -84,6 +85,14 @@ class RegistroActivity : AppCompatActivity() {
             Toast.makeText(this, "El correo ingresado ya se encuentra registrado", Toast.LENGTH_LONG).show()
         }*/
 
+
+                }else{
+                    Toast.makeText(this, "El correo ingresado ya se encuentra registrado", Toast.LENGTH_LONG).show()
+                }
+            }
+            .addOnFailureListener {
+                Snackbar.make(binding.root, "Error al registrar el usuario", Snackbar.LENGTH_LONG).show()
+            }
 
     }
     private fun verificarEmail(user: FirebaseUser){
