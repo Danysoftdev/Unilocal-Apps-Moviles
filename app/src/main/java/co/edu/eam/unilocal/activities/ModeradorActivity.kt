@@ -16,6 +16,7 @@ import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityModeradorBinding
 import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
+import co.edu.eam.unilocal.models.Usuario
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth

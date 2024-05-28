@@ -36,7 +36,7 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
         private val comentario: TextView = itemView.findViewById(R.id.comentarios)
         private val direccion: TextView = itemView.findViewById(R.id.direccion_lugar)
         private val corazones: TextView = itemView.findViewById(R.id.corazones)
-
+        val prom: TextView = itemView.findViewById(R.id.calificacion_promedio_top)
         fun bind(lugar: Lugar) {
             nombre.text = lugar.nombre
             direccion.text = lugar.direccion
@@ -77,7 +77,8 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
                             if (i < estrellas) Color.YELLOW else Color.GRAY
                         )
                     }
-                    comentario.text = comentarios.size.toString()
+                    prom.text = total.toString()
+                    comentario.text = "("+comentarios.size.toString()+")"
                 }
         }
     }

@@ -20,6 +20,12 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlin.math.log
 import co.edu.eam.unilocal.R
+/*import com.sendgrid.helpers.mail.objects.Content
+import com.sendgrid.helpers.mail.objects.Email
+import com.sendgrid.helpers.mail.Mail
+import com.sendgrid.Method
+import com.sendgrid.Request
+import com.sendgrid.SendGrid*/
 class ComentariosLugarFragment : Fragment() {
 
     lateinit var binding: FragmentComentariosLugarBinding
@@ -29,6 +35,8 @@ class ComentariosLugarFragment : Fragment() {
     private var estrellas: Int = 0
     private var codigoUsuario: String = ""
     private var user: FirebaseUser? = null
+    private val SENDGRID_API_KEY = "SG.vv8v9DvTTd-3iZEHDkfAqQ.kcOinDNYJgFDMJ_LKrODdnZJGqvldfMrcXL8qCGi8Mo"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,7 +117,7 @@ class ComentariosLugarFragment : Fragment() {
                 .collection("comentarios")
                 .add(comentario)
                 .addOnSuccessListener {
-
+                    //enviarCorreo(comentario)
                     limpiarFormulario()
                     Snackbar.make(binding.root,getText(R.string.txt_comentario_enviado) , Snackbar.LENGTH_LONG).show()
 
@@ -124,6 +132,27 @@ class ComentariosLugarFragment : Fragment() {
             Snackbar.make(binding.root, getText(R.string.txt_advertencia_comentario), Snackbar.LENGTH_LONG).show()
         }
     }
+   /* private fun enviarCorreo(comentario: Comentario) {
+        val sendgrid = SendGrid(SENDGRID_API_KEY)
+        val from = Email("lopez.hamilton.5426@eam.edu.co")
+        val to = Email("hamilt727@gmail.com")
+        val subject = "Nuevo comentario en lugar"
+        val content = Content("text/plain", "Se ha creado un nuevo comentario: ${comentario.texto}")
+        val mail = Mail(from, subject, to, content)
+
+        val request = Request()
+        try {
+            request.method = Method.POST
+            request.endpoint = "mail/send"
+            request.body = mail.build()
+            val response = sendgrid.api(request)
+            println(response.statusCode)
+            println(response.body)
+            println(response.headers)
+        } catch (ex: Exception) {
+            println(ex.message)
+        }
+    }*/
 
     private fun limpiarFormulario(){
         binding.txtComentario.setText("")

@@ -81,7 +81,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
                .addOnSuccessListener {
 
 
-                   comentario.text = it.size().toString() +" comentarios"
+                   comentario.text = it.size().toString()
                }
 
 

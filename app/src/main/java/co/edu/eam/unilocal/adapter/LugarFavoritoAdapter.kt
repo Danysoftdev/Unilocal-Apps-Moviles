@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.models.Categoria
+import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -42,15 +43,21 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
         val nombre: TextView = itemView.findViewById(R.id.nombre_lugar_fav)
         val categoria: TextView = itemView.findViewById(R.id.categoria_lugar_fav)
         val direccion:TextView= itemView.findViewById(R.id.direccion_lugar_fav)
+        private val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar_fav)
         val btnEliminarLugar : Button = itemView.findViewById(R.id.btn_eliminar_favorito)
+        private val comentario: TextView = itemView.findViewById(R.id.comentarios_fav)
         var codigoLugar : String =""
+        val prom: TextView = itemView.findViewById(R.id.calificacion_promedio_fav)
         init{
             itemView.setOnClickListener(this)
             btnEliminarLugar.setOnClickListener(this)
         }
         fun bind(lugar: Lugar){
             Log.d("LugarFavoritoAdapter", "Binding lugar: ${lugar.nombre}, ${lugar.direccion}")
-            nombre.text = lugar.nombre.toUpperCase()
+            nombre.text = lugar.nombre
+            direccion.text = lugar.direccion
+            codigoLugar = lugar.key
+
             Firebase.firestore.collection("categorias")
                 .whereEqualTo("id", lugar.idCategoria)
                 .get()
@@ -62,10 +69,33 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
                         }
                     }
                 }
-            direccion.text = lugar.direccion
+            Firebase.firestore.collection("lugares")
+                .document(lugar.key)
+                .collection("comentarios")
+                .get()
+                .addOnSuccessListener { result ->
+                    val comentarios = ArrayList<Comentario>()
+                    var promedio = 0.0
+                    var cantidad = 0
+                    for (document in result) {
+                        val comentario = document.toObject(Comentario::class.java)
+                        comentarios.add(comentario)
+                        promedio += comentario.calificaicon
+                        cantidad++
+                    }
 
+                    val total = if (cantidad > 0) promedio / cantidad else 0.0
+                    Log.e("total", total.toString())
+                    val estrellas = total.toInt()
+                    for (i in 0 until listaEstrellas.childCount) {
+                        (listaEstrellas[i] as TextView).setTextColor(
+                            if (i < estrellas) Color.YELLOW else Color.GRAY
+                        )
+                    }
+                    prom.text = total.toString()
+                    comentario.text = "("+comentarios.size.toString()+")"
+                }
 
-            codigoLugar = lugar.key
 
         }
         private fun recargarFragmento() {
