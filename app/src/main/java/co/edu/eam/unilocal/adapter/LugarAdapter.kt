@@ -8,6 +8,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -20,6 +21,7 @@ import co.edu.eam.unilocal.activities.DetalleLugarActivity
 import co.edu.eam.unilocal.models.Categoria
 
 import co.edu.eam.unilocal.models.Comentario
+import com.bumptech.glide.Glide
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -43,6 +45,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
     }
     override fun getItemCount() = lista.size
     inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView),OnClickListener{
+        val imagen: ImageView = itemView.findViewById(R.id.img_mis_lugares)
         val nombre:TextView= itemView.findViewById(R.id.nombre_lugar)
         val categoria:TextView= itemView.findViewById(R.id.categoria_lugar)
         val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar)
@@ -123,6 +126,10 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
                     prom.text = total.toString()
                     comentario.text = comentarios.size.toString()
                 }
+
+            Glide.with( itemView )
+                .load(lugar.imagenes[0])
+                .into(imagen)
 
         }
 

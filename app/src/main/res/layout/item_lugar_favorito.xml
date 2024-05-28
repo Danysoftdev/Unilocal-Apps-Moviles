@@ -34,9 +34,9 @@
             >
 
             <ImageView
+                android:id="@+id/img_mis_favoritos"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-
                 android:src="@mipmap/ic_launcher_round" />
 
         </LinearLayout>

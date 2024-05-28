@@ -13,6 +13,7 @@ import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.adapters.LugarBusquedaAdapter
 import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityResultadoBusquedaBinding
+import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
 import com.google.android.material.chip.Chip
 import com.google.firebase.firestore.ktx.firestore
@@ -70,7 +71,7 @@ class ResultadoBusquedaActivity : AppCompatActivity() {
                     for (document in documents){
                         val lugar = document.toObject(Lugar::class.java)
                         lugar.key = document.id
-                        if (lugar.nombre.lowercase().contains(textoBusqueda.lowercase())){
+                        if (lugar.nombre.lowercase().contains(textoBusqueda.lowercase()) && lugar.estado == Estado.APROBADO){
                             listaLugares.add(lugar)
                         }
                     }

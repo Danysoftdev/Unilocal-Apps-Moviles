@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.activities.DetalleLugarActivity
+import com.bumptech.glide.Glide
 
 class LugarBusquedaAdapter(var listaLugares: ArrayList<Lugar>): RecyclerView.Adapter<LugarBusquedaAdapter.ViewHolder>() {
 
@@ -64,6 +65,12 @@ class LugarBusquedaAdapter(var listaLugares: ArrayList<Lugar>): RecyclerView.Ada
                 horario.text = lugar.obtenerHoraApertura()
             }
             codigo = lugar.key
+
+            if (lugar.imagenes.size > 0){
+                Glide.with( itemView )
+                    .load(lugar.imagenes[0])
+                    .into(imagen)
+            }
         }
 
         override fun onClick(v: View?) {

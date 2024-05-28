@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.get
@@ -17,6 +18,7 @@ import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -40,6 +42,7 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
     }
     override fun getItemCount() = lista.size
     inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        val imagen: ImageView = itemView.findViewById(R.id.img_mis_favoritos)
         val nombre: TextView = itemView.findViewById(R.id.nombre_lugar_fav)
         val categoria: TextView = itemView.findViewById(R.id.categoria_lugar_fav)
         val direccion:TextView= itemView.findViewById(R.id.direccion_lugar_fav)
@@ -95,6 +98,10 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
                     prom.text = total.toString()
                     comentario.text = "("+comentarios.size.toString()+")"
                 }
+
+            Glide.with( itemView )
+                .load(lugar.imagenes[0])
+                .into(imagen)
 
 
         }

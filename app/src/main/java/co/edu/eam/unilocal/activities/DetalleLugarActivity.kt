@@ -16,7 +16,6 @@ import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.models.Usuario
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

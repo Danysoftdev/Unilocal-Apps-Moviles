@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.get
@@ -13,6 +14,7 @@ import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -30,6 +32,7 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
     }
 
     inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView) {
+        private val imagen: ImageView = itemView.findViewById(R.id.img_top)
         private val nombre: TextView = itemView.findViewById(R.id.nombre_lugar)
         private val categoria: TextView = itemView.findViewById(R.id.categoria_lugar)
         private val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar)
@@ -80,6 +83,10 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
                     prom.text = total.toString()
                     comentario.text = "("+comentarios.size.toString()+")"
                 }
+
+            Glide.with( itemView )
+                .load(lugar.imagenes[0])
+                .into(imagen)
         }
     }
 }
