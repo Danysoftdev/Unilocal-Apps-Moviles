@@ -63,7 +63,11 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
            /* for (i in 0..calificacion){
                 (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
             }*/
+
+            nombre.text = lugar.nombre
+
             nombre.text = lugar.nombre.toUpperCase()
+
             Firebase.firestore.collection("categorias")
                 .whereEqualTo("id", lugar.idCategoria)
                 .get()
@@ -114,6 +118,10 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
                             .delete()
 
                             .addOnSuccessListener {
+                                onLugarEliminadoListener?.onLugarEliminado()
+
+
+                            .addOnSuccessListener {
 
                                 Firebase.firestore
                                     .collection("lugares")
@@ -131,6 +139,7 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fra
                                     }
                                 onLugarEliminadoListener?.onLugarEliminado()
                                 recargarFragmento()
+
                             }
 
                     }

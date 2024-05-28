@@ -17,6 +17,7 @@ import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.models.Usuario
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
@@ -25,6 +26,7 @@ import kotlin.math.log
 
 class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, val activity: AppCompatActivity): RecyclerView.Adapter<LugarModeradorAdapter.ViewHolder>() {
     private var user: FirebaseUser? = null
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -55,6 +57,9 @@ class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, val activity: Ap
 
         fun bind(lugar: Lugar){
             nombreLugar.text = lugar.nombre
+
+            val usuario = Usuario()// Usuarios.getById(codigoModerador)
+            nombreModerador.text = usuario?.nombre
             user =  FirebaseAuth.getInstance().currentUser
             Firebase.firestore.collection("usuarios").document(user!!.uid).get().addOnSuccessListener {
                 val usuario = it.toObject(Usuario::class.java)
@@ -62,6 +67,7 @@ class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, val activity: Ap
             }
             //val usuario = Usuario()// Usuarios.getById(codigoModerador)
            // nombreModerador.text = usuario?.nombre
+
             estado.text = lugar.estado.name
             codigo = lugar.key
             btnAprobar.setOnClickListener {
@@ -80,6 +86,9 @@ class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, val activity: Ap
 
                     }
             }
+
+
+            codigo = lugar.key
 
         }
 

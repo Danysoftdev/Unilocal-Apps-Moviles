@@ -30,6 +30,9 @@ class ComentarioLugarAdapter(var lista:ArrayList<Comentario>):RecyclerView.Adapt
 
         val texto: TextView = itemView.findViewById(R.id.comentario)
         val autor: TextView = itemView.findViewById(R.id.autor_comentario)
+
+        val estrellas: TextView = itemView.findViewById(R.id.estrellas_comentario)
+
         //val estrellas: TextView = itemView.findViewById(R.id.estrellas_comentario)
         val fecha : TextView = itemView.findViewById(R.id.fecha_comentario)
         private val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_comentario)

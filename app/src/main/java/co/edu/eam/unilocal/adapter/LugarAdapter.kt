@@ -16,7 +16,9 @@ import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.activities.ComentariosLugarActivity
 import co.edu.eam.unilocal.models.Categoria
+
 import co.edu.eam.unilocal.models.Comentario
+
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -46,6 +48,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
         val irAComentariosButton: Button = itemView.findViewById(R.id.ir_comentarios_lugar)
         val btnEliminarLugar : Button = itemView.findViewById(R.id.btn_eliminar_lugar)
         var codigoLugar : String =""
+
         val prom: TextView = itemView.findViewById(R.id.calificacion_promedio_mi)
 
         init{
@@ -58,6 +61,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
             nombre.text = lugar.nombre
             codigoLugar = lugar.key
 
+
             Firebase.firestore.collection("categorias")
                 .whereEqualTo("id", lugar.idCategoria)
                 .get()
@@ -69,6 +73,31 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
                         }
                     }
                 }
+
+           Firebase.firestore.collection("comentarios")
+               .whereEqualTo("idLugar", lugar.key)
+               .get()
+               .addOnSuccessListener {
+                   comentario.text = it.size().toString() +" comentarios"
+               }
+            //val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
+           // val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
+
+           // val estrellas = "\uF005".repeat(promedio.toInt()) //
+           // val promedioFormateado = String.format("%.1f", promedio)
+
+            nombre.text = lugar.nombre
+
+            val calificacion = lugar.obtenerCalificacionPromedio(ArrayList())
+            for (i in 0..calificacion){
+                (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
+            }
+            /*calificacion.text = "$promedioFormateado $estrellas"
+            calificacion.setTextColor(Color.YELLOW)*/
+            //comentario.text = comentarios.size.toString() +" comentarios"
+
+            codigoLugar = lugar.key
+
             Firebase.firestore.collection("lugares")
                 .document(lugar.key)
                 .collection("comentarios")
@@ -96,6 +125,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
                     prom.text = total.toString()
                     comentario.text = comentarios.size.toString()+" comentarios"
                 }
+
 
 
 
