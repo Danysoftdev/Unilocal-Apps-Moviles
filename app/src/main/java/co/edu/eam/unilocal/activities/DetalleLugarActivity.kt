@@ -8,8 +8,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
+import co.edu.eam.unilocal.adapters.ImagenesViewPager
 import co.edu.eam.unilocal.adapters.ViewPagerAdapter
 import co.edu.eam.unilocal.databinding.ActivityDetalleLugarBinding
+import co.edu.eam.unilocal.fragments.ImagenFragment
 import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
@@ -20,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.Date
-
+import co.edu.eam.unilocal.R
 class DetalleLugarActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetalleLugarBinding
@@ -89,6 +91,9 @@ class DetalleLugarActivity : AppCompatActivity() {
             binding.horarioLugar.text = lugar.obtenerHoraApertura()
         }
 
+
+        binding.listaImgs.adapter = ImagenesViewPager(this, lugar.imagenes)
+
         Firebase.firestore.collection("categorias")
             .whereEqualTo("id", lugar.idCategoria)
             .get()
@@ -131,15 +136,16 @@ class DetalleLugarActivity : AppCompatActivity() {
 
 
 
+
     }
 
     private fun cargarTabs() {
         binding.viewPager.adapter = ViewPagerAdapter(this, codigoLugar)
         TabLayoutMediator(binding.tabsLugar, binding.viewPager) { tab, pos ->
             when (pos) {
-                0 -> tab.text = "Información"
-                1 -> tab.text = "Comentario"
-                2 -> tab.text = "Novedades"
+                0 -> tab.text = getText(R.string.txt_informacion)
+                1 -> tab.text = getText(R.string.txt_comentario)
+                2 -> tab.text = getText(R.string.txt_novedades)
             }
         }.attach()
     }
@@ -152,8 +158,8 @@ class DetalleLugarActivity : AppCompatActivity() {
 
         if(!valor){
             esFavorito = true
-          //  binding.btnFavorito.typeface = typefaceSolid
-           // binding.btnFavorito.text = '\uf004'.toString()
+            //  binding.btnFavorito.typeface = typefaceSolid
+            // binding.btnFavorito.text = '\uf004'.toString()
 
             Firebase.firestore
                 .collection("usuarios")
@@ -176,7 +182,7 @@ class DetalleLugarActivity : AppCompatActivity() {
                             .set(lugar!!)
                     }
                 }
-                Toast.makeText(this, "Añadido a los lugares favoritos", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getText(R.string.txt_anadido_favorito), Toast.LENGTH_LONG).show()
         }else{
             esFavorito = false
             //binding.btnFavorito.typeface = typefaceRegular
@@ -202,7 +208,7 @@ class DetalleLugarActivity : AppCompatActivity() {
                             .set(lugar!!)
                     }
                 }
-            Toast.makeText(this, "Eliminado de los lugares favoritos", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getText(R.string.txt_lugar_favorito_eliminado), Toast.LENGTH_LONG).show()
 
         }
 

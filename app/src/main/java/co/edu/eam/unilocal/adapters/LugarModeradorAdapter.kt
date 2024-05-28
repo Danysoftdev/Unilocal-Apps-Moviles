@@ -1,5 +1,6 @@
 package co.edu.eam.unilocal.adapters
 
+import android.content.Intent
 import android.nfc.Tag
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,11 +13,14 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
+import co.edu.eam.unilocal.activities.DetalleLugarActivity
 import co.edu.eam.unilocal.activities.ModeradorActivity
 import co.edu.eam.unilocal.bd.Usuarios
 import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.models.Usuario
+import com.bumptech.glide.Glide
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
@@ -25,6 +29,7 @@ import kotlin.math.log
 
 class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, val activity: AppCompatActivity): RecyclerView.Adapter<LugarModeradorAdapter.ViewHolder>() {
     private var user: FirebaseUser? = null
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -42,6 +47,7 @@ class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, val activity: Ap
 
     inner class ViewHolder(var itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
+        val imagen: ImageView = itemView.findViewById(R.id.imagen_lugar)
         val nombreLugar: TextView = itemView.findViewById(R.id.nombre_lugar_revisar)
         val nombreModerador: TextView = itemView.findViewById(R.id.nombreModerador)
         val estado: TextView = itemView.findViewById(R.id.estadoSolicitud)
@@ -55,6 +61,9 @@ class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, val activity: Ap
 
         fun bind(lugar: Lugar){
             nombreLugar.text = lugar.nombre
+
+            val usuario = Usuario()// Usuarios.getById(codigoModerador)
+            nombreModerador.text = usuario?.nombre
             user =  FirebaseAuth.getInstance().currentUser
             Firebase.firestore.collection("usuarios").document(user!!.uid).get().addOnSuccessListener {
                 val usuario = it.toObject(Usuario::class.java)
@@ -62,6 +71,7 @@ class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, val activity: Ap
             }
             //val usuario = Usuario()// Usuarios.getById(codigoModerador)
            // nombreModerador.text = usuario?.nombre
+
             estado.text = lugar.estado.name
             codigo = lugar.key
             btnAprobar.setOnClickListener {
@@ -81,10 +91,22 @@ class LugarModeradorAdapter(var listaLugares: ArrayList<Lugar>, val activity: Ap
                     }
             }
 
+
+            codigo = lugar.key
+
+            if (lugar.imagenes.size > 0){
+                Glide.with( itemView )
+                    .load(lugar.imagenes[0])
+                    .into(imagen)
+            }
+
         }
 
         override fun onClick(v: View?) {
 
+            val intent = Intent(itemView.context, DetalleLugarActivity::class.java)
+            intent.putExtra("codigoLugar", codigo)
+            itemView.context.startActivity(intent)
 
         }
 

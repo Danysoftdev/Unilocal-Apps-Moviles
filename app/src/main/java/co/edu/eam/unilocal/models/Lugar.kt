@@ -115,28 +115,16 @@ class Lugar() {
         var mensaje = ""
         var pos: Int = 0
 
-        if (dia < 1 || dia > 7) {
-            throw IllegalArgumentException("El valor de dia debe estar entre 1 y 7, pero es: $dia")
-        }
+        for (horario in horarios){
+            pos = horario.diasSemana.indexOf(DiaSemana.entries[dia-3])
 
-        for (horario in horarios) {
-            val indiceDiaSemana = dia - 2 // Ajuste para convertir dia en índice (0-6)
-
-            // Asegura que indiceDiaSemana esté dentro del rango válido de DiaSemana.entries
-            if (indiceDiaSemana >= 0 && indiceDiaSemana < DiaSemana.entries.size) {
-                pos = horario.diasSemana.indexOf(DiaSemana.entries[indiceDiaSemana])
-
-                mensaje = if (pos != -1 && pos + 1 < horario.diasSemana.size) {
-                    "Abre el ${horario.diasSemana[pos + 1].toString().lowercase()} a las ${horario.horaInicio}:00"
-                } else {
-                    "Abre el ${horario.diasSemana[0].toString().lowercase()} a las ${horario.horaInicio}:00"
-                }
-            } else {
-                mensaje = "Abre el ${horario.diasSemana[0].toString().lowercase()} a las ${horario.horaInicio}:00"
+            mensaje = if (pos != -1){
+                "Abre el ${horario.diasSemana[pos+1].toString().lowercase()} a las ${horario.horaInicio}:00"
+            }else{
+                "Abre el ${horario.diasSemana[0].toString().lowercase()} a las ${horario.horaInicio}:00"
             }
             break
         }
-
 
         return mensaje
 

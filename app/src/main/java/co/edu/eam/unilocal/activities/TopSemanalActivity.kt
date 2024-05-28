@@ -26,7 +26,6 @@ class TopSemanalActivity : AppCompatActivity() {
 
         listaLugares = ArrayList()
 
-        //listaLugares = Lugares.ordenarPorCorazones()
 
         val adapter = TopLugarAdapter(listaLugares)
 

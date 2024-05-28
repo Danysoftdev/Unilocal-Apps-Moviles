@@ -4,22 +4,22 @@
         android:id="@+id/menuInicio"
         android:enabled="true"
         android:icon="@drawable/ic_inicio"
-        android:title="Inicio"/>
+        android:title="@string/txt_inicio"/>
     <item
         android:id="@+id/menuLugares"
         android:enabled="true"
         android:icon="@drawable/ic_mis_lugares"
-        android:title="Mis lugares"/>
+        android:title="@string/txt_lugaress"/>
 
     <item
         android:id="@+id/menuFavoritos"
         android:enabled="true"
         android:icon="@drawable/ic_favoritos"
-        android:title="Favoritos"/>
+        android:title="@string/txt_favoritos"/>
 
     <item
         android:id="@+id/menuTopSemanal"
         android:enabled="true"
         android:icon="@drawable/ic_top_semanal"
-        android:title="Top semanal"/>
+        android:title="@string/txt_top_semanal"/>
 </menu>

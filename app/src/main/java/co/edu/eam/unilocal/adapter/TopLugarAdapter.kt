@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.get
@@ -13,6 +14,7 @@ import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -30,13 +32,14 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
     }
 
     inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView) {
+        private val imagen: ImageView = itemView.findViewById(R.id.img_top)
         private val nombre: TextView = itemView.findViewById(R.id.nombre_lugar)
         private val categoria: TextView = itemView.findViewById(R.id.categoria_lugar)
         private val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar)
         private val comentario: TextView = itemView.findViewById(R.id.comentarios)
         private val direccion: TextView = itemView.findViewById(R.id.direccion_lugar)
         private val corazones: TextView = itemView.findViewById(R.id.corazones)
-
+        val prom: TextView = itemView.findViewById(R.id.calificacion_promedio_top)
         fun bind(lugar: Lugar) {
             nombre.text = lugar.nombre
             direccion.text = lugar.direccion
@@ -77,8 +80,13 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
                             if (i < estrellas) Color.YELLOW else Color.GRAY
                         )
                     }
-                    comentario.text = comentarios.size.toString()
+                    prom.text = total.toString()
+                    comentario.text = "("+comentarios.size.toString()+")"
                 }
+
+            Glide.with( itemView )
+                .load(lugar.imagenes[0])
+                .into(imagen)
         }
     }
 }

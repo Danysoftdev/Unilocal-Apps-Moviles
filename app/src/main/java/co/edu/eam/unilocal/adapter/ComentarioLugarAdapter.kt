@@ -47,18 +47,18 @@ class ComentarioLugarAdapter(var lista:ArrayList<Comentario>):RecyclerView.Adapt
                         autor.text = usuario.nombre
                     }
                 }
-                val cal = "\uF005".repeat(comentario.calificaicon) //
+            val cal = "\uF005".repeat(comentario.calificaicon) //
 
-                texto.text = comentario.texto
-                val estrellas = comentario.calificaicon
-                for (i in 0 until listaEstrellas.childCount) {
+            texto.text = comentario.texto
+            val estrellas = comentario.calificaicon
+            for (i in 0 until listaEstrellas.childCount) {
                 (listaEstrellas[i] as TextView).setTextColor(
                     if (i < estrellas) Color.YELLOW else Color.GRAY
-                 )
+                )
             }
-               // estrellas.text = cal
-                //estrellas.setTextColor(Color.YELLOW)
-                fecha.text = comentario.fecha.toString()
+            // estrellas.text = cal
+            //estrellas.setTextColor(Color.YELLOW)
+            fecha.text = comentario.fecha.toString()
 
 
         }

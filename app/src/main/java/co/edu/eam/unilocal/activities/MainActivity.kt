@@ -45,11 +45,17 @@ class MainActivity : AppCompatActivity() {
                 .document(user.uid)
                 .get()
                 .addOnSuccessListener { u ->
+
                     val rol = u.toObject(Usuario::class.java)?.tipo
                     correo = u.toObject(Usuario::class.java)?.correo ?: ""
                     val btnSesion: Button = binding.btnSesion
                     if(rol == "usuario") {
+
+
+                        btnSesion.setBackgroundResource(R.drawable.ic_logout)
+
                         btnSesion.setBackgroundResource(R.drawable.user_circle)
+
                         binding.barraInferior.visibility = View.VISIBLE
                         btnSesion.setOnClickListener { limpiarSesion() }
                     }else {

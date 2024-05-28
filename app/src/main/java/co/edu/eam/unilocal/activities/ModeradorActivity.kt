@@ -16,6 +16,7 @@ import co.edu.eam.unilocal.bd.Lugares
 import co.edu.eam.unilocal.databinding.ActivityModeradorBinding
 import co.edu.eam.unilocal.models.Estado
 import co.edu.eam.unilocal.models.Lugar
+import co.edu.eam.unilocal.models.Usuario
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -75,7 +76,7 @@ class ModeradorActivity : AppCompatActivity() {
                     }.addOnFailureListener {
                         Log.e("Error", it.message.toString())
                     }
-      // listaLugares.addAll(Lugares.listarAprobados())
+                    // listaLugares.addAll(Lugares.listarAprobados())
                 }else{
                     listaLugares.clear()
                     Firebase.firestore.
@@ -106,7 +107,7 @@ class ModeradorActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     Log.e("Error", it.message.toString())
                 }
-               // listaLugares.removeAll(Lugares.listarAprobados())
+                // listaLugares.removeAll(Lugares.listarAprobados())
             }
             binding.lugaresRevisar.adapter!!.notifyDataSetChanged()
         }
@@ -148,7 +149,7 @@ class ModeradorActivity : AppCompatActivity() {
                     }.addOnFailureListener {
                         Log.e("Error", it.message.toString())
                     }
-                //listaLugares.addAll(Lugares.listarPendientes())
+                    //listaLugares.addAll(Lugares.listarPendientes())
                 }
             }else{
                 Firebase.firestore.
@@ -165,7 +166,7 @@ class ModeradorActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     Log.e("Error", it.message.toString())
                 }
-               //listaLugares.removeAll(Lugares.listarPendientes())
+                //listaLugares.removeAll(Lugares.listarPendientes())
             }
             binding.lugaresRevisar.adapter!!.notifyDataSetChanged()
         }
@@ -190,7 +191,7 @@ class ModeradorActivity : AppCompatActivity() {
                     }.addOnFailureListener {
                         Log.e("Error", it.message.toString())
                     }
-                  //  listaLugares.addAll(Lugares.listarRechazados())
+                    //  listaLugares.addAll(Lugares.listarRechazados())
                 }else{
                     listaLugares.clear()
                     Firebase.firestore.
@@ -206,7 +207,7 @@ class ModeradorActivity : AppCompatActivity() {
                     }.addOnFailureListener {
                         Log.e("Error", it.message.toString())
                     }
-                  //  listaLugares.addAll(Lugares.listarRechazados())
+                    //  listaLugares.addAll(Lugares.listarRechazados())
                 }
             }else{
                 Firebase.firestore.

@@ -30,7 +30,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="COMENTARIOS"/>
+                android:text="@string/txt_comentarios_mayus"/>
 
 
         </LinearLayout>
@@ -50,7 +50,7 @@
             android:id="@+id/mensaje_vacio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sin comentarios"/>
+            android:text="@string/txt_sin_comentarios"/>
     </LinearLayout>
 
     </LinearLayout>

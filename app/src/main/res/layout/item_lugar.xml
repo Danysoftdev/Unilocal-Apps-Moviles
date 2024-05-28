@@ -20,27 +20,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-      >
+        android:layout_marginEnd="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
-
-            android:gravity="center"
-          >
+            android:gravity="center" >
 
             <ImageView
+                android:id="@+id/img_mis_lugares"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-
-                android:src="@mipmap/ic_launcher_round" />
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-
                 android:src="@mipmap/ic_launcher_round" />
 
         </LinearLayout>
@@ -57,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/nombre_lugar"
                     android:layout_width="wrap_content"
@@ -125,20 +117,35 @@
 
                 </LinearLayout>
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/comentarios_lugar"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Comentarios"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/comentarios_lugar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_comentarios"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="5dp"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+
 
                 <Button
                     android:id="@+id/ir_comentarios_lugar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ver comentarios"
+                    android:text="@string/txt_ver_comentarios"
                     android:textColor="#DFDFDF"
                     android:textSize="15sp"
 

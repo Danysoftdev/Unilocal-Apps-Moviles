@@ -8,15 +8,21 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.activities.ComentariosLugarActivity
+import co.edu.eam.unilocal.activities.DetalleLugarActivity
 import co.edu.eam.unilocal.models.Categoria
+
 import co.edu.eam.unilocal.models.Comentario
+import com.bumptech.glide.Glide
+
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -39,6 +45,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
     }
     override fun getItemCount() = lista.size
     inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView),OnClickListener{
+        val imagen: ImageView = itemView.findViewById(R.id.img_mis_lugares)
         val nombre:TextView= itemView.findViewById(R.id.nombre_lugar)
         val categoria:TextView= itemView.findViewById(R.id.categoria_lugar)
         val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar)
@@ -46,10 +53,12 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
         val irAComentariosButton: Button = itemView.findViewById(R.id.ir_comentarios_lugar)
         val btnEliminarLugar : Button = itemView.findViewById(R.id.btn_eliminar_lugar)
         var codigoLugar : String =""
+
         val prom: TextView = itemView.findViewById(R.id.calificacion_promedio_mi)
 
         init{
             itemView.setOnClickListener(this)
+            nombre.setOnClickListener(this)
             irAComentariosButton.setOnClickListener(this)
             btnEliminarLugar.setOnClickListener(this)
         }
@@ -57,6 +66,7 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
 
             nombre.text = lugar.nombre
             codigoLugar = lugar.key
+
 
             Firebase.firestore.collection("categorias")
                 .whereEqualTo("id", lugar.idCategoria)
@@ -69,6 +79,26 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
                         }
                     }
                 }
+
+           Firebase.firestore.collection("comentarios")
+               .whereEqualTo("idLugar", lugar.key)
+               .get()
+               .addOnSuccessListener {
+
+
+                   comentario.text = it.size().toString()
+               }
+
+
+            nombre.text = lugar.nombre
+
+            val calificacion = lugar.obtenerCalificacionPromedio(ArrayList())
+            for (i in 0..calificacion){
+                (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
+            }
+
+            codigoLugar = lugar.key
+
             Firebase.firestore.collection("lugares")
                 .document(lugar.key)
                 .collection("comentarios")
@@ -94,20 +124,22 @@ class LugarAdapter (var lista:ArrayList<Lugar>):RecyclerView.Adapter<LugarAdapte
                         )
                     }
                     prom.text = total.toString()
-                    comentario.text = comentarios.size.toString()+" comentarios"
+                    comentario.text = comentarios.size.toString()
                 }
 
-
-
-
-
+            Glide.with( itemView )
+                .load(lugar.imagenes[0])
+                .into(imagen)
 
         }
 
         override fun onClick(v: View?) {
+
             when (v?.id) {
                 R.id.nombre_lugar -> {
-                    // Aquí puedes definir la acción para hacer clic en el nombre del lugar si lo necesitas
+                    val intent = Intent(itemView.context, DetalleLugarActivity::class.java)
+                    intent.putExtra("codigoLugar", codigoLugar)
+                    itemView.context.startActivity(intent)
                 }
                 R.id.ir_comentarios_lugar -> {
                     val intent = Intent(itemView.context, ComentariosLugarActivity::class.java)

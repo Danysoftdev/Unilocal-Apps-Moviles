@@ -21,8 +21,8 @@ class NovedadesLugarFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (arguments != null){
-            codigoLugar = requireArguments().getString("codigoLugar","")
+        arguments?.let {
+            codigoLugar = it.getString("codigoLugar", "")
         }
     }
 

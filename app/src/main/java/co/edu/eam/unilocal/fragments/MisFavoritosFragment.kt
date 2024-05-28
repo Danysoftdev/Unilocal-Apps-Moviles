@@ -91,7 +91,7 @@ class MisFavoritosFragment : Fragment(), LugarFavoritoAdapter.OnLugarEliminadoLi
 
     override fun onLugarEliminado() {
         actualizarListaLugares()
-        Toast.makeText(requireActivity(), "Se eliminó correctamente", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireActivity(), getText(R.string.txt_lugar_eliminado), Toast.LENGTH_LONG).show()
 
     }
 }

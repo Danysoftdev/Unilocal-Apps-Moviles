@@ -15,7 +15,7 @@
             android:id="@+id/mensaje_vacio_favoritos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sin lugares favoritos"/>
+            android:text="@string/txt_sin_lugares_favoritos"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lista_lugares"
