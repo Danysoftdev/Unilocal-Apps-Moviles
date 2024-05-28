@@ -218,7 +218,7 @@ class FormularioCrearLugarFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    /*Toast.makeText(baseContext,"EL elemento seleccionado fue ${parent!!.getItemAtPosition(position).toString()}",Toast.LENGTH_LONG).show()*/
+
                     if (position == 0) {
                         Toast.makeText(
                             requireContext(),

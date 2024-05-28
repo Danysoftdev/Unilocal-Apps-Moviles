@@ -2,6 +2,7 @@ package co.edu.eam.unilocal.activities
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -12,6 +13,7 @@ import co.edu.eam.unilocal.adapters.ViewPagerAdapter
 import co.edu.eam.unilocal.databinding.ActivityDetalleLugarBinding
 import co.edu.eam.unilocal.fragments.ImagenFragment
 import co.edu.eam.unilocal.models.Categoria
+import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.models.Usuario
 import com.bumptech.glide.Glide
@@ -21,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.Date
-
+import co.edu.eam.unilocal.R
 class DetalleLugarActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetalleLugarBinding
@@ -64,6 +66,7 @@ class DetalleLugarActivity : AppCompatActivity() {
                 .get()
                 .addOnSuccessListener { document ->
                     lugar = document.toObject(Lugar::class.java)
+                    lugar?.key = document.id
                     lugar?.let {
 
                         cargarInformacionSuperior(it)
@@ -77,16 +80,8 @@ class DetalleLugarActivity : AppCompatActivity() {
     }
 
     private fun cargarInformacionSuperior(lugar: Lugar) {
+
         binding.nombreLugar.text = lugar.nombre
-
-        val calificacion = 2 //lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
-        for (i in 0..calificacion) {
-            (binding.listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
-        }
-
-        binding.cantidadComentarios.text = "2" // "(${Comentarios.obtenerCantidadComentarios(lugar.id).toString()})"
-        val categoryPlace = Categoria() //Categorias.obtener(lugar.idCategoria)
-        binding.categoriaLugar.text = categoryPlace?.nombre
         binding.estadoHorarioLugar.text = lugar.verificarEstadoHorario()
 
         if (lugar.verificarEstadoHorario() == "Abierto") {
@@ -97,16 +92,61 @@ class DetalleLugarActivity : AppCompatActivity() {
             binding.horarioLugar.text = lugar.obtenerHoraApertura()
         }
 
+
         binding.listaImgs.adapter = ImagenesViewPager(this, lugar.imagenes)
+
+        Firebase.firestore.collection("categorias")
+            .whereEqualTo("id", lugar.idCategoria)
+            .get()
+            .addOnSuccessListener {
+                for (document in it) {
+                    val categoria = document.toObject(Categoria::class.java)
+                    categoria.nombre?.let { categoria ->
+                        binding.categoriaLugar.text = categoria
+                    }
+                }
+            }
+        Firebase.firestore.collection("lugares")
+            .document(lugar.key)
+            .collection("comentarios")
+            .get()
+            .addOnSuccessListener { result ->
+                val comentarios = ArrayList<Comentario>()
+                var promedio = 0.0
+                var cantidad = 0
+                for (document in result) {
+                    val comentario = document.toObject(Comentario::class.java)
+                    comentarios.add(comentario)
+                    promedio += comentario.calificaicon
+                    cantidad++
+                }
+
+                val total = if (cantidad > 0) promedio / cantidad else 0.0
+                Log.e("total", total.toString())
+                val estrellas = total.toInt()
+                for (i in 0 until binding.listaEstrellas.childCount) {
+                    (binding.listaEstrellas[i] as TextView).setTextColor(
+                        if (i < estrellas) Color.YELLOW else Color.GRAY
+                    )
+                }
+                binding.calificacionPromedio.text = total.toString()
+                binding.cantidadComentarios.text = "("+comentarios.size.toString()+")"
+            }
+
+
+
+
+
+
     }
 
     private fun cargarTabs() {
         binding.viewPager.adapter = ViewPagerAdapter(this, codigoLugar)
         TabLayoutMediator(binding.tabsLugar, binding.viewPager) { tab, pos ->
             when (pos) {
-                0 -> tab.text = "Información"
-                1 -> tab.text = "Comentario"
-                2 -> tab.text = "Novedades"
+                0 -> tab.text = getText(R.string.txt_informacion)
+                1 -> tab.text = getText(R.string.txt_comentario)
+                2 -> tab.text = getText(R.string.txt_novedades)
             }
         }.attach()
     }
@@ -119,8 +159,8 @@ class DetalleLugarActivity : AppCompatActivity() {
 
         if(!valor){
             esFavorito = true
-          //  binding.btnFavorito.typeface = typefaceSolid
-           // binding.btnFavorito.text = '\uf004'.toString()
+            //  binding.btnFavorito.typeface = typefaceSolid
+            // binding.btnFavorito.text = '\uf004'.toString()
 
             Firebase.firestore
                 .collection("usuarios")
@@ -128,7 +168,22 @@ class DetalleLugarActivity : AppCompatActivity() {
                 .collection("favoritos")
                 .document(codigoLugar)
                 .set( fecha )
-                Toast.makeText(this, "Añadido a los lugares favoritos", Toast.LENGTH_LONG).show()
+
+            Firebase.firestore
+                .collection("lugares")
+                .document(codigoLugar)
+                .get()
+                .addOnSuccessListener { document ->
+                    lugar = document.toObject(Lugar::class.java)
+                    lugar?.let {
+                        lugar!!.corazones++
+                        Firebase.firestore
+                            .collection("lugares")
+                            .document(codigoLugar)
+                            .set(lugar!!)
+                    }
+                }
+            Toast.makeText(this, getText(R.string.txt_anadido_favorito), Toast.LENGTH_LONG).show()
         }else{
             esFavorito = false
             //binding.btnFavorito.typeface = typefaceRegular
@@ -140,132 +195,25 @@ class DetalleLugarActivity : AppCompatActivity() {
                 .collection("favoritos")
                 .document(codigoLugar)
                 .delete()
-            Toast.makeText(this, "Eliminado de los lugares favoritos", Toast.LENGTH_LONG).show()
+            Firebase.firestore
+                .collection("lugares")
+                .document(codigoLugar)
+                .get()
+                .addOnSuccessListener { document ->
+                    lugar = document.toObject(Lugar::class.java)
+                    lugar?.let {
+                        lugar!!.corazones--
+                        Firebase.firestore
+                            .collection("lugares")
+                            .document(codigoLugar)
+                            .set(lugar!!)
+                    }
+                }
+            Toast.makeText(this, getText(R.string.txt_lugar_favorito_eliminado), Toast.LENGTH_LONG).show()
 
         }
 
 
-        /*
-        usuario?.let {
-            it.favoritos.add(lugar!!)
-            Toast.makeText(this, "Añadido a los lugares favoritos", Toast.LENGTH_LONG).show()
-        }*/
+
     }
 }
-
-/*package co.edu.eam.unilocal.activities
-
-import android.content.Context
-import android.graphics.Color
-import android.os.Bundle
-import android.view.View
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
-import co.edu.eam.unilocal.adapters.ViewPagerAdapter
-import co.edu.eam.unilocal.bd.Usuarios
-import co.edu.eam.unilocal.databinding.ActivityDetalleLugarBinding
-import co.edu.eam.unilocal.models.Categoria
-import co.edu.eam.unilocal.models.Lugar
-import co.edu.eam.unilocal.models.Usuario
-import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-
-class DetalleLugarActivity : AppCompatActivity() {
-
-    lateinit var binding: ActivityDetalleLugarBinding
-    private var lugar: Lugar? = null
-    var codigoLugar: String = ""
-    private var usuario: Usuario? = null
-    var codigo : Int = 0
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityDetalleLugarBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-
-        if (codigo > 0){
-            usuario = Usuario() //Usuarios.getById(codigoUsuario)
-            binding.btnGuardarLugar.visibility = View.VISIBLE
-            binding.btnGuardarLugar.setOnClickListener { guardarLugarFavoritos() }
-        }else{
-            binding.btnGuardarLugar.visibility = View.GONE
-        }
-
-
-        codigoLugar = intent.extras!!.getString("codigoLugar").toString()
-
-        Firebase.firestore.collection("lugares").document(codigoLugar)
-            .get()
-            .addOnSuccessListener {
-                var lugar = it.toObject(Lugar::class.java)
-                cargarInformacionSuperior(lugar)
-                cargarTabs()}
-
-
-    }
-
-    private fun cargarInformacionSuperior(lugar: Lugar?){
-
-        if (lugar != null){
-
-            val nombre: TextView = binding.nombreLugar
-            val categoria: TextView = binding.categoriaLugar
-            val estadoHorario: TextView = binding.estadoHorarioLugar
-            val horario: TextView = binding.horarioLugar
-
-            nombre.text = lugar.nombre
-
-            val calificacion = 2 //lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
-            for (i in 0..calificacion){
-                (binding.listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
-            }
-
-            val cantidadComentatios: TextView = binding.cantidadComentarios
-            cantidadComentatios.text = "2"//"(${Comentarios.obtenerCantidadComentarios(lugar.id).toString()})"
-
-            val categoryPlace = Categoria()//Categorias.obtener(lugar.idCategoria)
-            categoria.text = categoryPlace?.nombre
-            estadoHorario.text = lugar.verificarEstadoHorario()
-            if (lugar.verificarEstadoHorario() == "Abierto"){
-                estadoHorario.setTextColor(Color.GREEN)
-                horario.text = lugar.obtenerHoraCierre()
-            }else{
-                estadoHorario.setTextColor(Color.RED)
-                horario.text = lugar.obtenerHoraApertura()
-            }
-        }
-
-
-    }
-
-    private fun cargarTabs(){
-
-        if (codigoLugar != null){
-
-            binding.viewPager.adapter = ViewPagerAdapter(this, codigoLugar)
-            TabLayoutMediator(binding.tabsLugar, binding.viewPager){tab, pos ->
-                when(pos){
-                    0 -> tab.text = "Información"
-                    1 -> tab.text = "Comentario"
-                    2 -> tab.text = "Novedades"
-                }
-            }.attach()
-        }
-
-    }
-
-    private fun guardarLugarFavoritos(){
-
-        if (usuario != null){
-
-            usuario!!.favoritos.add(lugar!!)
-
-            Toast.makeText(this, "Añadido a los lugares favoritos", Toast.LENGTH_LONG).show()
-        }
-
-    }
-}*/

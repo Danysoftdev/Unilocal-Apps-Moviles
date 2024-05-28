@@ -56,7 +56,6 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-
                 android:orientation="vertical">
 
                 <TextView
@@ -77,11 +76,28 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
                 <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/calificacion_promedio_mi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        />
+                <LinearLayout
                     android:id="@+id/calificacion_lugar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="3dp"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
 
                     <TextView
                         android:id="@+id/estrella_1"
@@ -109,29 +125,36 @@
                         android:textSize="15sp"/>
 
                 </LinearLayout>
-                <!--TextView
-                    android:id="@+id/calificacion_lugar"
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:text="Calificación"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/font_awesome_6_free_solid_900"
-                    android:textIsSelectable="true"/-->
-                <TextView
-                    android:id="@+id/comentarios_lugar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Comentarios"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/comentarios_lugar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_comentarios"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="5dp"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+
 
                 <Button
                     android:id="@+id/ir_comentarios_lugar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ver comentarios"
+                    android:text="@string/txt_ver_comentarios"
                     android:textColor="#DFDFDF"
                     android:textSize="15sp"
 

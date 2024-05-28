@@ -1,5 +1,6 @@
 package co.edu.eam.unilocal.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,7 +12,10 @@ import co.edu.eam.unilocal.fragments.crearlugar.FormularioCrearLugarFragment
 import co.edu.eam.unilocal.fragments.crearlugar.HorariosCrearLugarFragment
 import co.edu.eam.unilocal.fragments.crearlugar.MapaCrearLugarFragment
 import co.edu.eam.unilocal.models.Lugar
+import co.edu.eam.unilocal.models.Usuario
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -21,6 +25,7 @@ class CrearLugarActivity : AppCompatActivity(){
     lateinit var binding: ActivityCrearLugarBinding
     var lugar:Lugar? = null
     var posicionActual:Int = 0
+    private var user: FirebaseUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +83,8 @@ class CrearLugarActivity : AppCompatActivity(){
                 Firebase.firestore.collection("lugares")
                     .add(lugar!!)
                     .addOnSuccessListener {
+                        user = FirebaseAuth.getInstance().currentUser
+                        hacerRedireccion(user!!)
                         Snackbar.make(binding.root, getString(R.string.txt_creacion_exitosa), Snackbar.LENGTH_LONG).show()
 
                         Handler(Looper.getMainLooper()).postDelayed({
@@ -94,6 +101,33 @@ class CrearLugarActivity : AppCompatActivity(){
 
         }
 
+    }
+    fun hacerRedireccion(user: FirebaseUser){
+        Firebase.firestore
+            .collection("usuarios")
+            .document(user.uid)
+            .get()
+            .addOnSuccessListener { u ->
+
+
+                val rol = u.toObject(Usuario::class.java)?.tipo
+
+                if(rol == "usuario") {
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity( intent )
+                    finish()
+                }else if(rol == "moderador") {
+
+                    val intent = Intent(this, ModeradorActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity( intent )
+                    finish()
+
+                }
+
+
+            }
     }
 
 }

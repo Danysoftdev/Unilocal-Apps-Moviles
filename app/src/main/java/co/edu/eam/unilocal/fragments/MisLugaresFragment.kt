@@ -90,6 +90,6 @@ class MisLugaresFragment : Fragment(), LugarAdapter.OnLugarEliminadoListener {
 
     override fun onLugarEliminado() {
         cargarLugares() // Recargar la lista de lugares después de eliminar
-        Toast.makeText(requireActivity(), "Lugar eliminado correctamente", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireActivity(), getText(R.string.txt_lugar_eliminado), Toast.LENGTH_LONG).show()
     }
 }

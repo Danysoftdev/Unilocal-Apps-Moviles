@@ -26,7 +26,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:text="Mis favoritos"/>
+                android:textStyle="bold"
+                android:text="@string/txt_titulo_mis_favoritos"/>
 
 
         </LinearLayout>
@@ -35,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp" />
+
         <LinearLayout
 
         android:layout_width="match_parent"
@@ -47,7 +49,7 @@
             android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
-            android:text="Sin lugares favoritos" />
+            android:text="@string/txt_sin_lugares_favoritos" />
         </LinearLayout>
 
     </LinearLayout>

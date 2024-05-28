@@ -51,7 +51,9 @@ dependencies {
     implementation libs.androidx.lifecycle.livedata.ktx
     implementation libs.androidx.lifecycle.viewmodel.ktx
     implementation libs.firebase.firestore
+
     implementation libs.glide
+
 
     implementation 'com.google.firebase:firebase-auth-ktx'
     testImplementation libs.junit

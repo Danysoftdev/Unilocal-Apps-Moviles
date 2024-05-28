@@ -5,6 +5,8 @@
     <string name="txt_btn_registro">Ir a registro</string>
     <string name="txt_btn_login">Ir a login</string>
 
+    <!-- TEXTOS DE SESION Y AUTENTICACION -->
+
     <!-- TEXTOS DE LOGIN-->
     <string name="txt_email">Escriba su correo</string>
     <string name="txt_password">Escriba su contraseña</string>
@@ -12,12 +14,29 @@
     <string name="txt_registro">Registrarse</string>
 
     <!-- TEXTOS DE REGISTRO-->
+    <string name="txt_titulo_registro">Datos de registro</string>
     <string name="txt_nombre">Escriba su nombre</string>
     <string name="txt_nickname">Escriba su nickname</string>
+    <string name="txt_btn_registrarse">Registrarse</string>
+    <string name="txt_contrasena_olvidada">¿Has olvidado tu contraseña?</string>
+
+    <!-- TEXTOS DE ENVIAR COIDGO DE RECUPERAION-->
+    <string name="txt_titulo_recuperar">Recuperar contraseña</string>
+    <string name="txt_btn_enviar_codigo">Enviar codigo</string>
+
+    <!-- TEXTOS DE INGRESAR COIDGO DE RECUPERAION-->
+    <string name="txt_titulo">Cambiar contraseña</string>
+    <string name="txt_btn_ingresar_codigo">Ingrese el codigo</string>
+    <string name="txt_contraseña">contraseña</string>
+    <string name="txt_confirmar_contraseña">Confirmar contraseña</string>
+    <string name="txt_btn_confirmar_contraseña">Confirmar cambio de contraseña</string>
+
 
     <string name="app_name">Unilocal</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--                  -->
+    <!-- TEXTOS DE LUGARES-->
 
     <!-- TEXTOS DE CREAR LUGAR-->
     <string name="txt_nombre_lugar">Nombre</string>
@@ -49,6 +68,7 @@
     <string name="horario_del_lugar">Horario del lugar</string>
     <string name="agregar_horario">Añadir horario</string>
 
+
     <string name="paso_3">Paso 3/3: Elegir ubicación del lugar</string>
     <string name="horario_validacion">Es necesario asignar al menos un horario</string>
 
@@ -60,6 +80,12 @@
     <!-- TEXTOS DE VALIDACIONES-->
     <string name="es_obligatorio">Este campo es obligatario</string>
 
+    <!-- TEXTOS DE LUGARES FAVORITOS -->
+    <string name="txt_sin_lugares_favoritos">Sin lugares favoritos</string>
+
+    <!-- TEXTOS DE LUGARES FAVORITOS -->
+    <string name="txt_sin_lugares">No tienes lugares</string>
+    <string name="txt_lugares">LUGARES</string>
 
     <!-- TEXTOS DEL DETALLE LUGAR -->
     <string name="txt_calificacion_promedio_lugar">Calificación promedio</string>
@@ -67,6 +93,8 @@
     <string name="txt_estado_horario_lugar">Estado horario</string>
     <string name="txt_horario_lugar">Horario</string>
     <string name="txt_guardar_lugar">Guardar</string>
+    <string name="txt_detalle">DETALLE</string>
+
 
     <!-- TEXTOS DEL INFO LUGAR FRAGMENT -->
     <string name="ic_ubicacion">\uf124</string>
@@ -79,6 +107,36 @@
     <string name="txt_descripcion_lugar">Descripciòn del lugar</string>
     <string name="ic_calificacion">\uf005</string>
 
+    <!-- TEXTOS DEL LUGAR ITEM -->
+    <string name="txt_categoria">Categoria</string>
+    <string name="txt_comentarios">Comentarios</string>
+    <string name="txt_ver_comentarios">Ver comentarios</string>
+    <string name="txt_btn_eliminar">\uf1f8</string>
+
+    <!-- TEXTOS DEL LUGAR FAVORITO ITEM -->
+    <string name="txt_btn_comentarios">\uf004</string>
+
+    <!-- TEXTOS DEL LUGAR TOP SEMANAL ITEM -->
+    <string name="txt_cant_corazones">50</string>
+    <string name="txt_cant_comentarios">350</string>
+
+    <!-- TEXTOS DE LUGAR BUSQUEDA-->
+    <string name="txt_estado">Abierto</string>
+    <string name="txt_horario">Horario</string>
+
+    <!-- TEXTOS DE MIS FAVORITOS FRAGMENT-->
+    <string name="txt_titulo_mis_favoritos">MIS FAVORTIOS</string>
+
+    <string name="txt_titulo_mis_lugares">MIS LUGARES</string>
+
+    <string name="txt_top">TOP</string>
+
+    <!-- TEXTOS DE COMETARIO LUGAR-->
+    <string name="txt_centro">Cometarios</string>
+    <string name="txt_btn_user">\uf007</string>
+    <string name="txt_btn_back">\uf053</string>
+    <string name="txt_sin_comentarios">Sin comentarios</string>
+
     <!-- TEXTOS DEL COMENTARIOS LUGAR FRAGMENT -->
     <string name="txt_descripcion_comentario">Escriba su comentario</string>
     <string name="txt_btn_comentar">Comentar</string>
@@ -87,7 +145,15 @@
     <string name="txt_nombre_persona_comentario">Nombre de la persona</string>
     <string name="txt_fecha_comentario">Fecha del comentario</string>
     <string name="txt_comentario">Comentario</string>
+    <string name="txt_comentarios_mayus">COMENTARIOS</string>
 
+
+    <!-- TEXTOS DEL COMENTARIOS LUGAR ITEM -->
+    <string name="txt_fecha">14/01/2021</string>
+    <string name="txt_nombre_usuario">Usuario</string>
+
+
+    <!-- TEXTOS DEL MODERADOR -->
     <!-- TEXTOS DEL MODERADOR ACRIVITY -->
     <string name="txt_pendiente">Pendientes</string>
     <string name="txt_aceptado">Aceptados</string>
@@ -107,9 +173,34 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+
     <!-- TEXTOS DEL RESULTADO BUSQUEDA ACTIVITY -->
     <string name="no_coincidencias_lugares">No se encontraron lugares relacionados</string>
     <string name="loading">Loading...</string>
+
+    <!-- TEXTOS  -->
+    <string name="txt_inicio" >Inicio</string>
+    <string name="txt_lugaress" >Mis lugares</string>
+    <string name="txt_favoritos" >Favoritos</string>
+    <string name="txt_top_semanal" >Top semanal</string>
+    <string name="txt_lugar_eliminado" >Lugar eliminado correctamente</string>
+    <string name="txt_posicion" >Aquí estás</string>
+    <string name="txt_advertencia_comentario" >Debe escribir el comentario y seleccionar las estrellas</string>
+    <string name="txt_comentario_enviado" >Se ha enviado el comentario</string>
+    <string name="txt_agregar">Agregar</string>
+    <string name="txt_campos_obligatorios">Los campos son obligatorios</string>
+    <string name="txt_contrasenas_diferentes">Las contraseñas no son iguales</string>
+    <string name="txt_usuario_registrado">Usuario registrado</string>
+    <string name="txt_usuario_error">Usuario registrado</string>
+    <string name="txt_correo_enviado">Error al registrar el usuario</string>
+    <string name="txt_correo_ya_registrado">El correo ingresado ya se encuentra registrado</string>
+    <string name="txt_login_incorrecto">Login incorrecto</string>
+    <string name="txt_anadido_favorito">Añadido a los lugares favoritos</string>
+    <string name="txt_lugar_favorito_eliminado" >Eliminado de los lugares favoritos</string>
+    <string name="txt_informacion">Informacion</string>
+
+
+
 
 
 </resources>

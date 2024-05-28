@@ -42,6 +42,7 @@ class MenuPrincipalFragment : Fragment() {
 
                 if (busqueda.isNotEmpty()){
 
+
                     if (resultadoBusquedaActivity != null) {
 
                         Firebase.firestore
