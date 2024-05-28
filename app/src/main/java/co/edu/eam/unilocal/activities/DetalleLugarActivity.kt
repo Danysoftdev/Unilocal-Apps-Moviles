@@ -7,11 +7,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
+import co.edu.eam.unilocal.adapters.ImagenesViewPager
 import co.edu.eam.unilocal.adapters.ViewPagerAdapter
 import co.edu.eam.unilocal.databinding.ActivityDetalleLugarBinding
+import co.edu.eam.unilocal.fragments.ImagenFragment
 import co.edu.eam.unilocal.models.Categoria
 import co.edu.eam.unilocal.models.Lugar
 import co.edu.eam.unilocal.models.Usuario
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -62,6 +65,7 @@ class DetalleLugarActivity : AppCompatActivity() {
                 .addOnSuccessListener { document ->
                     lugar = document.toObject(Lugar::class.java)
                     lugar?.let {
+
                         cargarInformacionSuperior(it)
                         cargarTabs()
                     }
@@ -92,6 +96,8 @@ class DetalleLugarActivity : AppCompatActivity() {
             binding.estadoHorarioLugar.setTextColor(Color.RED)
             binding.horarioLugar.text = lugar.obtenerHoraApertura()
         }
+
+        binding.listaImgs.adapter = ImagenesViewPager(this, lugar.imagenes)
     }
 
     private fun cargarTabs() {
