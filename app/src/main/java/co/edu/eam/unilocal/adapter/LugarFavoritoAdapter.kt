@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Usuarios
@@ -19,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class LugarFavoritoAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<LugarFavoritoAdapter.ViewHolder>() {
+class LugarFavoritoAdapter(var lista:ArrayList<Lugar>, private val fragment: Fragment): RecyclerView.Adapter<LugarFavoritoAdapter.ViewHolder>() {
     private var onLugarEliminadoListener: OnLugarEliminadoListener? = null
 
     fun setOnLugarEliminadoListener(listener: OnLugarEliminadoListener) {
@@ -62,7 +63,7 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<Lug
            /* for (i in 0..calificacion){
                 (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
             }*/
-            nombre.text = lugar.nombre
+            nombre.text = lugar.nombre.toUpperCase()
             Firebase.firestore.collection("categorias")
                 .whereEqualTo("id", lugar.idCategoria)
                 .get()
@@ -87,6 +88,13 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<Lug
             codigoLugar = lugar.key
 
         }
+        private fun recargarFragmento() {
+            val fragmentManager = fragment.parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.detach(fragment)
+            fragmentTransaction.attach(fragment)
+            fragmentTransaction.commit()
+        }
 
         override fun onClick(v: View?) {
             when (v?.id) {
@@ -104,8 +112,25 @@ class LugarFavoritoAdapter(var lista:ArrayList<Lugar>): RecyclerView.Adapter<Lug
                             .collection("favoritos")
                             .document(codigoLugar)
                             .delete()
+
                             .addOnSuccessListener {
+
+                                Firebase.firestore
+                                    .collection("lugares")
+                                    .document(codigoLugar)
+                                    .get()
+                                    .addOnSuccessListener { document ->
+                                        val lugar = document.toObject(Lugar::class.java)
+                                        lugar?.let {
+                                            lugar.corazones--
+                                            Firebase.firestore
+                                                .collection("lugares")
+                                                .document(codigoLugar)
+                                                .set(lugar)
+                                        }
+                                    }
                                 onLugarEliminadoListener?.onLugarEliminado()
+                                recargarFragmento()
                             }
 
                     }

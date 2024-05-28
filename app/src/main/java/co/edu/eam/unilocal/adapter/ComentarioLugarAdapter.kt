@@ -1,9 +1,12 @@
 package co.edu.eam.unilocal.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.bd.Usuarios
@@ -27,7 +30,9 @@ class ComentarioLugarAdapter(var lista:ArrayList<Comentario>):RecyclerView.Adapt
 
         val texto: TextView = itemView.findViewById(R.id.comentario)
         val autor: TextView = itemView.findViewById(R.id.autor_comentario)
-        val estrellas: TextView = itemView.findViewById(R.id.estrellas_comentario)
+        //val estrellas: TextView = itemView.findViewById(R.id.estrellas_comentario)
+        val fecha : TextView = itemView.findViewById(R.id.fecha_comentario)
+        private val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_comentario)
 
 
         fun bind(comentario: Comentario){
@@ -45,7 +50,15 @@ class ComentarioLugarAdapter(var lista:ArrayList<Comentario>):RecyclerView.Adapt
                 val cal = "\uF005".repeat(comentario.calificaicon) //
 
                 texto.text = comentario.texto
-                estrellas.text = cal
+                val estrellas = comentario.calificaicon
+                for (i in 0 until listaEstrellas.childCount) {
+                (listaEstrellas[i] as TextView).setTextColor(
+                    if (i < estrellas) Color.YELLOW else Color.GRAY
+                 )
+            }
+               // estrellas.text = cal
+                //estrellas.setTextColor(Color.YELLOW)
+                fecha.text = comentario.fecha.toString()
 
 
         }

@@ -1,6 +1,7 @@
 package co.edu.eam.unilocal.adapter
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +11,16 @@ import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.models.Categoria
+import co.edu.eam.unilocal.models.Comentario
 import co.edu.eam.unilocal.models.Lugar
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLugarAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_lugar_top_semanal,parent,false)
-        return  ViewHolder(v)
+        return ViewHolder(v)
     }
 
     override fun getItemCount() = lista.size
@@ -24,35 +28,57 @@ class TopLugarAdapter (var lista:ArrayList<Lugar>): RecyclerView.Adapter<TopLuga
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(lista[position])
     }
-    inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView){
-        val nombre:TextView= itemView.findViewById(R.id.nombre_lugar)
-        val categoria:TextView= itemView.findViewById(R.id.categoria_lugar)
-        /*val calificacion:TextView= itemView.findViewById(R.id.calificacion_lugar)*/
-        val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar)
-        val comentario:TextView= itemView.findViewById(R.id.comentarios)
-        val direccion:TextView= itemView.findViewById(R.id.direccion_lugar)
-        val corazones:TextView= itemView.findViewById(R.id.corazones)
-        fun bind(lugar: Lugar){
 
-            val cate : Categoria? = Categoria()//Categorias.obtener(lugar.idCategoria)
-            //val comentarios : ArrayList<Comentario> = Comentarios.listar(lugar.id)
-            //val promedio = Comentarios.calcularPromedioCalificacion(lugar.id)
-            //val estrellas = "\uF005".repeat(promedio.toInt()) //
-            //val promedioFormateado = String.format("%.1f", promedio)
-            val calificacion = 2//lugar.obtenerCalificacionPromedio(Comentarios.listar(lugar.id))
-            for (i in 0..calificacion){
-                (listaEstrellas[i] as TextView).setTextColor(Color.YELLOW)
-            }
-            //ASIGNACION DE LOS ATRIBUTOS DEL LUGAR
-            direccion.text = lugar.direccion
-            corazones.text=lugar.corazones.toString()
+    inner class ViewHolder(var itemView: View):RecyclerView.ViewHolder(itemView) {
+        private val nombre: TextView = itemView.findViewById(R.id.nombre_lugar)
+        private val categoria: TextView = itemView.findViewById(R.id.categoria_lugar)
+        private val listaEstrellas: LinearLayout = itemView.findViewById(R.id.calificacion_lugar)
+        private val comentario: TextView = itemView.findViewById(R.id.comentarios)
+        private val direccion: TextView = itemView.findViewById(R.id.direccion_lugar)
+        private val corazones: TextView = itemView.findViewById(R.id.corazones)
+
+        fun bind(lugar: Lugar) {
             nombre.text = lugar.nombre
-            if (cate != null) {
-                categoria.text= cate.nombre
-            }
-            /*calificacion.text = "$promedioFormateado $estrellas"*/
-            comentario.text ="2"// comentarios.size.toString()
+            direccion.text = lugar.direccion
+            corazones.text = lugar.corazones.toString()
+
+            Firebase.firestore.collection("categorias")
+                .whereEqualTo("id", lugar.idCategoria)
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        val categoria = document.toObject(Categoria::class.java)
+                        categoria.nombre?.let {
+                            this.categoria.text = it
+                        }
+                    }
+                }
+
+            Firebase.firestore.collection("lugares")
+                .document(lugar.key)
+                .collection("comentarios")
+                .get()
+                .addOnSuccessListener { result ->
+                    val comentarios = ArrayList<Comentario>()
+                    var promedio = 0.0
+                    var cantidad = 0
+                    for (document in result) {
+                        val comentario = document.toObject(Comentario::class.java)
+                        comentarios.add(comentario)
+                        promedio += comentario.calificaicon
+                        cantidad++
+                    }
+
+                    val total = if (cantidad > 0) promedio / cantidad else 0.0
+                    Log.e("total", total.toString())
+                    val estrellas = total.toInt()
+                    for (i in 0 until listaEstrellas.childCount) {
+                        (listaEstrellas[i] as TextView).setTextColor(
+                            if (i < estrellas) Color.YELLOW else Color.GRAY
+                        )
+                    }
+                    comentario.text = comentarios.size.toString()
+                }
         }
     }
-
 }
