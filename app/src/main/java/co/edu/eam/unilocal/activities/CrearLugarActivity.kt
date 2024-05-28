@@ -1,6 +1,8 @@
 package co.edu.eam.unilocal.activities
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import co.edu.eam.unilocal.R
 import co.edu.eam.unilocal.adapters.CrearLugarAdapter
@@ -77,6 +79,10 @@ class CrearLugarActivity : AppCompatActivity(){
                     .add(lugar!!)
                     .addOnSuccessListener {
                         Snackbar.make(binding.root, getString(R.string.txt_creacion_exitosa), Snackbar.LENGTH_LONG).show()
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            finish()
+                        }, 4000)
                     }
                     .addOnFailureListener {
                         Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()

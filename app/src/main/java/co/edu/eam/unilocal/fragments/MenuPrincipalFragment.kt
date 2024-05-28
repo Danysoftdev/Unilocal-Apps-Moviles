@@ -51,6 +51,7 @@ class MenuPrincipalFragment : Fragment() {
                                 for (document in documents){
                                     val lugar = document.toObject(Lugar::class.java)
                                     if (lugar.nombre.lowercase().contains(busqueda.lowercase())){
+                                        lugar.key = document.id
                                         listaLugares.add(lugar)
                                     }
                                 }

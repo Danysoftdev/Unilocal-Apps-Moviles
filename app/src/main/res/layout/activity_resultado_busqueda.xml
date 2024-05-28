@@ -16,6 +16,16 @@
         android:layout_marginTop="20dp"
         class="co.edu.eam.unilocal.fragments.MenuPrincipalFragment"/>
 
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/categoria_chips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:singleLine="false"
+        app:chipSpacing="8dp"
+        app:singleSelection="false"
+        android:orientation="horizontal"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lugares"
         android:layout_width="match_parent"
